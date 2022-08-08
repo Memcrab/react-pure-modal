@@ -48,7 +48,7 @@ function PureModal(props: Props) {
 
     if (allModals.length && allModals[allModals.length - 1].classList.contains(hash)) return false;
 
-    if (event.keyCode === 27 && document.activeElement) {
+    if (event.key === 'Escape' && document.activeElement) {
       close(event);
     }
   }, []);
