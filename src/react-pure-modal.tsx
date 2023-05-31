@@ -38,9 +38,6 @@ function PureModal(props: Props) {
     if (isOpen) {
       open();
     }
-    return () => {
-      isOpen && close();
-    };
   }, [isOpen]);
 
   const handleEsc = useCallback(event => {
