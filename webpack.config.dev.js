@@ -4,7 +4,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const config = {
-  mode: process.env.NODE_ENV || 'production',
+  mode: process.env.NODE_ENV || 'development',
   optimization: {
     minimize: process.env.NODE_ENV !== 'development',
     minimizer:
@@ -23,7 +23,7 @@ const config = {
   entry: {
     example: path.join(__dirname, 'example/example.tsx'),
   },
-  devtool: process.env.NODE_ENV !== 'development' ? '' : 'inline-source-map',
+  devtool: process.env.NODE_ENV !== 'development' ? false : 'inline-source-map',
   module: {
     rules: [
       {
@@ -53,7 +53,7 @@ const config = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
     }),
   ],
   resolve: {
