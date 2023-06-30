@@ -33,17 +33,12 @@ function PureModal(props: Props) {
   const [mouseOffsetY, setMouseOffsetY] = useState(0);
 
   const { isOpen, onClose } = props;
-  const isClassBody = useMemo(() => document.body.classList.contains('body-modal-fix'), [isOpen]);
-
-  const removeClassBody = useCallback(() => {
-    document.body.classList.remove('body-modal-fix');
-  }, []);
 
   useEffect(() => {
     if (isOpen) {
       open();
-    } else if (isClassBody) {
-      removeClassBody();
+    } else if (document.body.classList.contains('body-modal-fix')) {
+      unsetModalContext();
     }
   }, [isOpen]);
 
@@ -71,7 +66,7 @@ function PureModal(props: Props) {
 
   function unsetModalContext() {
     document.removeEventListener('keydown', handleEsc);
-    removeClassBody();
+    document.body.classList.remove('body-modal-fix');
     setX(null);
     setY(null);
     setDeltaX(0);
