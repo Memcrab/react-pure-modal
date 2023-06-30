@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 
 import PureModalContent from './pure-modal-content';
@@ -33,11 +33,16 @@ function PureModal(props: Props) {
   const [mouseOffsetY, setMouseOffsetY] = useState(0);
 
   const { isOpen, onClose } = props;
+  const isClassBody = () => document.body.classList.contains('body-modal-fix');
+
+  const removeClassBody = useCallback(() => {
+    document.body.classList.remove('body-modal-fix');
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
       open();
-    } else {
+    } else if (isClassBody()) {
       unsetModalContext();
     }
   }, [isOpen]);
@@ -66,7 +71,7 @@ function PureModal(props: Props) {
 
   function unsetModalContext() {
     document.removeEventListener('keydown', handleEsc);
-    document.body.classList.remove('body-modal-fix');
+    removeClassBody();
     setX(null);
     setY(null);
     setDeltaX(0);
