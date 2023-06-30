@@ -37,7 +37,7 @@ function PureModal(props: Props) {
   useEffect(() => {
     if (isOpen) {
       open();
-    } else if (document.body.classList.contains('body-modal-fix')) {
+    } else {
       unsetModalContext();
     }
   }, [isOpen]);
