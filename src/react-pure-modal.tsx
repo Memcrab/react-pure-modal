@@ -42,7 +42,7 @@ function PureModal(props: Props) {
     if (isOpen) {
       open();
     } else {
-      unsetModalContext();
+      close();
     }
   }, [isOpen]);
 
