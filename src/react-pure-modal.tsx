@@ -34,9 +34,15 @@ function PureModal(props: Props) {
 
   const { isOpen, onClose } = props;
 
+  const removeClassBody = useCallback(() => {
+    document.body.classList.remove('body-modal-fix');
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
       open();
+    } else {
+      close();
     }
   }, [isOpen]);
 
@@ -64,7 +70,7 @@ function PureModal(props: Props) {
 
   function unsetModalContext() {
     document.removeEventListener('keydown', handleEsc);
-    document.body.classList.remove('body-modal-fix');
+    removeClassBody();
     setX(null);
     setY(null);
     setDeltaX(0);
