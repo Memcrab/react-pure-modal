@@ -41,9 +41,12 @@ function PureModal(props: Props) {
   useEffect(() => {
     if (isOpen) {
       open();
-    } else {
-      close();
     }
+
+    return () => {
+      const openModal = document.querySelector('.pure-modal');
+      !openModal && close();
+    };
   }, [isOpen]);
 
   const handleEsc = useCallback(event => {
