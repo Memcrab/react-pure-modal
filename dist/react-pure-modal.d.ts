@@ -10,7 +10,8 @@ declare type Props = {
     draggable?: boolean;
     width?: string;
     isOpen?: boolean;
-    onClose?: Function;
+    onUnmount?: Function;
+    handleClose?: Function;
     closeButton?: JSX.Element | string;
     closeButtonPosition?: string;
     portal?: boolean;
