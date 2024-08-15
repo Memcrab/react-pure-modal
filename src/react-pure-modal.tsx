@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 
+// components
 import PureModalContent from './pure-modal-content';
-import './react-pure-modal.css';
 
+// types
 import type { MouseOrTouch } from './types';
+
+// styles
+import './react-pure-modal.css';
 
 type Props = {
   children: JSX.Element;
@@ -16,7 +20,6 @@ type Props = {
   draggable?: boolean;
   width?: string;
   isOpen?: boolean;
-  onUnmount?: Function;
   onClose?: Function;
   closeButton?: JSX.Element | string;
   closeButtonPosition?: string;
@@ -33,20 +36,45 @@ function PureModal(props: Props) {
   const [mouseOffsetX, setMouseOffsetX] = useState(0);
   const [mouseOffsetY, setMouseOffsetY] = useState(0);
 
-  const { isOpen, onUnmount, onClose } = props;
+  const { isOpen, onClose } = props;
 
   const removeClassBody = useCallback(() => {
     document.body.classList.remove('body-modal-fix');
   }, []);
 
+  /**
+   * useEffect to setup popup OR perform a cleanup after popup was closed
+   */
   useEffect(() => {
+    /**
+     * if popup was opened:
+     *  - add esc event listener
+     *  - add overflow fix class to body
+     *  - remove focus from focused element (e.g. remove focus from btn after click, cuz popup was opened)
+     */
     if (isOpen) {
-      open();
+      document.addEventListener('keydown', handleEsc);
+      if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+      document.body.classList.add('body-modal-fix');
     }
 
     return () => {
-      const openModal = document.querySelector('.pure-modal');
-      !openModal && handleUnmount();
+      /**
+       * if popup was closed:
+       *  - remove esc event listener
+       *  - remove overflow fix class from body
+       *  - reset popup states
+       */
+      if (!document.querySelector('.pure-modal')) {
+        document.removeEventListener('keydown', handleEsc);
+        removeClassBody();
+        setX(null);
+        setY(null);
+        setDeltaX(0);
+        setDeltaY(0);
+        setMouseOffsetX(0);
+        setMouseOffsetY(0);
+      }
     };
   }, [isOpen]);
 
@@ -64,38 +92,10 @@ function PureModal(props: Props) {
     return null;
   }
 
-  function setModalContext() {
-    document.addEventListener('keydown', handleEsc);
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
-    document.body.classList.add('body-modal-fix');
-  }
-
-  function unsetModalContext() {
-    document.removeEventListener('keydown', handleEsc);
-    removeClassBody();
-    setX(null);
-    setY(null);
-    setDeltaX(0);
-    setDeltaY(0);
-    setMouseOffsetX(0);
-    setMouseOffsetY(0);
-  }
-
-  function open(event?: MouseOrTouch) {
-    if (event) {
-      event.stopPropagation();
-      event.preventDefault();
-    }
-
-    setModalContext();
-  }
-
   /**
    * method that will be called when some of the closing elements are beeing interacted with
    *
-   * onClose SHOULD modify isOpen props value
+   * click on close btn, click on backdrop, press on esc
    */
   function close(event?: MouseOrTouch) {
     if (event) {
@@ -104,17 +104,6 @@ function PureModal(props: Props) {
     }
 
     onClose?.({ isPassive: Boolean(event) });
-    unsetModalContext();
-  }
-
-  /**
-   * method that will be called on popup unmount
-   *
-   * onUnmount SHOULD NOT modify isOpen props value
-   */
-  function handleUnmount() {
-    onUnmount?.();
-    unsetModalContext();
   }
 
   function getCoords(e: MouseOrTouch) {
