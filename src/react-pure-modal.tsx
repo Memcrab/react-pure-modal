@@ -92,6 +92,11 @@ function PureModal(props: Props) {
     setModalContext();
   }
 
+  /**
+   * method that will be called when some of the closing elements are beeing interacted with
+   *
+   * onClose SHOULD modify isOpen props value
+   */
   function close(event?: MouseOrTouch) {
     if (event) {
       event.stopPropagation();
@@ -102,6 +107,11 @@ function PureModal(props: Props) {
     unsetModalContext();
   }
 
+  /**
+   * method that will be called on popup unmount
+   *
+   * onUnmount SHOULD NOT modify isOpen props value
+   */
   function handleUnmount() {
     onUnmount?.();
     unsetModalContext();
