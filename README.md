@@ -68,7 +68,7 @@ You can drag a modal window
 
 #### onClose: `Function`
 
-Handle modal closing. Should return true if you allow closing
+Handle modal closing. Should change isOpen to false
 
 #### className: `string`
 
@@ -100,6 +100,7 @@ Creates React.Portal
 
 ## Changelog (latest on top)
 
+- Removed double calling onClose on popup closing and unmount. onClose will be called only on: close button, backdrop, esc click
 - Drag and drop
 - fix bug in firefox and safari with modal position
 - set width as atribute
