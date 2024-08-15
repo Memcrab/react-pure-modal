@@ -17,7 +17,7 @@ type Props = {
   width?: string;
   isOpen?: boolean;
   onUnmount?: Function;
-  handleClose?: Function;
+  onClose?: Function;
   closeButton?: JSX.Element | string;
   closeButtonPosition?: string;
   portal?: boolean;
@@ -33,7 +33,7 @@ function PureModal(props: Props) {
   const [mouseOffsetX, setMouseOffsetX] = useState(0);
   const [mouseOffsetY, setMouseOffsetY] = useState(0);
 
-  const { isOpen, onUnmount, handleClose } = props;
+  const { isOpen, onUnmount, onClose } = props;
 
   const removeClassBody = useCallback(() => {
     document.body.classList.remove('body-modal-fix');
@@ -98,7 +98,7 @@ function PureModal(props: Props) {
       event.preventDefault();
     }
 
-    handleClose?.({ isPassive: Boolean(event) });
+    onClose?.({ isPassive: Boolean(event) });
     unsetModalContext();
   }
 

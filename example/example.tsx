@@ -33,7 +33,7 @@ function ModalContainer() {
         footer="Buttons?"
         isOpen={modalInnerScroll}
         closeButtonPosition="bottom"
-        handleClose={() => {
+        onClose={() => {
           setModalInnerScroll(false);
           return true;
         }}
@@ -47,7 +47,7 @@ function ModalContainer() {
         width="800px"
         scrollable={false}
         isOpen={modal}
-        handleClose={() => {
+        onClose={() => {
           setModal(false);
           return true;
         }}
@@ -62,7 +62,7 @@ function ModalContainer() {
         closeButtonPosition="bottom"
         portal
         closeButton={<div>&#10007;</div>}
-        handleClose={() => {
+        onClose={() => {
           setModalCenter(false);
           return true;
         }}
@@ -79,7 +79,7 @@ function ModalContainer() {
         closeButtonPosition="bottom"
         portal
         closeButton={<div>&#10007;</div>}
-        handleClose={() => {
+        onClose={() => {
           setModalDrag(false);
           return true;
         }}
@@ -95,7 +95,7 @@ function ModalContainer() {
         scrollable={false}
         portal
         closeButton={<div>&#10007;</div>}
-        handleClose={() => {
+        onClose={() => {
           setModalNoScrollable(false);
           return true;
         }}
