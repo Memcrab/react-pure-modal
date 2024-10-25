@@ -46,15 +46,25 @@ function PureModal(props: Props) {
     }
   }, [isOpen]);
 
-  const handleEsc = useCallback(event => {
-    const allModals = document.querySelectorAll('.pure-modal');
+  const handleEsc = useCallback(
+    event => {
+      const allModals = document.querySelectorAll('.pure-modal');
+      const isManyModalsOpen = allModals.length > 1; // open modal in modal
+      const firstModalData = allModals[allModals.length - 1];
 
-    if (allModals.length && allModals[allModals.length - 1].classList.contains(hash)) return false;
+      if (isManyModalsOpen && !firstModalData.className.includes(hash)) {
+        return false; // closing only current modal
+      }
 
-    if (event.key === 'Escape' && document.activeElement) {
-      close(event);
-    }
-  }, []);
+      if (event.key === 'Escape' && document.activeElement) {
+        close(event);
+        return true;
+      }
+
+      return false;
+    },
+    [close, hash],
+  );
 
   if (!isOpen) {
     return null;
