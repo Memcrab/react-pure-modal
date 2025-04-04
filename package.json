@@ -1,6 +1,6 @@
 {
   "name": "react-pure-modal",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "React modal",
   "main": "dist/react-pure-modal.min.js",
   "types": "dist/react-pure-modal.d.ts",
@@ -67,7 +67,7 @@
     "yargs": "15.4.1"
   },
   "peerDependencies": {
-    "react": "^15.3.0 || ^16.0 || ^17.0 || ^18.0",
-    "react-dom": "^15.3.0 || ^16.0 || ^17.0 || ^18.0"
+    "react": "^15.3.0 || ^16.0 || ^17.0 || ^18.0 || ^19.0",
+    "react-dom": "^15.3.0 || ^16.0 || ^17.0 || ^18.0 || ^19.0"
   }
 }
