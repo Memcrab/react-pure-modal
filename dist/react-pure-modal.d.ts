@@ -15,6 +15,6 @@ declare type Props = {
     closeButtonPosition?: string;
     portal?: boolean;
 };
-declare function PureModal(props: Props): JSX.Element | null;
+declare function PureModal(props: Props): React.JSX.Element | null;
 declare const _default: React.MemoExoticComponent<typeof PureModal>;
 export default _default;
