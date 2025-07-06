@@ -1,6 +1,6 @@
 import React from 'react';
-import Modal from '../dist/react-pure-modal.min.js';
 import renderer, { act } from 'react-test-renderer';
+import Modal from '../dist/react-pure-modal.min.js';
 
 const mockMath = Object.create(global.Math);
 mockMath.random = () => 0.5;
@@ -34,7 +34,7 @@ it('Should show content', () => {
     component = renderer.create(
       <Modal isOpen>
         <span>Some content of modal</span>
-      </Modal>
+      </Modal>,
     );
   });
   expect(component.toJSON()).toMatchSnapshot();
@@ -49,7 +49,7 @@ it('Should show only content', () => {
     component = renderer.create(
       <Modal replace isOpen>
         <span>Some content of modal</span>
-      </Modal>
+      </Modal>,
     );
   });
   expect(component.toJSON()).toMatchSnapshot();
@@ -64,7 +64,7 @@ it('Should contain width attribute', () => {
     component = renderer.create(
       <Modal replace width="400px" isOpen>
         <span>Some content of modal</span>
-      </Modal>
+      </Modal>,
     );
   });
   expect(component.toJSON()).toMatchSnapshot();
