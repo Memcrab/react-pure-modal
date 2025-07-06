@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useId } from 'react';
+import React, { useCallback, useEffect, useId, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 // components
@@ -20,7 +20,7 @@ type Props = {
   draggable?: boolean;
   width?: string;
   isOpen?: boolean;
-  onClose?: Function;
+  onClose?: (options?: { isPassive: boolean }) => void;
   closeButton?: JSX.Element | string;
   closeButtonPosition?: string;
   portal?: boolean;
@@ -52,7 +52,7 @@ function PureModal(props: Props) {
 
       onClose?.({ isPassive: Boolean(event) });
     },
-    [onClose]
+    [onClose],
   );
 
   const handleEsc = useCallback(
@@ -72,7 +72,7 @@ function PureModal(props: Props) {
 
       return false;
     },
-    [close]
+    [close, hash],
   );
 
   const removeClassBody = useCallback(() => {
@@ -91,7 +91,9 @@ function PureModal(props: Props) {
      */
     if (isOpen) {
       document.addEventListener('keydown', handleEsc);
-      if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
       document.body.classList.add('body-modal-fix');
     }
 
@@ -113,7 +115,7 @@ function PureModal(props: Props) {
         setMouseOffsetY(0);
       }
     };
-  }, [isOpen, handleEsc]);
+  }, [isOpen, handleEsc, removeClassBody]);
 
   if (!isOpen) {
     return null;
@@ -139,7 +141,9 @@ function PureModal(props: Props) {
   }
 
   function handleStartDrag(e: MouseOrTouch) {
-    if (e instanceof TouchEvent && e.changedTouches && e.changedTouches.length > 1) return;
+    if (e instanceof TouchEvent && e.changedTouches && e.changedTouches.length > 1) {
+      return;
+    }
 
     e.preventDefault();
 
@@ -217,9 +221,15 @@ function PureModal(props: Props) {
   }
 
   const modalContent = (
-    <div
+    <button
+      type="button"
       className={backdropclasses.join(' ')}
       onMouseDown={handleBackdropClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          handleBackdropClick(e as unknown as MouseOrTouch);
+        }
+      }}
       onTouchMove={isDragged ? handleDrag : undefined}
       onMouseMove={isDragged ? handleDrag : undefined}
     >
@@ -245,7 +255,7 @@ function PureModal(props: Props) {
           {children}
         </PureModalContent>
       </div>
-    </div>
+    </button>
   );
 
   if (portal) {

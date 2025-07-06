@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 import type { MouseOrTouch } from './types';
 
@@ -43,7 +43,8 @@ function PureModalContent(props: Props): JSX.Element {
     <div
       className={`panel panel-default ${closeButtonPosition === 'bottom' ? 'additional-row' : ''}`}
     >
-      <div
+      <button
+        type="button"
         className="panel-heading"
         onTouchStart={onDragStart}
         onMouseDown={onDragStart}
@@ -51,11 +52,12 @@ function PureModalContent(props: Props): JSX.Element {
         onMouseUp={onDragEnd}
       >
         {header && <h3 className="panel-title">{header}</h3>}
-      </div>
+      </button>
 
       <div className={bodyClass}>{children}</div>
       {footer && <div className="panel-footer">{footer}</div>}
-      <div
+      <button
+        type="button"
         className="close"
         onClick={onClose}
         style={{
@@ -64,7 +66,7 @@ function PureModalContent(props: Props): JSX.Element {
         }}
       >
         {closeButton}
-      </div>
+      </button>
     </div>
   );
 }
