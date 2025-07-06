@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useId } from 'react';
 import { createPortal } from 'react-dom';
 
 // components
@@ -27,7 +27,7 @@ type Props = {
 };
 
 function PureModal(props: Props) {
-  let hash = Math.random().toString();
+  const hash = useId();
   const [isDragged, setIsDragged] = useState(false);
   const [x, setX] = useState<number | null>(null);
   const [y, setY] = useState<number | null>(null);
@@ -37,6 +37,43 @@ function PureModal(props: Props) {
   const [mouseOffsetY, setMouseOffsetY] = useState(0);
 
   const { isOpen, onClose } = props;
+
+  /**
+   * Method that will be called when some of the closing elements are being interacted with
+   *
+   * click on close btn, click on backdrop, press on esc
+   */
+  const close = useCallback(
+    (event?: MouseOrTouch) => {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+
+      onClose?.({ isPassive: Boolean(event) });
+    },
+    [onClose]
+  );
+
+  const handleEsc = useCallback(
+    (event: KeyboardEvent) => {
+      const allModals = document.querySelectorAll('.pure-modal');
+      const isManyModalsOpen = allModals.length > 1; // open modal in modal
+      const firstModalData = allModals[allModals.length - 1];
+
+      if (isManyModalsOpen && !firstModalData.className.includes(hash)) {
+        return false; // closing only current modal
+      }
+
+      if (event.key === 'Escape' && document.activeElement) {
+        close(event as unknown as MouseOrTouch);
+        return true;
+      }
+
+      return false;
+    },
+    [close]
+  );
 
   const removeClassBody = useCallback(() => {
     document.body.classList.remove('body-modal-fix');
@@ -76,44 +113,10 @@ function PureModal(props: Props) {
         setMouseOffsetY(0);
       }
     };
-  }, [isOpen]);
-
-  const handleEsc = useCallback(
-    event => {
-      const allModals = document.querySelectorAll('.pure-modal');
-      const isManyModalsOpen = allModals.length > 1; // open modal in modal
-      const firstModalData = allModals[allModals.length - 1];
-
-      if (isManyModalsOpen && !firstModalData.className.includes(hash)) {
-        return false; // closing only current modal
-      }
-
-      if (event.key === 'Escape' && document.activeElement) {
-        close(event);
-        return true;
-      }
-
-      return false;
-    },
-    [close, hash],
-  );
+  }, [isOpen, handleEsc]);
 
   if (!isOpen) {
     return null;
-  }
-
-  /**
-   * method that will be called when some of the closing elements are beeing interacted with
-   *
-   * click on close btn, click on backdrop, press on esc
-   */
-  function close(event?: MouseOrTouch) {
-    if (event) {
-      event.stopPropagation();
-      event.preventDefault();
-    }
-
-    onClose?.({ isPassive: Boolean(event) });
   }
 
   function getCoords(e: MouseOrTouch) {
