@@ -1,4 +1,4 @@
-import Modal from "../src/Modal";
+import Modal from "../src/compounds/Modal";
 
 const meta = {
   title: "Example/Modal",
