@@ -9,8 +9,6 @@
     "resolveJsonModule": true,
     "moduleResolution": "bundler",
     "useDefineForClassFields": true
-    ,
-    "typeRoots": ["./node_modules/@types"]
   },
-  "include": ["src", "rslib.config.ts"]
+  "include": ["src", "rslib.config.ts", "./node_modules/@types"]
 }

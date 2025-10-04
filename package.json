@@ -17,6 +17,7 @@
     "dev": "rslib build --watch"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.2.5",
     "@rsbuild/core": "1.5.13",
     "@rsbuild/plugin-react": "^1.4.1",
     "@rslib/core": "^0.15.0",
@@ -28,7 +29,8 @@
     "storybook": "9.1.10",
     "storybook-addon-rslib": "2.1.2",
     "storybook-react-rsbuild": "2.1.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "@types/react-dom": "19.2.0"
   },
   "peerDependencies": {
     "react": ">=16.9.0",

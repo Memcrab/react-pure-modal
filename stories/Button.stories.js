@@ -1,7 +1,7 @@
-import { Button } from '../src/Button';
+import { Button } from "../src/compounds/Button/Button";
 
 const meta = {
-  title: 'Example/Button',
+  title: "Example/Button",
   component: Button,
 };
 
@@ -10,12 +10,12 @@ export default meta;
 export const Primary = {
   args: {
     primary: true,
-    label: 'Button',
+    label: "Button",
   },
 };
 
 export const Secondary = {
   args: {
-    label: 'Secondary Button',
+    label: "Secondary Button",
   },
 };
