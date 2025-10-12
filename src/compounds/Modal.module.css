@@ -1,0 +1,10 @@
+.pureModal {
+  z-index: var(--z-index);
+
+  background: var(--background);
+  border-radius: var(--radius);
+  box-shadow: var(--box-shadow);
+  max-width: var(--max-width);
+  max-height: var(--max-height);
+  overflow: auto;
+}

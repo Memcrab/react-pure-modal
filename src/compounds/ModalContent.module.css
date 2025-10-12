@@ -1,0 +1,4 @@
+.pureModalContent {
+  padding: var(--top-padding) var(--right-padding) var(--bottom-padding)
+    var(--left-padding);
+}

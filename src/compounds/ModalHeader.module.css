@@ -1,0 +1,7 @@
+.pureModalHeader {
+  padding: var(--top-padding) var(--right-padding) var(--bottom-padding)
+    var(--left-padding);
+  border-bottom: 1px solid var(--dividers-color);
+  background: var(--background-panels);
+  backdrop-filter: blur(4px);
+}
