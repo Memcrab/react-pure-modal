@@ -4,6 +4,7 @@ import { ModalBackdrop } from "./ModalBackdrop";
 import styles from "./Modal.module.css";
 import { ModalFooter } from "./ModalFooter";
 import { ModalHeader } from "./ModalHeader";
+import { ModalClose } from "./ModalClose";
 
 // components
 // import PureModalContent from './pure-modal-content';
@@ -15,10 +16,7 @@ type Props = {
   children: React.ReactNode;
   isOpen?: boolean;
   // backdrop?: boolean;
-  // replace?: boolean;
   // className?: string;
-  // header?: JSX.Element | string;
-  // footer?: JSX.Element | string;
   // scrollable?: boolean;
   // draggable?: boolean;
   // width?: string;
@@ -66,3 +64,4 @@ Modal.Footer = ModalFooter;
 Modal.Header = ModalHeader;
 Modal.Backdrop = ModalBackdrop;
 Modal.Content = ModalContent;
+Modal.Close = ModalClose;

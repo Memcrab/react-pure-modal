@@ -1,10 +1,8 @@
 .pureModal {
-  /* z-index: var(--z-index);
-
+  z-index: var(--z-index);
   background: var(--background);
-  border-radius: var(--radius);
   box-shadow: var(--box-shadow);
-  */
+  border-radius: var(--radius);
   max-height: var(--max-height);
   max-width: max(320px, var(--max-width));
   overflow: auto;
@@ -12,6 +10,9 @@
   display: grid;
   aspect-ratio: 4 / 3;
 
+  /* minmax(0, max-content) */
+  grid-template-columns: 1fr;
+  grid-auto-flow: row;
   grid-template-rows:
     minmax(0, max-content) /* header row: collapses if no header */
     minmax(0, 1fr) /* main row: stretches and can scroll */

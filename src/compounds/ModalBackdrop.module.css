@@ -3,7 +3,7 @@
   --backdrop-blur: 2px;
   --backdrop-color: rgba(0, 0, 0, 0.4);
   --box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-  --max-width: 90vw;
+  --max-width: 95vw;
   --max-height: 90vh;
   --background: white;
   --background-panels: rgba(255, 255, 255, 0.9);
@@ -34,6 +34,7 @@
 
 @media (max-width: 600px) {
   .pureModalBackdrop {
+    --radius: 12px 12px 0 0;
     justify-content: end;
   }
 }

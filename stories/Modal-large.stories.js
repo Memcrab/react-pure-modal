@@ -10,6 +10,7 @@ function App() {
         Open Modal
       </button>
       <Modal isOpen={true}>
+        <Modal.Close />
         <Modal.Header>header content</Modal.Header>
         <Modal.Content>
           <h1>some main content</h1>
