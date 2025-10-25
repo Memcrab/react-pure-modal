@@ -4,4 +4,8 @@
   border-top: 1px solid var(--dividers-color);
   background: var(--background-panels);
   backdrop-filter: blur(4px);
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  grid-row: 3;
 }

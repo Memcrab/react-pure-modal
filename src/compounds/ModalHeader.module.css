@@ -4,4 +4,7 @@
   border-bottom: 1px solid var(--dividers-color);
   background: var(--background-panels);
   backdrop-filter: blur(4px);
+  width: 100%;
+  box-sizing: border-box;
+  grid-row: 1;
 }

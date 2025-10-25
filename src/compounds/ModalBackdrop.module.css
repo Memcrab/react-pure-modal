@@ -29,4 +29,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: auto;
+}
+
+@media (max-width: 600px) {
+  .pureModalBackdrop {
+    justify-content: end;
+  }
 }

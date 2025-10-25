@@ -14,7 +14,7 @@ import { ModalHeader } from "./ModalHeader";
 type Props = {
   children: React.ReactNode;
   isOpen?: boolean;
-  backdrop?: boolean;
+  // backdrop?: boolean;
   // replace?: boolean;
   // className?: string;
   // header?: JSX.Element | string;
@@ -44,8 +44,8 @@ export function useModalContext(): ModalContextType {
 export function Modal(props: Props) {
   const hash = useId();
   const modalState = useMemo(() => {
-    return { isOpen: Boolean(props.isOpen), backdrop: Boolean(props.backdrop) };
-  }, [props.isOpen, props.backdrop]);
+    return { isOpen: Boolean(props.isOpen) };
+  }, [props.isOpen]);
 
   if (!modalState.isOpen) {
     return null;
