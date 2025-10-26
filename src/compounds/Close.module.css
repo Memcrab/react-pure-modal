@@ -7,7 +7,7 @@
   justify-self: end;
 
   /* internal clickable space */
-  padding-inline: calc(var(--right-padding) / 2);
+  padding: calc(var(--right-padding) / 2);
 
   /* styling */
   display: flex;

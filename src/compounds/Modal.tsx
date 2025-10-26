@@ -1,49 +1,18 @@
-import { createContext, useContext, useId, useMemo } from "react";
+import { useId, useMemo } from "react";
 import { ModalContent } from "./Content";
 import { ModalBackdrop } from "./Backdrop";
 import styles from "./Modal.module.css";
 import { ModalFooter } from "./Footer";
 import { ModalHeader } from "./Header";
 import { ModalClose } from "./Close";
+import { ModalContext } from "./ModalContext";
+import type { ModalProps } from "./Modal.types";
 
-// components
-// import PureModalContent from './pure-modal-content';
-
-// styles
-// import "./react-pure-modal.css";
-
-type Props = {
-  children: React.ReactNode;
-  isOpen?: boolean;
-  // backdrop?: boolean;
-  // className?: string;
-  // scrollable?: boolean;
-  // draggable?: boolean;
-  // width?: string;
-  // onClose?: Function;
-  // closeButton?: JSX.Element | string;
-  // closeButtonPosition?: string;
-  // portal?: boolean;
-};
-
-export type ModalContextType = {
-  isOpen?: boolean;
-};
-
-export const ModalContext = createContext<ModalContextType | undefined>(
-  undefined,
-);
-
-export function useModalContext(): ModalContextType {
-  const ctx = useContext(ModalContext);
-  return (ctx ?? {}) as ModalContextType;
-}
-
-export function Modal(props: Props) {
+export function Modal(props: ModalProps) {
   const hash = useId();
   const modalState = useMemo(() => {
-    return { isOpen: Boolean(props.isOpen) };
-  }, [props.isOpen]);
+    return { isOpen: Boolean(props.isOpen), onClose: props.onClose };
+  }, [props.isOpen, props.onClose]);
 
   if (!modalState.isOpen) {
     return null;
