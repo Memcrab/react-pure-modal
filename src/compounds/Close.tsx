@@ -7,10 +7,18 @@ type ModalCloseProps = {
 };
 
 export function ModalClose({ children }: ModalCloseProps) {
-  const { onClose } = use(useModalContext);
+  const { onClose } = useModalContext();
   return (
     <div className={styles.pureCloseButton}>
-      {children || <div className={styles.pureCloseButtonIcon}>✕</div>}
+      {children || (
+        <button
+          type="button"
+          onClick={onClose}
+          className={styles.pureCloseButtonIcon}
+        >
+          ✕
+        </button>
+      )}
     </div>
   );
 }

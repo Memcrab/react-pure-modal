@@ -2,16 +2,19 @@ import React from "react";
 import { Modal } from "../src/compounds/Modal";
 
 function App() {
-  const [isOpen, setIsOpen] = React.useState(true;
+  const [isOpen, setIsOpen] = React.useState(true);
 
   return (
     <div className="App">
       <button type="button" onClick={() => setIsOpen(true)}>
         Open Modal
       </button>
-      <Modal isOpen={isOpen} onClose={() => {
-        setIsOpen(false);
-      }}>
+      <Modal
+        isOpen={isOpen}
+        onClose={() => {
+          setIsOpen(false);
+        }}
+      >
         <Modal.Close />
         <Modal.Header>
           <h2>header content</h2>
