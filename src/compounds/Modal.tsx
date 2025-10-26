@@ -1,10 +1,10 @@
 import { createContext, useContext, useId, useMemo } from "react";
-import { ModalContent } from "./ModalContent";
-import { ModalBackdrop } from "./ModalBackdrop";
+import { ModalContent } from "./Content";
+import { ModalBackdrop } from "./Backdrop";
 import styles from "./Modal.module.css";
-import { ModalFooter } from "./ModalFooter";
-import { ModalHeader } from "./ModalHeader";
-import { ModalClose } from "./ModalClose";
+import { ModalFooter } from "./Footer";
+import { ModalHeader } from "./Header";
+import { ModalClose } from "./Close";
 
 // components
 // import PureModalContent from './pure-modal-content';

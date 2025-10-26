@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ModalClose.module.css";
+import styles from "./Close.module.css";
 
 type ModalCloseProps = {
   children?: React.ReactNode;

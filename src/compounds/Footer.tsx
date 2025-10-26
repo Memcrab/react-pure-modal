@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ModalFooter.module.css";
+import styles from "./Footer.module.css";
 
 type ModalFooterProps = {
   children?: React.ReactNode;

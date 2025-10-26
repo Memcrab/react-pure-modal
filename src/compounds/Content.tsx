@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ModalContent.module.css";
+import styles from "./Content.module.css";
 
 type ModalContentProps = {
   children?: React.ReactNode;

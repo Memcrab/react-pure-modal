@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ModalHeader.module.css";
+import styles from "./Header.module.css";
 
 type ModalHeaderProps = {
   children?: React.ReactNode;
