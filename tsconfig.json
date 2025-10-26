@@ -8,7 +8,13 @@
     "isolatedModules": true,
     "resolveJsonModule": true,
     "moduleResolution": "bundler",
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules",
+        "options": { "goToDefinition": true }
+      }
+    ]
   },
   "include": ["src", "rslib.config.ts", "./node_modules/@types"]
 }
