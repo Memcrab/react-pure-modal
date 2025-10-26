@@ -1,9 +1,9 @@
 .pureCloseButton {
   grid-row: 1;
-  grid-column: 1;
+  grid-column: 1 / -1;
 
   /* Always match the header row height */
-  align-self: stretch;
+  align-self: start;
   justify-self: end;
 
   /* internal clickable space */
@@ -27,7 +27,7 @@
   line-height: 29px;
   aspect-ratio: 1 / 1;
   border: 1px solid var(--dividers-color);
-  background: none;
+  background: var(--background);
   padding: 0;
   transition: all 50ms ease-in-out;
 

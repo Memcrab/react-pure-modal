@@ -9,7 +9,7 @@ function App() {
       <button type="button" onClick={() => setIsOpen(true)}>
         Open Modal
       </button>
-      <Modal isOpen={true} backdrop>
+      <Modal isOpen={true}>
         <Modal.Header>header content</Modal.Header>
         <Modal.Content>some content here</Modal.Content>
         <Modal.Footer>footer content</Modal.Footer>

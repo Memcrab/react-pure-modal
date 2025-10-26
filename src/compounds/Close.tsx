@@ -1,4 +1,3 @@
-import React, { use } from "react";
 import styles from "./Close.module.css";
 import { useModalContext } from "./ModalContext";
 
