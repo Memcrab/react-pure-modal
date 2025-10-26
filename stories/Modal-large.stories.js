@@ -11,7 +11,9 @@ function App() {
       </button>
       <Modal isOpen={true}>
         <Modal.Close />
-        <Modal.Header>header content</Modal.Header>
+        <Modal.Header>
+          <h2>header content</h2>
+        </Modal.Header>
         <Modal.Content>
           <h1>some main content</h1>
           <p>some content here</p>
