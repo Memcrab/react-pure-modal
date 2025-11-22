@@ -9,14 +9,15 @@ pnpm install
 ```
 
 ## Features
-[x] Lightweight, no external dependencies
+[x] Lightweight, no external dependencies, XKb brotli
 [x] Easy change modal components, they all independent but works well together
 [x] Close only current modal on ESC or Backdrop
+[x] Easy change modal proportions
+[x] Easy change modal appearence with variables
+[x] Dynamic width based on content
 [ ] Mobile friendly gestures
-[ ] Easy change modal proportions
-[ ] Easy change modal appearence with variables
 [ ] Stop background scrolling when focus in modal
-[ ] Dynamic width based on content
+[ ] Smooth animations
 [ ] 
 [ ] 
 [ ] 
