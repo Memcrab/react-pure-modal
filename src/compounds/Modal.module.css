@@ -7,7 +7,9 @@ body:has(.pureModalBackdrop) {
   --aspect-ratio: auto;
   --backdrop-blur: 2px;
   --backdrop-color: rgba(0, 0, 0, 0.4);
-  --box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  --box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.14), /* tiny sharp shadow */ 0px 8px 20px
+    rgba(0, 0, 0, 0.18), /* medium soft */ 0px 20px 48px rgba(0, 0, 0, 0.22); /* wide ambient */
   --max-width: 95vw;
   --max-height: 90vh;
   --background: white;
