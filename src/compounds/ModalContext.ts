@@ -1,7 +1,10 @@
 import { createContext, useContext } from "react";
 import type { ModalProps } from "./Modal.types";
 
-export type ModalContextType = Pick<ModalProps, "isOpen" | "onClose"> & {};
+export type ModalContextType = Pick<
+  ModalProps,
+  "isOpen" | "onClose" | "closeOnBackdropClick"
+> & {};
 
 export const ModalContext = createContext<ModalContextType | undefined>(
   undefined,

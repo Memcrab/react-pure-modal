@@ -11,8 +11,12 @@ import type { ModalProps } from "./Modal.types";
 export function Modal(props: ModalProps) {
   const hash = useId();
   const modalState = useMemo(() => {
-    return { isOpen: Boolean(props.isOpen), onClose: props.onClose };
-  }, [props.isOpen, props.onClose]);
+    return {
+      isOpen: Boolean(props.isOpen),
+      onClose: props.onClose,
+      closeOnBackdropClick: Boolean(props.closeOnBackdropClick),
+    };
+  }, [props.isOpen, props.onClose, props.closeOnBackdropClick]);
 
   if (!modalState.isOpen) {
     return null;

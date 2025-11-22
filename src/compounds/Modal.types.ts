@@ -1,13 +1,27 @@
+import type { ReactElement } from "react";
+import type { ModalBackdrop } from "./Backdrop";
+import type { ModalClose } from "./Close";
+import type { ModalContent } from "./Content";
+import type { ModalFooter } from "./Footer";
+import type { ModalHeader } from "./Header";
+
+export type ModalCompoundElement =
+  | ReactElement<typeof ModalBackdrop>
+  | ReactElement<typeof ModalClose>
+  | ReactElement<typeof ModalHeader>
+  | ReactElement<typeof ModalContent>
+  | ReactElement<typeof ModalFooter>;
+
+export type ModalChildren = ModalCompoundElement | ModalCompoundElement[];
+
 export type ModalProps = {
-  children: React.ReactNode;
+  children: ModalChildren;
   isOpen?: boolean;
   // backdrop?: boolean;
   // className?: string;
-  // scrollable?: boolean;
   // draggable?: boolean;
   // width?: string;
   onClose?: () => boolean | undefined;
+  closeOnBackdropClick?: boolean;
   // closeButton?: JSX.Element | string;
-  // closeButtonPosition?: string;
-  // portal?: boolean;
 };
