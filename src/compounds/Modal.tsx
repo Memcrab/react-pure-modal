@@ -26,7 +26,7 @@ export function Modal(props: ModalProps) {
   return (
     <ModalContext.Provider value={modalState}>
       <ModalBackdrop>
-        <div id={hash} className={styles.pureModal}>
+        <div id={`pure-modal-${hash}`} className={styles.pureModal}>
           {props.children}
         </div>
       </ModalBackdrop>

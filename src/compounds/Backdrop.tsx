@@ -105,14 +105,6 @@ export function ModalBackdrop({ children }: { children?: React.ReactNode }) {
     }
   }, []);
 
-  const backdropStyles = useMemo(() => {
-    console.log({ style });
-    return {
-      ...style,
-    };
-  }, [style]);
-  console.log({ backdropStyles });
-
   return (
     <div
       ref={backdropRef}
@@ -120,7 +112,7 @@ export function ModalBackdrop({ children }: { children?: React.ReactNode }) {
       onMouseDown={handleBackdropClick}
       aria-modal="true"
       role="dialog"
-      style={backdropStyles}
+      style={style}
     >
       {children}
     </div>
