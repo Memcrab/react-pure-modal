@@ -45,16 +45,6 @@ body:has(.pureModalBackdrop) {
   overflow: auto;
 }
 
-@media (max-width: 600px) {
-  .pureModalBackdrop {
-    --radius: 12px 12px 0 0;
-    justify-content: end;
-  }
-  .pureModal {
-    --aspect-ratio: auto;
-  }
-}
-
 .pureModal {
   z-index: calc(var(--z-index) + 1);
   background: var(--background);
@@ -115,4 +105,16 @@ body:has(.pureModalBackdrop) {
   box-sizing: border-box;
   grid-row: 3;
   grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+  .pureModalBackdrop {
+    --radius: 12px 12px 0 0;
+    justify-content: end;
+  }
+
+  .pureModal {
+    --aspect-ratio: auto;
+    min-width: var(--max-width);
+  }
 }
