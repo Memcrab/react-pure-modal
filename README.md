@@ -16,6 +16,7 @@ pnpm install
 [ ] Easy change modal proportions
 [ ] Easy change modal appearence with variables
 [ ] Stop background scrolling when focus in modal
+[ ] Dynamic width based on content
 [ ] 
 [ ] 
 [ ] 

@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+} from "react";
 import type { MouseOrTouch } from "../../@types/types";
 import styles from "./Modal.module.css";
 import { useModalContext } from "./ModalContext";
@@ -18,12 +24,33 @@ function getMaximumNodeZIndex(selector: string): number {
   return Math.max(maximumZindex, 1);
 }
 
+function isTypingElement(el: Element | null): boolean {
+  if (!el) return false;
+
+  const tag = el.tagName.toLowerCase();
+
+  if (tag === "input" || tag === "textarea" || tag === "select") {
+    return true;
+  }
+
+  // contenteditable element
+  if ((el as HTMLElement).isContentEditable) {
+    return true;
+  }
+
+  return false;
+}
+
 export function ModalBackdrop({ children }: { children?: React.ReactNode }) {
   const { isOpen, onClose, closeOnBackdropClick } = useModalContext();
   const backdropRef = useRef<HTMLDivElement | null>(null);
 
   const handleEsc = useCallback(
     (event: KeyboardEvent) => {
+      if (isTypingElement(document.activeElement)) {
+        return;
+      }
+
       const currentZindexNode = getNodeZIndex(backdropRef.current);
       const maximumZindex = getMaximumNodeZIndex(
         `.${styles.pureModalBackdrop}`,
@@ -32,8 +59,7 @@ export function ModalBackdrop({ children }: { children?: React.ReactNode }) {
       if (
         onClose &&
         event.key === "Escape" &&
-        currentZindexNode === maximumZindex &&
-        document.activeElement
+        currentZindexNode === maximumZindex
       ) {
         onClose();
         return true;
@@ -71,12 +97,18 @@ export function ModalBackdrop({ children }: { children?: React.ReactNode }) {
     };
   }, [isOpen, handleEsc]);
 
+  useLayoutEffect(() => {
+    const max = getMaximumNodeZIndex(`.${styles.pureModalBackdrop}`);
+    if (backdropRef.current) {
+      // TODO Or just get from props if passed
+      backdropRef.current.style.zIndex = String(max + 1);
+    }
+  }, []);
+
   const backdropStyles = useMemo(() => {
     // TODO Problem that components isn't mounted yet to get correct zIndex
-    const max = getMaximumNodeZIndex(`.${styles.pureModalBackdrop}`);
     return {
       // TODO add here passing css variables from Modal props
-      ...(max ? { zIndex: max + 1 } : {}),
     };
   }, []);
   console.log({ backdropStyles });
