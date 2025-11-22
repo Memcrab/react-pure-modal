@@ -3,7 +3,7 @@ import type { ModalProps } from "./Modal.types";
 
 export type ModalContextType = Pick<
   ModalProps,
-  "isOpen" | "onClose" | "closeOnBackdropClick"
+  "isOpen" | "onClose" | "closeOnBackdropClick" | "style"
 > & {};
 
 export const ModalContext = createContext<ModalContextType | undefined>(

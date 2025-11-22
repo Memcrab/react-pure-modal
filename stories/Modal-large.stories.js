@@ -5,6 +5,10 @@ function App(props) {
   const [isOpen, setIsOpen] = React.useState(true);
   const [isSecondOpen, setIsSecondOpen] = React.useState(false);
 
+  const customStyle = {
+    "--aspect-ratio": "4 / 3",
+  };
+
   return (
     <div className="App">
       <button type="button" onClick={() => setIsOpen(true)}>
@@ -73,6 +77,7 @@ function App(props) {
         onClose={() => {
           setIsOpen(false);
         }}
+        style={customStyle}
         closeOnBackdropClick={props.closeOnBackdropClick}
       >
         {props.closeIcon && <Modal.Close />}

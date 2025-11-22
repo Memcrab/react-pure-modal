@@ -15,8 +15,9 @@ export function Modal(props: ModalProps) {
       isOpen: Boolean(props.isOpen),
       onClose: props.onClose,
       closeOnBackdropClick: Boolean(props.closeOnBackdropClick),
+      style: props.style,
     };
-  }, [props.isOpen, props.onClose, props.closeOnBackdropClick]);
+  }, [props.isOpen, props.onClose, props.closeOnBackdropClick, props.style]);
 
   if (!modalState.isOpen) {
     return null;

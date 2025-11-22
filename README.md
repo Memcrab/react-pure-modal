@@ -11,7 +11,7 @@ pnpm install
 ## Features
 [x] Lightweight, no external dependencies
 [x] Easy change modal components, they all independent but works well together
-[ ] Close only current modal on ESC or Backdrop
+[x] Close only current modal on ESC or Backdrop
 [ ] Mobile friendly gestures
 [ ] Easy change modal proportions
 [ ] Easy change modal appearence with variables

@@ -4,6 +4,7 @@ body:has(.pureModalBackdrop) {
 
 .pureModalBackdrop {
   --radius: 12px;
+  --aspect-ratio: auto;
   --backdrop-blur: 2px;
   --backdrop-color: rgba(0, 0, 0, 0.4);
   --box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
@@ -51,11 +52,9 @@ body:has(.pureModalBackdrop) {
   max-height: var(--max-height);
   max-width: max(320px, var(--max-width));
   overflow: auto;
-  height: 100%;
   display: grid;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: var(--aspect-ratio);
 
-  /* minmax(0, max-content) */
   grid-template-columns: 1fr;
   grid-auto-flow: row;
   grid-template-rows:

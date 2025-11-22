@@ -42,7 +42,7 @@ function isTypingElement(el: Element | null): boolean {
 }
 
 export function ModalBackdrop({ children }: { children?: React.ReactNode }) {
-  const { isOpen, onClose, closeOnBackdropClick } = useModalContext();
+  const { isOpen, onClose, style, closeOnBackdropClick } = useModalContext();
   const backdropRef = useRef<HTMLDivElement | null>(null);
 
   const handleEsc = useCallback(
@@ -106,11 +106,11 @@ export function ModalBackdrop({ children }: { children?: React.ReactNode }) {
   }, []);
 
   const backdropStyles = useMemo(() => {
-    // TODO Problem that components isn't mounted yet to get correct zIndex
+    console.log({ style });
     return {
-      // TODO add here passing css variables from Modal props
+      ...style,
     };
-  }, []);
+  }, [style]);
   console.log({ backdropStyles });
 
   return (
