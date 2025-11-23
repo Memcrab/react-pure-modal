@@ -1,4 +1,4 @@
-import styles from "./Close.module.css";
+import styles from "./Modal.module.css";
 import { useModalContext } from "./ModalContext";
 
 type ModalCloseProps = {

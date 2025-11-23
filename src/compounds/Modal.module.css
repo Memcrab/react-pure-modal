@@ -160,3 +160,42 @@ body:has(.pureModalBackdrop) {
     }
   }
 }
+
+.pureCloseButton {
+  grid-row: 1;
+  grid-column: 1 / -1;
+
+  /* Always match the header row height */
+  align-self: start;
+  justify-self: end;
+
+  /* internal clickable space */
+  padding: calc(var(--right-padding) / 2);
+
+  /* styling */
+  display: flex;
+  align-items: center;
+  z-index: 3;
+}
+
+.pureCloseButtonIcon {
+  font-weight: bold;
+  border-radius: 50%;
+  font-size: 14px;
+  height: 30px;
+  color: var(--backdrop-color);
+  width: 30px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 29px;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--dividers-color);
+  background: var(--background);
+  padding: 0;
+  transition: all 50ms ease-in-out;
+
+  &:hover {
+    color: black;
+    border-color: black;
+  }
+}
