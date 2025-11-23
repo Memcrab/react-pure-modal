@@ -17,5 +17,5 @@
       }
     ]
   },
-  "include": ["src", "rslib.config.ts"]
+  "include": ["src", "rslib.config.ts", "@types"]
 }

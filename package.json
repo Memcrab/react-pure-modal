@@ -15,7 +15,8 @@
   "scripts": {
     "build": "rslib build",
     "dev": "rslib build --watch",
-    "storybook": "npx storybook dev"
+    "storybook": "npx storybook dev",
+    "storybook:build": "storybook build -o storybook-static"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.5",
