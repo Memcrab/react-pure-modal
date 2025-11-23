@@ -1,6 +1,6 @@
 {
-  "name": "rslib-react-ts",
-  "version": "0.0.0",
+  "name": "react-pure-modal",
+  "version": "3.0.0",
   "type": "module",
   "exports": {
     ".": {
