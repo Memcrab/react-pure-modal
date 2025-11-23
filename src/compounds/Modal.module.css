@@ -29,20 +29,36 @@ body:has(.pureModalBackdrop) {
   --backdrop-filter: blur(3px);
 
   backdrop-filter: var(--backdrop-filter);
-  transition: opacity 160ms ease-out;
-  opacity: 1;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: var(--z-index);
-  background-color: var(--backdrop-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: auto;
+
+  background-color: var(--backdrop-color);
+  animation: backdropFadeSmooth 260ms cubic-bezier(0.16, 0.84, 0.44, 1);
+  animation-fill-mode: both;
+}
+
+@keyframes backdropFadeSmooth {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    backdrop-filter: var(--backdrop-filter);
+    background-color: var(--backdrop-color);
+  }
 }
 
 .pureModal {
@@ -66,6 +82,20 @@ body:has(.pureModalBackdrop) {
 
   &:has(> .pureModalHeader) > .pureModalContent {
     grid-row: 2;
+  }
+
+  animation: panelSoftPop 240ms cubic-bezier(0.18, 0.77, 0.42, 1);
+  animation-fill-mode: both;
+}
+
+@keyframes panelSoftPop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 

@@ -1,10 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-} from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import type { MouseOrTouch } from "../../@types/types";
 import styles from "./Modal.module.css";
 import { useModalContext } from "./ModalContext";
