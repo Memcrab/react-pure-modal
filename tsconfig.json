@@ -1,21 +1,21 @@
 {
-  "include": ["src/*.tsx"],
   "compilerOptions": {
-    "outDir": "./dist",
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "sourceMap": true,
-    "noImplicitAny": true,
-    "module": "commonjs",
-    "target": "es2016",
-    "jsx": "react",
-    "lib": ["es2018", "dom"],
-    "esModuleInterop": true,
+    "lib": ["DOM", "ES2022"],
+    "module": "ESNext",
+    "jsx": "react-jsx",
     "strict": true,
-    "importsNotUsedAsValues": "error",
+    "skipLibCheck": true,
+    "isolatedModules": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "typeRoots": ["./@types/**", "./node_modules/@types"],
-    "types": ["node", "jest"]
-  }
+    "moduleResolution": "bundler",
+    "useDefineForClassFields": true,
+    "typeRoots": ["./node_modules/@types", "./@types"],
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules",
+        "options": { "goToDefinition": true }
+      }
+    ]
+  },
+  "include": ["src", "rslib.config.ts", "@types"]
 }

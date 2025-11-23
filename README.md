@@ -4,9 +4,17 @@
 
 React pure modal is a simplest way to create dialog on your site.
 
-- Very small (less than 4Kb)
-- Mobile friendly
-- Without dependencies
+## Features
+[x] Lightweight, no external dependencies, XKb brotli
+[x] Easy change modal components, they all independent but works well together
+[x] Close only current modal on ESC or Backdrop
+[x] Easy change modal proportions
+[x] Easy change modal appearence with variables
+[x] Dynamic width based on content
+[x] Stop background scrolling when focus in modal
+[x] Mobile friendly safe areas
+[x] Smooth animations
+[ ] Mobile friendly gestures
 
 ## Demo
 
@@ -19,87 +27,39 @@ https://memcrab.github.io/react-pure-modal/
 ## Usage
 
 ```jsx
-import PureModal from 'react-pure-modal';
-import 'react-pure-modal/dist/react-pure-modal.min.css';
-
-const [modal, setModal] = useState(false);
-
-<PureModal
-  header="Your header"
-  footer={
-    <div>
-      <button>Cancel</button>
-      <button>Save</button>
-    </div>
-  }
-  isOpen={modal}
-  closeButton="close"
-  closeButtonPosition="bottom"
-  onClose={() => {
-    setModal(false);
-    return true;
-  }}
+<Modal
+  isOpen={isOpen}
+  onClose={onClose}
+  closeOnBackdropClick
 >
-  <p>Your content</p>
-</PureModal>;
+  <Modal.Close />
+  <Modal.Header>
+    <h2>Seconds Modal</h2>
+  </Modal.Header>
+  <Modal.Content>
+    <h1>some main content</h1>
+    <p>some content here</p>
+  </Modal.Content>
+  <Modal.Footer>footer content</Modal.Footer>
+</Modal>
 ```
 
-And open with
-
-`<button className="button" onClick={() => setModal(true)}>Open simple modal</button>`
-
 ## Options
-
-#### replace `boolean` (default: false)
-
-Replace all inner markup with Component children
 
 #### isOpen: `boolean`
 
 Control modal state from parent component
 
-#### scrollable: `boolean` (default: true)
-
-You can disable scroll in modal body
-
-#### draggable: `boolean` (default: false)
-
-You can drag a modal window
-
 #### onClose: `Function`
 
 Handle modal closing. Should change isOpen to false
 
-#### className: `string`
+## CSS Variables
 
-ClassName for modal DOM element, can be used for set modal width or change behaviour on mobile devices
-
-#### width: `string` (example '200px')
-
-Width in pixels, em's, vw etc
-
-#### header: `JSX.Element | string`
-
-Modal heading, doesn't disabled close button
-
-#### footer: `JSX.Element | string`
-
-Place here your actions
-
-#### closeButton: `(JSX.Element | string)`
-
-Content of your closing button
-
-#### closeButtonPosition: `string`
-
-Place closing button under your modal or inside header. Allowed options: 'header' | 'bottom'
-
-#### portal: `boolean` (default: false)
-
-Creates React.Portal
 
 ## Changelog (latest on top)
 
+- Migration to compound components after 7 years with previous API
 - Removed double calling onClose on popup closing and unmount. onClose will be called only on: close button, backdrop, esc click
 - Drag and drop
 - fix bug in firefox and safari with modal position
@@ -112,10 +72,36 @@ Creates React.Portal
 - remove dependencies, rewrite open and close logic, fix linting
 - new header logic and breaking classes changes
 
-## Developing
 
-- `npm install`
-- `npm run webpack:dev -- --watch`
-- `npm run webpack:prod -- --watch`
-- `npm run test:dev`
-- Open `index.html` from examples
+## Development
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+
+## Approach Details
+
+You can't use css `fixed` positioning because it stops using any nested modals. Modal nesting is well known bad UX pattern, but still sometimes in very rare cases you really need that.
+
+We can't use sticky, because scrollbar appears over the sticky elements, which looks weird
+
+HTML dialog tag can't be used due to lack of nesting and bad imperative interface. Like backdrop will be shown only when you open it with JS API `openModal()`, so no SSR support.
+
+HTML popover can't be used due to low support accross browsers.
+
+## Get started
+
+Build the library:
+
+```bash
+pnpm build
+```
+
+Build the library in watch mode:
+
+```bash
+pnpm dev
+```

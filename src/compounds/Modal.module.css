@@ -1,0 +1,201 @@
+body:has(.pureModalBackdrop) {
+  overflow: hidden;
+}
+
+.pureModalBackdrop {
+  --radius: 12px;
+  --aspect-ratio: auto;
+  --backdrop-blur: 2px;
+  --backdrop-color: rgba(0, 0, 0, 0.4);
+  --box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.14), /* tiny sharp shadow */ 0px 8px 20px
+    rgba(0, 0, 0, 0.18), /* medium soft */ 0px 20px 48px rgba(0, 0, 0, 0.22); /* wide ambient */
+  --max-width: 95vw;
+  --max-height: 90vh;
+  --min-width: 320px;
+  --background: white;
+  --background-panels: rgba(255, 255, 255, 0.9);
+  --z-index: 1041;
+  --top-content-padding: 16px;
+  --bottom-content-padding: 16px;
+  --top-header-padding: 16px;
+  --bottom-header-padding: 16px;
+  --top-footer-padding: 16px;
+  --bottom-footer-padding: 16px;
+  --left-padding: 24px;
+  --right-padding: 24px;
+  --dividers-color: #eee;
+  --border: 1px solid var(--dividers-color);
+  --backdrop-filter: blur(3px);
+
+  backdrop-filter: var(--backdrop-filter);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-index);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+
+  background-color: var(--backdrop-color);
+  animation: backdropFadeSmooth 260ms cubic-bezier(0.16, 0.84, 0.44, 1);
+  animation-fill-mode: both;
+}
+
+@keyframes backdropFadeSmooth {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    backdrop-filter: var(--backdrop-filter);
+    background-color: var(--backdrop-color);
+  }
+}
+
+.pureModal {
+  z-index: calc(var(--z-index) + 1);
+  background: var(--background);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--radius);
+  max-height: var(--max-height);
+  max-width: max(320px, var(--max-width));
+  min-width: var(--min-width);
+  overflow: auto;
+  display: grid;
+  aspect-ratio: var(--aspect-ratio);
+
+  grid-template-columns: 1fr;
+  grid-auto-flow: row;
+  grid-template-rows:
+    auto /* header row: collapses if no header */
+    minmax(0, 1fr) /* main row: stretches and can scroll */
+    minmax(0, max-content); /* footer row: collapses if no footer */
+
+  &:has(> .pureModalHeader) > .pureModalContent {
+    grid-row: 2;
+  }
+
+  animation: panelSoftPop 240ms cubic-bezier(0.18, 0.77, 0.42, 1);
+  animation-fill-mode: both;
+}
+
+@keyframes panelSoftPop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.pureModalHeader {
+  padding: var(--top-header-padding) var(--right-padding)
+    var(--bottom-header-padding) var(--left-padding);
+  border-bottom: var(--border);
+  background: var(--background-panels);
+  width: 100%;
+  box-sizing: border-box;
+  grid-row: 1;
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+}
+
+.pureModalContent {
+  padding: var(--top-content-padding) var(--right-padding)
+    var(--bottom-content-padding) var(--left-padding);
+  overflow: auto;
+  box-sizing: border-box;
+  overscroll-behavior: contain;
+  width: 100%;
+  grid-row: 1 / 2;
+  grid-column: 1 / -1;
+  min-block-size: 0; /* critical in Grid to allow inner scrolling */
+}
+
+.pureModalFooter {
+  padding: var(--top-footer-padding) var(--right-padding)
+    calc(var(--bottom-footer-padding) + env(safe-area-inset-bottom))
+    var(--left-padding);
+  border-top: var(--border);
+  background: var(--background-panels);
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  grid-row: 3;
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+  .pureModalBackdrop {
+    --radius: 12px 12px 0 0;
+    justify-content: end;
+  }
+
+  .pureModal {
+    --aspect-ratio: auto;
+    min-width: var(--max-width);
+    animation: panelSheetIn 280ms cubic-bezier(0.25, 0.85, 0.35, 1);
+  }
+
+  @keyframes panelSheetIn {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.pureCloseButton {
+  grid-row: 1;
+  grid-column: 1 / -1;
+
+  /* Always match the header row height */
+  align-self: start;
+  justify-self: end;
+
+  /* internal clickable space */
+  padding: calc(var(--right-padding) / 2);
+
+  /* styling */
+  display: flex;
+  align-items: center;
+  z-index: 3;
+}
+
+.pureCloseButtonIcon {
+  font-weight: bold;
+  border-radius: 50%;
+  font-size: 14px;
+  height: 30px;
+  color: var(--backdrop-color);
+  width: 30px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 29px;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--dividers-color);
+  background: var(--background);
+  padding: 0;
+  transition: all 50ms ease-in-out;
+
+  &:hover {
+    color: black;
+    border-color: black;
+  }
+}
