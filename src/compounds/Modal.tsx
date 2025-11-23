@@ -8,7 +8,7 @@ import { ModalClose } from "./Close";
 import { ModalContext } from "./ModalContext";
 import type { ModalProps } from "./Modal.types";
 
-export function Modal(props: ModalProps) {
+export default function Modal(props: ModalProps) {
   const hash = useId();
   const modalState = useMemo(() => {
     return {

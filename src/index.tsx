@@ -1,1 +1,1 @@
-export { Modal } from "./compounds/Modal";
+export * as Modal from "./compounds/Modal";

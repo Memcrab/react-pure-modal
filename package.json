@@ -8,6 +8,11 @@
       "import": "./dist/index.js"
     }
   },
+  "sideEffects": [
+    "*.css",
+    "*.module.css",
+    "**/*.css"
+  ],
   "types": "./dist/index.d.ts",
   "files": [
     "dist"

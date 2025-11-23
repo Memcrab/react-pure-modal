@@ -4,18 +4,21 @@ import { defineConfig } from '@rslib/core';
 export default defineConfig({
   source: {
     entry: {
-      index: ['./src/**'],
+      index: './src/index.tsx',
     },
   },
   lib: [
     {
-      bundle: false,
-      dts: true,
       format: 'esm',
+      bundle: true,
+      autoExternal: true,
+      dts: true,
     },
   ],
   output: {
     target: 'web',
+    minify: true,
+    injectStyles: true,
   },
   plugins: [pluginReact()],
 });
