@@ -1,12 +1,8 @@
-# Rslib project
+# react-pure-modal [![npm package](https://img.shields.io/npm/v/react-pure-modal.svg?style=flat-square)](https://www.npmjs.org/package/react-pure-modal) [![Build Status](https://travis-ci.org/memCrab/react-pure-modal.svg?branch=master)](https://travis-ci.org/memCrab/react-pure-modal)
 
-## Setup
+[![NPM](https://nodei.co/npm/react-pure-modal.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-pure-modal/)
 
-Install the dependencies:
-
-```bash
-pnpm install
-```
+React pure modal is a simplest way to create dialog on your site.
 
 ## Features
 [x] Lightweight, no external dependencies, XKb brotli
@@ -19,6 +15,72 @@ pnpm install
 [x] Mobile friendly safe areas
 [x] Smooth animations
 [ ] Mobile friendly gestures
+
+## Demo
+
+https://memcrab.github.io/react-pure-modal/
+
+## Installation
+
+`npm i -S react-pure-modal`
+
+## Usage
+
+```jsx
+<Modal
+  isOpen={isOpen}
+  onClose={onClose}
+  closeOnBackdropClick
+>
+  <Modal.Close />
+  <Modal.Header>
+    <h2>Seconds Modal</h2>
+  </Modal.Header>
+  <Modal.Content>
+    <h1>some main content</h1>
+    <p>some content here</p>
+  </Modal.Content>
+  <Modal.Footer>footer content</Modal.Footer>
+</Modal>
+```
+
+## Options
+
+#### isOpen: `boolean`
+
+Control modal state from parent component
+
+#### onClose: `Function`
+
+Handle modal closing. Should change isOpen to false
+
+## CSS Variables
+
+
+## Changelog (latest on top)
+
+- Migration to compound components after 7 years with previous API
+- Removed double calling onClose on popup closing and unmount. onClose will be called only on: close button, backdrop, esc click
+- Drag and drop
+- fix bug in firefox and safari with modal position
+- set width as atribute
+- new default aligning to the screen center!
+- prevent of modal closing if ESC pressed in editable element
+- now with minified css!
+- styles are more impressive now, good mobile support
+- now scrollable can be false
+- remove dependencies, rewrite open and close logic, fix linting
+- new header logic and breaking classes changes
+
+
+## Development
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
 
 ## Approach Details
 
