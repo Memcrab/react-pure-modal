@@ -152,11 +152,11 @@ body:has(.pureModalBackdrop) {
   @keyframes panelSheetIn {
     from {
       opacity: 0;
-      transform: translateY(100%); /* off-screen bottom */
+      transform: translateY(100%);
     }
     to {
       opacity: 1;
-      transform: translateY(0); /* fully visible, attached to bottom */
+      transform: translateY(0);
     }
   }
 }

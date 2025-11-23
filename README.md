@@ -16,13 +16,9 @@ pnpm install
 [x] Easy change modal appearence with variables
 [x] Dynamic width based on content
 [x] Stop background scrolling when focus in modal
-[ ] Mobile friendly safe areas
+[x] Mobile friendly safe areas
+[x] Smooth animations
 [ ] Mobile friendly gestures
-[ ] Smooth animations
-[ ] 
-[ ] 
-[ ] 
-[ ] 
 
 ## Approach Details
 

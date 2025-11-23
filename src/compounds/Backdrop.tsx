@@ -92,12 +92,14 @@ export function ModalBackdrop({ children }: { children?: React.ReactNode }) {
   }, [isOpen, handleEsc]);
 
   useLayoutEffect(() => {
-    const max = getMaximumNodeZIndex(`.${styles.pureModalBackdrop}`);
+    const max =
+      typeof style?.zIndex === "number"
+        ? style.zIndex
+        : getMaximumNodeZIndex(`.${styles.pureModalBackdrop}`);
     if (backdropRef.current) {
-      // TODO Or just get from props if passed
       backdropRef.current.style.zIndex = String(max + 1);
     }
-  }, []);
+  }, [style?.zIndex]);
 
   return (
     <div
