@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Modal } from "../src/compounds/Modal";
+import Modal from "../src/compounds/Modal";
 
 function App(props) {
   const [isOpen, setIsOpen] = React.useState(true);
