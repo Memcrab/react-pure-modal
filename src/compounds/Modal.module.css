@@ -164,6 +164,7 @@ body:has(.pureModalBackdrop) {
 .pureCloseButton {
   grid-row: 1;
   grid-column: 1 / -1;
+  /* TODO Place button based on passed radius variable */
 
   /* Always match the header row height */
   align-self: start;
@@ -182,6 +183,7 @@ body:has(.pureModalBackdrop) {
   font-weight: bold;
   border-radius: 50%;
   font-size: 14px;
+  /* TODO Allow to change close button size */
   height: 30px;
   color: var(--dividers-color);
   width: 30px;
@@ -191,6 +193,7 @@ body:has(.pureModalBackdrop) {
   aspect-ratio: 1 / 1;
   /* TODO Put it to variables or build them automatically based on header background */
   border: 1px solid var(--dividers-color);
+  /* TODO Allow to remove border radius for close button */
   background: var(--background);
   padding: 0;
   transition: all 100ms ease-in-out;
