@@ -46,15 +46,34 @@ https://memcrab.github.io/react-pure-modal/
 
 ## Options
 
-#### isOpen: `boolean`
-
-Control modal state from parent component
-
-#### onClose: `Function`
-
-Handle modal closing. Should change isOpen to false
+- `isOpen` (boolean, required) - controls whether the modal is rendered.
+- `onClose` (() => boolean | void) - called when the user clicks the close button, presses ESC, or (optionally) clicks the backdrop; set `isOpen` to `false` inside it.
+- `closeOnBackdropClick` (boolean) - if `true`, clicking the backdrop calls `onClose` (default is `false`).
+- `style` (React.CSSProperties) - inline styles applied to the backdrop element; use this to set CSS custom properties (listed below) or to tweak things like `zIndex`.
+- `children` - compose the modal from the provided compounds: `Modal.Close`, `Modal.Header`, `Modal.Content`, and `Modal.Footer`.
 
 ## CSS Variables
+
+All variables can be provided through the `style` prop (e.g. `style={{ "--radius": "16px" }}`).
+
+- `--radius` - border radius of the modal container (mobile uses `12px 12px 0 0`).
+- `--aspect-ratio` - forced aspect ratio for the modal grid.
+- `--backdrop-blur` - available for custom use if you want to reference a blur amount.
+- `--backdrop-filter` - value for the backdrop `backdrop-filter` property.
+- `--backdrop-color` - background color of the overlay.
+- `--box-shadow` - shadow applied to the modal panel.
+- `--max-width` - maximum width of the modal.
+- `--max-height` - maximum height of the modal.
+- `--min-width` - minimum width of the modal.
+- `--background` - modal surface background.
+- `--background-panels` - background for header and footer panels.
+- `--z-index` - base stacking level for the backdrop (panel uses `+1`).
+- `--top-content-padding` / `--bottom-content-padding` - vertical padding for the content area.
+- `--top-header-padding` / `--bottom-header-padding` - vertical padding for the header.
+- `--top-footer-padding` / `--bottom-footer-padding` - vertical padding for the footer.
+- `--left-padding` / `--right-padding` - horizontal padding shared across sections.
+- `--dividers-color` - color for border dividers.
+- `--border` - border applied to header and footer.
 
 
 ## Changelog (latest on top)

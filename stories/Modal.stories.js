@@ -157,6 +157,86 @@ function App(props) {
   );
 }
 
+function CssVariablesStory() {
+  const [isOpen, setIsOpen] = React.useState(true);
+
+  const styledVariables = React.useMemo(
+    () => ({
+      "--radius": "24px",
+      "--aspect-ratio": "16 / 10",
+      "--backdrop-blur": "8px",
+      "--backdrop-filter": "blur(8px) saturate(140%)",
+      "--backdrop-color": "rgba(10, 23, 38, 0.72)",
+      "--box-shadow": "0 18px 60px rgba(0, 0, 0, 0.35), 0 6px 18px rgba(0, 0, 0, 0.22)",
+      "--max-width": "760px",
+      "--max-height": "92vh",
+      "--min-width": "360px",
+      "--background": "linear-gradient(160deg, #111827 0%, #0b1220 100%)",
+      "--background-panels": "rgba(17, 24, 39, 0.8)",
+      "--z-index": "1200",
+      "--top-content-padding": "22px",
+      "--bottom-content-padding": "24px",
+      "--top-header-padding": "18px",
+      "--bottom-header-padding": "12px",
+      "--top-footer-padding": "16px",
+      "--bottom-footer-padding": "18px",
+      "--left-padding": "28px",
+      "--right-padding": "28px",
+      "--dividers-color": "#1f2937",
+      "--border": "1px solid #1f2937",
+    }),
+    [],
+  );
+
+  return (
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "radial-gradient(circle at 10% 20%, #0b1220, #050a12 60%)",
+        color: "#e5e7eb",
+        padding: "24px",
+      }}
+    >
+      <button type="button" onClick={() => setIsOpen(true)}>
+        Open modal styled via CSS variables
+      </button>
+
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        closeOnBackdropClick
+        style={styledVariables}
+      >
+        <Modal.Close />
+        <Modal.Header>
+          <div>
+            <p style={{ margin: 0, letterSpacing: 1, textTransform: "uppercase", fontSize: 12 }}>
+              Live CSS Variables
+            </p>
+            <h2 style={{ margin: "4px 0 0" }}>Tailored surface</h2>
+          </div>
+        </Modal.Header>
+        <Modal.Content>
+          <p style={{ marginTop: 0 }}>
+            Every visual token here comes from the `style` prop using CSS custom properties. Adjust
+            colors, radii, padding, aspect ratio, or the backdrop blend without touching the
+            stylesheet.
+          </p>
+          <p>
+            Tweak the `styledVariables` object to see how the modal responds to new values in real
+            time.
+          </p>
+        </Modal.Content>
+        <Modal.Footer>
+          <button type="button" onClick={() => setIsOpen(false)}>
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+}
+
 const meta = {
   title: "Modal/Default",
   component: App,
@@ -172,4 +252,9 @@ export const Default = {
     closeIcon: true,
     closeOnBackdropClick: true,
   },
+};
+
+export const CssVariables = {
+  name: "CSS Variables",
+  render: () => <CssVariablesStory />,
 };
