@@ -24,7 +24,14 @@ body:has(.pureModalBackdrop) {
   --bottom-footer-padding: 16px;
   --left-padding: 24px;
   --right-padding: 24px;
-  --dividers-color: #eee;
+  --contrast-color: oklch(
+    from var(--background-panels) clamp(0.08, calc(1 - l), 0.92) c h
+  );
+  --dividers-color: color-mix(
+    in oklch,
+    var(--background-panels) 78%,
+    var(--contrast-color) 22%
+  );
   --border: 1px solid var(--dividers-color);
   --backdrop-filter: blur(3px);
 
@@ -191,16 +198,14 @@ body:has(.pureModalBackdrop) {
   text-align: center;
   line-height: 29px;
   aspect-ratio: 1 / 1;
-  /* TODO Put it to variables or build them automatically based on header background */
-  border: 1px solid var(--dividers-color);
+  border: var(--border);
   /* TODO Allow to remove border radius for close button */
   background: var(--background);
   padding: 0;
   transition: all 100ms ease-in-out;
 
   &:hover {
-    /* TODO Put it to variables or build them automatically based on header background */
-    color: black;
-    border-color: black;
+    color: var(--contrast-color);
+    border-color: var(--contrast-color);
   }
 }

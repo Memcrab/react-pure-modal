@@ -67,13 +67,14 @@ All variables can be provided through the `style` prop (e.g. `style={{ "--radius
 - `--min-width` - minimum width of the modal.
 - `--background` - modal surface background.
 - `--background-panels` - background for header and footer panels.
+- `--contrast-color` - high-contrast color derived from `--background-panels` (used to build borders and hover states); override to steer the automatic mix.
 - `--z-index` - base stacking level for the backdrop (panel uses `+1`).
 - `--top-content-padding` / `--bottom-content-padding` - vertical padding for the content area.
 - `--top-header-padding` / `--bottom-header-padding` - vertical padding for the header.
 - `--top-footer-padding` / `--bottom-footer-padding` - vertical padding for the footer.
 - `--left-padding` / `--right-padding` - horizontal padding shared across sections.
-- `--dividers-color` - color for border dividers.
-- `--border` - border applied to header and footer.
+- `--dividers-color` - border tone mixed from `--background-panels` and `--contrast-color` by default; override to force a specific divider color.
+- `--border` - border applied to header, footer, and close button; defaults to `1px solid var(--dividers-color)`.
 
 
 ## Changelog (latest on top)

@@ -182,8 +182,7 @@ function CssVariablesStory() {
       "--bottom-footer-padding": "18px",
       "--left-padding": "28px",
       "--right-padding": "28px",
-      "--dividers-color": "#1f2937",
-      "--border": "1px solid #1f2937",
+      "--contrast-color": "oklch(92% 0.05 240)",
     }),
     [],
   );
