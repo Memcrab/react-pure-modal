@@ -3,20 +3,22 @@ name: Release Drafter
 on:
   push:
     branches:
-      - master
       - main
-  workflow_dispatch:
+      - master
 
 permissions:
-  contents: write
-  pull-requests: read
+  contents: read
 
 jobs:
   update_release_draft:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: release-drafter/release-drafter@v6
         with:
           config-name: release-drafter-config.yml
+          # Autolabeler not in use; disable to avoid extra webhook events
+          disable-autolabeler: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
