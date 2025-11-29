@@ -35,7 +35,7 @@ https://memcrab.github.io/react-pure-modal/
 >
   <Modal.Close />
   <Modal.Header>
-    <h2>Seconds Modal</h2>
+    <h2>Second Modal</h2>
   </Modal.Header>
   <Modal.Content>
     <h1>some main content</h1>

@@ -144,7 +144,7 @@ function App(props) {
       >
         <Modal.Close />
         <Modal.Header>
-          <h2>Seconds Modal</h2>
+          <h2>Second Modal with long title</h2>
         </Modal.Header>
         <Modal.Content>
           <h1>some main content</h1>
@@ -167,7 +167,8 @@ function CssVariablesStory() {
       "--backdrop-blur": "8px",
       "--backdrop-filter": "blur(8px) saturate(140%)",
       "--backdrop-color": "rgba(10, 23, 38, 0.72)",
-      "--box-shadow": "0 18px 60px rgba(0, 0, 0, 0.35), 0 6px 18px rgba(0, 0, 0, 0.22)",
+      "--box-shadow":
+        "0 18px 60px rgba(0, 0, 0, 0.35), 0 6px 18px rgba(0, 0, 0, 0.22)",
       "--max-width": "760px",
       "--max-height": "92vh",
       "--min-width": "360px",
@@ -209,7 +210,14 @@ function CssVariablesStory() {
         <Modal.Close />
         <Modal.Header>
           <div>
-            <p style={{ margin: 0, letterSpacing: 1, textTransform: "uppercase", fontSize: 12 }}>
+            <p
+              style={{
+                margin: 0,
+                letterSpacing: 1,
+                textTransform: "uppercase",
+                fontSize: 12,
+              }}
+            >
               Live CSS Variables
             </p>
             <h2 style={{ margin: "4px 0 0" }}>Tailored surface</h2>
@@ -217,13 +225,13 @@ function CssVariablesStory() {
         </Modal.Header>
         <Modal.Content>
           <p style={{ marginTop: 0 }}>
-            Every visual token here comes from the `style` prop using CSS custom properties. Adjust
-            colors, radii, padding, aspect ratio, or the backdrop blend without touching the
-            stylesheet.
+            Every visual token here comes from the `style` prop using CSS custom
+            properties. Adjust colors, radii, padding, aspect ratio, or the
+            backdrop blend without touching the stylesheet.
           </p>
           <p>
-            Tweak the `styledVariables` object to see how the modal responds to new values in real
-            time.
+            Tweak the `styledVariables` object to see how the modal responds to
+            new values in real time.
           </p>
         </Modal.Content>
         <Modal.Footer>
