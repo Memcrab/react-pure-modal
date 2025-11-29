@@ -170,7 +170,7 @@ function CssVariablesStory() {
       "--box-shadow":
         "0 18px 60px rgba(0, 0, 0, 0.35), 0 6px 18px rgba(0, 0, 0, 0.22)",
       "--max-width": "760px",
-      "--max-height": "92vh",
+      "--max-height": "40vh",
       "--min-width": "360px",
       "--background": "linear-gradient(160deg, #111827 0%, #0b1220 100%)",
       "--background-panels": "rgba(17, 24, 39, 0.8)",
@@ -228,6 +228,10 @@ function CssVariablesStory() {
             Every visual token here comes from the `style` prop using CSS custom
             properties. Adjust colors, radii, padding, aspect ratio, or the
             backdrop blend without touching the stylesheet.
+          </p>
+          <p>
+            Tweak the `styledVariables` object to see how the modal responds to
+            new values in real time.
           </p>
           <p>
             Tweak the `styledVariables` object to see how the modal responds to

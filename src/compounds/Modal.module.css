@@ -26,7 +26,7 @@ body:has(.pureModalBackdrop) {
   --base-right-padding: 24px;
   --right-padding: var(--base-right-padding);
 
-  --close-button-background: white;
+  --close-button-background: var(--background-panels, white);
   --close-button-size: 30px; /* icon circle diameter */
   --close-button-hit-padding: calc(
     var(--right-padding) /
