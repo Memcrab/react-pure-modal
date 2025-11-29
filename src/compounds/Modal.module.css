@@ -23,7 +23,16 @@ body:has(.pureModalBackdrop) {
   --top-footer-padding: 16px;
   --bottom-footer-padding: 16px;
   --left-padding: 24px;
-  --right-padding: 24px;
+  --base-right-padding: 24px;
+  --right-padding: var(--base-right-padding);
+
+  --close-button-background: white;
+  --close-button-size: 30px; /* icon circle diameter */
+  --close-button-hit-padding: calc(
+    var(--right-padding) /
+    2
+  ); /* extra tap area around icon */
+  --close-button-space: var(--close-button-size);
   --contrast-color: oklch(
     from var(--background-panels) clamp(0.08, calc(1 - l), 0.92) c h
   );
@@ -168,17 +177,20 @@ body:has(.pureModalBackdrop) {
   }
 }
 
+.pureModal:has(.pureCloseButton) .pureModalHeader {
+  --right-padding: calc(var(--base-right-padding) + var(--close-button-space));
+}
+
 .pureCloseButton {
   grid-row: 1;
   grid-column: 1 / -1;
-  /* TODO Place button based on passed radius variable */
 
   /* Always match the header row height */
   align-self: start;
   justify-self: end;
 
   /* internal clickable space */
-  padding: calc(var(--right-padding) / 2);
+  padding: var(--close-button-hit-padding);
 
   /* styling */
   display: flex;
@@ -189,18 +201,16 @@ body:has(.pureModalBackdrop) {
 .pureCloseButtonIcon {
   font-weight: bold;
   border-radius: 50%;
-  font-size: 14px;
-  /* TODO Allow to change close button size */
-  height: 30px;
+  font-size: calc(var(--close-button-size) / 2);
+  height: var(--close-button-size);
   color: var(--dividers-color);
-  width: 30px;
+  width: var(--close-button-size);
   cursor: pointer;
   text-align: center;
-  line-height: 29px;
+  line-height: calc(var(--close-button-size) - 1px);
   aspect-ratio: 1 / 1;
   border: var(--border);
-  /* TODO Allow to remove border radius for close button */
-  background: var(--background);
+  background: var(--close-button-background);
   padding: 0;
   transition: all 100ms ease-in-out;
 
