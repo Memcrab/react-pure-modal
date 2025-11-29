@@ -126,3 +126,11 @@ Build the library in watch mode:
 ```bash
 pnpm dev
 ```
+
+## Publishing a new version
+
+1. Bump the package version and rebuild: `npm version <patch|minor|major>` then `npm run build`; commit the updated files (including `dist`) and push to `master`/`main`.
+2. Wait for the Release Drafter workflow to refresh the draft release on GitHub (it runs on pushes to the default branch).
+3. Open the draft release in the GitHub Releases page, review the generated notes, set the tag name to match the new version (e.g. `v3.0.1`), and publish the release.
+4. Publishing the release triggers the `Node.js Package` workflow to publish to npm using the `NPM_TOKEN` repository secret; verify that secret is configured.
+5. If you ever need to publish locally instead, run `npm run build` followed by `npm publish --access public` with `NPM_TOKEN` available in your environment.
