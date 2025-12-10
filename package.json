@@ -1,6 +1,7 @@
 {
   "name": "react-pure-modal",
   "version": "3.0.0",
+  "description": "React modal",
   "type": "module",
   "exports": {
     ".": {
@@ -17,6 +18,21 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Memcrab/react-pure-modal.git"
+  },
+  "keywords": [
+    "react",
+    "modal",
+    "dialog"
+  ],
+  "author": "Max Mykhailenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Memcrab/react-pure-modal/issues"
+  },
+  "homepage": "https://github.com/Memcrab/react-pure-modal#readme",
   "scripts": {
     "build": "rslib build",
     "dev": "rslib build --watch",
