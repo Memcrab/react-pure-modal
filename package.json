@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/max-mykhailenko/react-pure-modal.git"
+    "url": "https://github.com/Memcrab/react-pure-modal.git"
   },
   "keywords": [
     "react",
@@ -25,9 +25,9 @@
   "author": "Max Mykhailenko",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/max-mykhailenko/react-pure-modal/issues"
+    "url": "https://github.com/Memcrab/react-pure-modal/issues"
   },
-  "homepage": "https://github.com/max-mykhailenko/react-pure-modal#readme",
+  "homepage": "https://github.com/Memcrab/react-pure-modal#readme",
   "devDependencies": {
     "@babel/core": "7.22.1",
     "@babel/plugin-proposal-class-properties": "7.10.4",
