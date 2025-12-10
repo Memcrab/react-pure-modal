@@ -19,4 +19,17 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
-      - run: npm publish --provenance --access public
+      - name: Publish package
+        run: |
+          set -euo pipefail
+          VERSION="$(node -p "require('./package.json').version")"
+          MAJOR="${VERSION%%.*}"
+          TAG_ARG=""
+          if [ "$MAJOR" = "2" ]; then
+            TAG_ARG="--tag v2"
+          fi
+          if npm view react-pure-modal@"${VERSION}" version >/dev/null 2>&1; then
+            echo "Version ${VERSION} already exists on npm; skipping publish."
+            exit 0
+          fi
+          npm publish --provenance --access public ${TAG_ARG}
