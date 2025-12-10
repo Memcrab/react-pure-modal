@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useId } from 'react';
 import { createPortal } from 'react-dom';
 
 // components
@@ -26,8 +26,10 @@ type Props = {
   portal?: boolean;
 };
 
+type CloseInteractionEvent = MouseOrTouch | KeyboardEvent;
+
 function PureModal(props: Props) {
-  let hash = Math.random().toString();
+  const hash = useId();
   const [isDragged, setIsDragged] = useState(false);
   const [x, setX] = useState<number | null>(null);
   const [y, setY] = useState<number | null>(null);
@@ -79,7 +81,7 @@ function PureModal(props: Props) {
   }, [isOpen]);
 
   const handleEsc = useCallback(
-    event => {
+    (event: KeyboardEvent) => {
       const allModals = document.querySelectorAll('.pure-modal');
       const isManyModalsOpen = allModals.length > 1; // open modal in modal
       const firstModalData = allModals[allModals.length - 1];
@@ -107,7 +109,7 @@ function PureModal(props: Props) {
    *
    * click on close btn, click on backdrop, press on esc
    */
-  function close(event?: MouseOrTouch) {
+  function close(event?: CloseInteractionEvent) {
     if (event) {
       event.stopPropagation();
       event.preventDefault();
