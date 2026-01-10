@@ -1,11 +1,11 @@
 {
   "name": "react-pure-modal",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "React modal",
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/src/index.d.ts",
       "import": "./dist/index.js"
     }
   },
@@ -14,7 +14,7 @@
     "*.module.css",
     "**/*.css"
   ],
-  "types": "./dist/index.d.ts",
+  "types": "./dist/src/index.d.ts",
   "files": [
     "dist"
   ],
