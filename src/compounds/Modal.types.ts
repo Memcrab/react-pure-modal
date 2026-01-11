@@ -34,12 +34,13 @@ export type ModalCssVariable =
   | "--left-padding"
   | "--right-padding"
   | "--close-button-background"
+  | "--close-button-border"
   | "--close-button-size"
   | "--close-button-container-padding"
   | "--close-button-container-transform"
-  | "--contrast-color"
+  | "--close-button-hover-transform"
   | "--dividers-color"
-  | "--border"
+  | "--dividers-border"
   | "--backdrop-filter";
 
 export type ModalStyle = Partial<Record<ModalCssVariable, string | number>>;

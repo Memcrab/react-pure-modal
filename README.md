@@ -47,7 +47,7 @@ https://memcrab.github.io/react-pure-modal/
 
 ## Options
 
-- `isOpen` (boolean, required) - controls whether the modal is rendered.
+- `isOpen` (boolean) - controls whether the modal is rendered; defaults to `false`.
 - `onClose` (VoidFunction) - called when the user clicks the close button, presses ESC, or (optionally) clicks the backdrop; set `isOpen` to `false` inside it. Any return value is ignored.
 - `closeOnBackdropClick` (boolean) - if `true`, clicking the backdrop calls `onClose` (default is `false`).
 - `style` (CSS custom properties) - inline CSS variables applied to the backdrop element; use this to set the variables listed below. TypeScript users can reference the exported `ModalCssVariable` union for autocomplete.
@@ -68,17 +68,18 @@ All variables can be provided through the `style` prop (e.g. `style={{ "--radius
 - `--background` - modal surface background.
 - `--background-panels` - background for header and footer panels.
 - `--close-button-background` - background for the close icon circle.
+- `--close-button-border` - border applied to the close icon circle (defaults to `var(--dividers-border)`).
 - `--close-button-size` - diameter of the close icon circle.
 - `--close-button-container-padding` - extra tap target padding around the close icon.
 - `--close-button-container-transform` - transform applied to the close button container (for positional nudges).
-- `--contrast-color` - high-contrast color derived from `--background-panels` (used to build borders and hover states); override to steer the automatic mix.
+- `--close-button-hover-transform` - transform applied to the close icon on hover.
 - `--z-index` - base stacking level for the backdrop (panel uses `+1`).
 - `--top-content-padding` / `--bottom-content-padding` - vertical padding for the content area.
 - `--top-header-padding` / `--bottom-header-padding` - vertical padding for the header.
 - `--top-footer-padding` / `--bottom-footer-padding` - vertical padding for the footer.
 - `--left-padding` / `--right-padding` - horizontal padding shared across sections.
-- `--dividers-color` - border tone mixed from `--background-panels` and `--contrast-color` by default; override to force a specific divider color.
-- `--border` - border applied to header, footer, and close button; defaults to `1px solid var(--dividers-color)`.
+- `--dividers-color` - border color for header/footer dividers (also used as the default close icon border).
+- `--dividers-border` - border applied to header/footer dividers (defaults to `1px solid var(--dividers-color)`).
 
 
 ## Changelog (latest on top)

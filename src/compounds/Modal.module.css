@@ -14,35 +14,37 @@ body:has(.pureModalBackdrop) {
   --min-width: 320px;
   --background: white;
   --background-panels: rgba(255, 255, 255, 0.9);
-  --z-index: 1041;
   --top-content-padding: 16px;
   --bottom-content-padding: 16px;
-  --top-header-padding: 16px;
-  --bottom-header-padding: 16px;
   --top-footer-padding: 16px;
   --bottom-footer-padding: 16px;
   --left-padding: 24px;
   --right-padding: 24px;
   --calculated-right-padding: var(--right-padding);
+  
+  
+  /* Backdrop */
+  --z-index: 1041;
+  --backdrop-filter: blur(3px);
+  
+  /* Header */
+  --top-header-padding: 16px;
+  --bottom-header-padding: 16px;
 
+  /* Footer */
+
+  /* Dividers */
+  --dividers-color: #C0C0C0;
+  --dividers-border: 1px solid var(--dividers-color);
+
+  /* Close Block */
   --close-button-background: var(--background-panels, white);
   --close-button-size: 30px; /* icon circle diameter */
-  --close-button-container-padding: calc(
-    var(--calculated-right-padding) /
-    2
-  ); /* extra tap area around icon */
+  --close-button-container-padding: var(--radius);
   --close-button-container-transform: none; /* e.g., translateY(-10px) to nudge up */
   --close-button-space: var(--close-button-size);
-  --contrast-color: oklch(
-    from var(--background-panels) clamp(0.08, calc(1 - l), 0.92) c h
-  );
-  --dividers-color: color-mix(
-    in oklch,
-    var(--background-panels) 78%,
-    var(--contrast-color) 22%
-  );
-  --border: 1px solid var(--dividers-color);
-  --backdrop-filter: blur(3px);
+  --close-button-border: var(--dividers-border);
+  --close-button-hover-transform: scale(1.05);
 
   backdrop-filter: var(--backdrop-filter);
   position: fixed;
@@ -118,7 +120,7 @@ body:has(.pureModalBackdrop) {
 .pureModalHeader {
   padding: var(--top-header-padding) var(--calculated-right-padding)
     var(--bottom-header-padding) var(--left-padding);
-  border-bottom: var(--border);
+  border-bottom: var(--dividers-border);
   border-radius: var(--radius) var(--radius) 0 0;
   background: var(--background-panels);
   width: 100%;
@@ -145,7 +147,7 @@ body:has(.pureModalBackdrop) {
   padding: var(--top-footer-padding) var(--calculated-right-padding)
     calc(var(--bottom-footer-padding) + env(safe-area-inset-bottom))
     var(--left-padding);
-  border-top: var(--border);
+  border-top: var(--dividers-border);
   border-radius:  0 0 var(--radius) var(--radius);
   background: var(--background-panels);
   display: block;
@@ -203,7 +205,7 @@ body:has(.pureModalBackdrop) {
 
 .pureCloseButtonIcon {
   font-weight: bold;
-  border-radius: 50%;
+  border-radius: calc(var(--radius) * 2);
   font-size: calc(var(--close-button-size) / 2);
   height: var(--close-button-size);
   color: var(--dividers-color);
@@ -212,13 +214,12 @@ body:has(.pureModalBackdrop) {
   text-align: center;
   line-height: calc(var(--close-button-size) - 1px);
   aspect-ratio: 1 / 1;
-  border: var(--border);
+  border: var(--close-button-border);
   background: var(--close-button-background);
   padding: 0;
   transition: all 100ms ease-in-out;
-
+  
   &:hover {
-    color: var(--contrast-color);
-    border-color: var(--contrast-color);
+    transform: var(--close-button-hover-transform);
   }
 }
