@@ -32,7 +32,6 @@ export type ModalCssVariable =
   | "--top-footer-padding"
   | "--bottom-footer-padding"
   | "--left-padding"
-  | "--base-right-padding"
   | "--right-padding"
   | "--close-button-background"
   | "--close-button-size"
@@ -48,12 +47,7 @@ export type ModalStyle = Partial<Record<ModalCssVariable, string | number>>;
 export type ModalProps = {
   children: ModalChildren;
   isOpen?: boolean;
-  // backdrop?: boolean;
-  // className?: string;
-  // draggable?: boolean;
-  // width?: string;
   style?: ModalStyle;
   onClose?: VoidFunction;
   closeOnBackdropClick?: boolean;
-  // closeButton?: JSX.Element | string;
 };
