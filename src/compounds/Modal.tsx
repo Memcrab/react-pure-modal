@@ -36,6 +36,5 @@ export default function Modal(props: ModalProps) {
 
 Modal.Footer = ModalFooter;
 Modal.Header = ModalHeader;
-Modal.Backdrop = ModalBackdrop;
 Modal.Content = ModalContent;
 Modal.Close = ModalClose;
