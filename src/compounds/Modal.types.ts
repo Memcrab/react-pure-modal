@@ -22,7 +22,7 @@ export type ModalProps = {
   // draggable?: boolean;
   // width?: string;
   style?: React.CSSProperties;
-  onClose?: () => boolean | undefined;
+  onClose?: VoidFunction;
   closeOnBackdropClick?: boolean;
   // closeButton?: JSX.Element | string;
 };
