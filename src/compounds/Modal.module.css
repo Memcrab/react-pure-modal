@@ -27,10 +27,11 @@ body:has(.pureModalBackdrop) {
 
   --close-button-background: var(--background-panels, white);
   --close-button-size: 30px; /* icon circle diameter */
-  --close-button-hit-padding: calc(
+  --close-button-container-padding: calc(
     var(--calculated-right-padding) /
     2
   ); /* extra tap area around icon */
+  --close-button-container-transform: none; /* e.g., translateY(-10px) to nudge up */
   --close-button-space: var(--close-button-size);
   --contrast-color: oklch(
     from var(--background-panels) clamp(0.08, calc(1 - l), 0.92) c h
@@ -84,7 +85,7 @@ body:has(.pureModalBackdrop) {
   max-height: var(--max-height);
   max-width: max(320px, var(--max-width));
   min-width: var(--min-width);
-  overflow: auto;
+  overflow: visible;
   display: grid;
   aspect-ratio: var(--aspect-ratio);
 
@@ -118,6 +119,7 @@ body:has(.pureModalBackdrop) {
   padding: var(--top-header-padding) var(--calculated-right-padding)
     var(--bottom-header-padding) var(--left-padding);
   border-bottom: var(--border);
+  border-radius: var(--radius) var(--radius) 0 0;
   background: var(--background-panels);
   width: 100%;
   box-sizing: border-box;
@@ -144,6 +146,7 @@ body:has(.pureModalBackdrop) {
     calc(var(--bottom-footer-padding) + env(safe-area-inset-bottom))
     var(--left-padding);
   border-top: var(--border);
+  border-radius:  0 0 var(--radius) var(--radius);
   background: var(--background-panels);
   display: block;
   width: 100%;
@@ -189,7 +192,8 @@ body:has(.pureModalBackdrop) {
   justify-self: end;
 
   /* internal clickable space */
-  padding: var(--close-button-hit-padding);
+  padding: var(--close-button-container-padding);
+  transform: var(--close-button-container-transform, none);
 
   /* styling */
   display: flex;
