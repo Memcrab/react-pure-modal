@@ -164,7 +164,6 @@ function CssVariablesStory() {
     () => ({
       "--radius": "24px",
       "--aspect-ratio": "16 / 10",
-      "--backdrop-blur": "8px",
       "--backdrop-filter": "blur(8px) saturate(140%)",
       "--backdrop-color": "rgba(10, 23, 38, 0.72)",
       "--box-shadow":
