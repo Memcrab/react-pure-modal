@@ -36,6 +36,7 @@
   "scripts": {
     "build": "rslib build",
     "dev": "rslib build --watch",
+    "typecheck": "tsc -p tsconfig.types.json",
     "storybook": "npx storybook dev",
     "storybook:build": "storybook build -o storybook-static",
     "storybook:deploy": "npm run storybook:build"
