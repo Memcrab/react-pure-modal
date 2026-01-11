@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import type { CSSProperties } from "react";
 import type { MouseOrTouch } from "../../@types/types";
 import styles from "./Modal.module.css";
 import { useModalContext } from "./ModalContext";
@@ -92,14 +93,20 @@ export function ModalBackdrop({ children }: { children?: React.ReactNode }) {
   }, [isOpen, handleEsc]);
 
   useLayoutEffect(() => {
-    const max =
-      typeof style?.zIndex === "number"
-        ? style.zIndex
-        : getMaximumNodeZIndex(`.${styles.pureModalBackdrop}`);
+    const zIndexVar = style?.["--z-index"];
+    const zIndexOverride =
+      typeof zIndexVar === "number"
+        ? zIndexVar
+        : typeof zIndexVar === "string"
+          ? Number.parseFloat(zIndexVar)
+          : Number.NaN;
+    const max = Number.isFinite(zIndexOverride)
+      ? zIndexOverride
+      : getMaximumNodeZIndex(`.${styles.pureModalBackdrop}`);
     if (backdropRef.current) {
       backdropRef.current.style.zIndex = String(max + 1);
     }
-  }, [style?.zIndex]);
+  }, [style?.["--z-index"]]);
 
   return (
     <div
@@ -108,7 +115,7 @@ export function ModalBackdrop({ children }: { children?: React.ReactNode }) {
       onMouseDown={handleBackdropClick}
       aria-modal="true"
       role="dialog"
-      style={style}
+      style={style as CSSProperties}
     >
       {children}
     </div>

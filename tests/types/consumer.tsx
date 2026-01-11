@@ -3,7 +3,12 @@ import Modal from "react-pure-modal";
 const handleClose = () => true;
 
 const ValidModal = (
-  <Modal isOpen onClose={handleClose} closeOnBackdropClick style={{ zIndex: 10 }}>
+  <Modal
+    isOpen
+    onClose={handleClose}
+    closeOnBackdropClick
+    style={{ "--z-index": 10 }}
+  >
     <Modal.Close />
     <Modal.Header>Header</Modal.Header>
     <Modal.Content>Content</Modal.Content>

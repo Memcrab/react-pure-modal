@@ -5,4 +5,5 @@ export default Modal;
 export type {
   ModalCompoundElement,
   ModalProps,
+  ModalCssVariable,
 } from "./compounds/Modal.types";
