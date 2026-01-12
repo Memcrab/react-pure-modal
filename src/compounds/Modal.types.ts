@@ -51,4 +51,5 @@ export type ModalProps = {
   style?: ModalStyle;
   onClose?: VoidFunction;
   closeOnBackdropClick?: boolean;
+  portal?: Element | DocumentFragment | null;
 };

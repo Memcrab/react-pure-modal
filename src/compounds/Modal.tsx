@@ -1,4 +1,5 @@
 import { useId, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { ModalContent } from "./Content";
 import { ModalBackdrop } from "./Backdrop";
 import styles from "./Modal.module.css";
@@ -23,7 +24,7 @@ export default function Modal(props: ModalProps) {
     return null;
   }
 
-  return (
+  const modalNode = (
     <ModalContext.Provider value={modalState}>
       <ModalBackdrop>
         <div id={`pure-modal-${hash}`} className={styles.pureModal}>
@@ -32,6 +33,18 @@ export default function Modal(props: ModalProps) {
       </ModalBackdrop>
     </ModalContext.Provider>
   );
+
+  if (props.portal !== undefined) {
+    if (typeof document === "undefined") {
+      return null;
+    }
+    if (!props.portal) {
+      return null;
+    }
+    return createPortal(modalNode, props.portal);
+  }
+
+  return modalNode;
 }
 
 Modal.Footer = ModalFooter;

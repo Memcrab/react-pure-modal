@@ -51,6 +51,7 @@ https://memcrab.github.io/react-pure-modal/
 - `onClose` (VoidFunction) - called when the user clicks the close button, presses ESC, or (optionally) clicks the backdrop; set `isOpen` to `false` inside it. Any return value is ignored.
 - `closeOnBackdropClick` (boolean) - if `true`, clicking the backdrop calls `onClose` (default is `false`).
 - `style` (CSS custom properties) - inline CSS variables applied to the backdrop element; use this to set the variables listed below. TypeScript users can reference the exported `ModalCssVariable` union for autocomplete.
+- `portal` (Element | DocumentFragment | null) - when provided, render the modal into the target via `createPortal`. If set during SSR (no `document`), the modal returns `null`.
 - `children` - compose the modal from the provided compounds: `Modal.Close`, `Modal.Header`, `Modal.Content`, and `Modal.Footer`.
 
 ## CSS Variables
