@@ -70,6 +70,8 @@ function CustomCloseContent() {
 
 The context provides: `isOpen`, `onClose`, `closeOnBackdropClick`, and `style`.
 
+`Modal.Close` renders the default icon button when no children are provided.
+
 ## Portal
 
 Render the modal into a dedicated DOM node (for example, a `#modal-root`
@@ -112,12 +114,12 @@ All variables can be provided through the `style` prop (e.g. `style={{ "--radius
 - `--close-button-background` - background for the close icon circle.
 - `--close-button-border` - border applied to the close icon circle (defaults to `var(--dividers-border)`).
 - `--close-button-size` - diameter of the close icon circle.
-- `--close-button-space` - extra space reserved for the close button (defaults to `--close-button-size`).
 - `--close-button-container-transform` - transform applied to the close button container (for positional nudges).
 - `--close-button-hover-transform` - transform applied to the close icon on hover.
 - `--z-index` - base stacking level for the backdrop (panel uses `+1`).
 - `--top-content-padding` / `--bottom-content-padding` - vertical padding for the content area.
 - `--top-header-padding` / `--bottom-header-padding` - vertical padding for the header.
+- `--header-left-padding` / `--header-right-padding` - horizontal padding for the header (defaults to `--left-padding`/`--right-padding`).
 - `--top-footer-padding` / `--bottom-footer-padding` - vertical padding for the footer.
 - `--left-padding` / `--right-padding` - horizontal padding shared across sections.
 - `--dividers-color` - border color for header/footer dividers (also used as the default close icon border).

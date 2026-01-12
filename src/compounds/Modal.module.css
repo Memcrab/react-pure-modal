@@ -21,6 +21,7 @@ body:has(.pureModalBackdrop) {
   --left-padding: 24px;
   --right-padding: 24px;
   --header-right-padding: var(--right-padding);
+  --header-left-padding: var(--left-padding);
   
   
   /* Backdrop */
@@ -41,7 +42,6 @@ body:has(.pureModalBackdrop) {
   --close-button-background: var(--background-panels, white);
   --close-button-size: 30px; /* icon circle diameter */
   --close-button-container-transform: translate(calc(0px - var(--radius)), var(--radius)); /* e.g., translateY(-10px) to nudge up */
-  --close-button-space: var(--close-button-size);
   --close-button-border: var(--dividers-border);
   --close-button-hover-transform: scale(1.05);
 
@@ -118,7 +118,7 @@ body:has(.pureModalBackdrop) {
 
 .pureModalHeader {
   padding: var(--top-header-padding) var(--header-right-padding)
-    var(--bottom-header-padding) var(--left-padding);
+    var(--bottom-header-padding) var(--header-left-padding);
   border-bottom: var(--dividers-border);
   border-radius: var(--radius) var(--radius) 0 0;
   background: var(--background-panels);
@@ -180,10 +180,6 @@ body:has(.pureModalBackdrop) {
       transform: translateY(0);
     }
   }
-}
-
-.pureModal:has(.pureCloseButton) .pureModalHeader {
-  --header-right-padding: var(--close-button-space);
 }
 
 .pureCloseButton {
