@@ -124,6 +124,7 @@ body:has(.pureModalBackdrop) {
   border-radius: var(--radius) var(--radius) 0 0;
   background: var(--background-panels);
   width: 100%;
+  max-width: max(320px, var(--max-width));
   box-sizing: border-box;
   grid-row: 1;
   grid-column: 1;
@@ -152,6 +153,7 @@ body:has(.pureModalBackdrop) {
   background: var(--background-panels);
   display: block;
   width: 100%;
+  max-width: max(320px, var(--max-width));
   box-sizing: border-box;
   grid-row: 3;
   grid-column: 1 / -1;
