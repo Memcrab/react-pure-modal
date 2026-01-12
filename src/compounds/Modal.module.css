@@ -20,7 +20,7 @@ body:has(.pureModalBackdrop) {
   --bottom-footer-padding: 16px;
   --left-padding: 24px;
   --right-padding: 24px;
-  --calculated-right-padding: var(--right-padding);
+  --header-right-padding: var(--right-padding);
   
   
   /* Backdrop */
@@ -40,8 +40,7 @@ body:has(.pureModalBackdrop) {
   /* Close Block */
   --close-button-background: var(--background-panels, white);
   --close-button-size: 30px; /* icon circle diameter */
-  --close-button-container-padding: var(--radius);
-  --close-button-container-transform: none; /* e.g., translateY(-10px) to nudge up */
+  --close-button-container-transform: translate(calc(0px - var(--radius)), var(--radius)); /* e.g., translateY(-10px) to nudge up */
   --close-button-space: var(--close-button-size);
   --close-button-border: var(--dividers-border);
   --close-button-hover-transform: scale(1.05);
@@ -118,7 +117,7 @@ body:has(.pureModalBackdrop) {
 }
 
 .pureModalHeader {
-  padding: var(--top-header-padding) var(--calculated-right-padding)
+  padding: var(--top-header-padding) var(--header-right-padding)
     var(--bottom-header-padding) var(--left-padding);
   border-bottom: var(--dividers-border);
   border-radius: var(--radius) var(--radius) 0 0;
@@ -133,7 +132,7 @@ body:has(.pureModalBackdrop) {
 }
 
 .pureModalContent {
-  padding: var(--top-content-padding) var(--calculated-right-padding)
+  padding: var(--top-content-padding) var(--right-padding)
     var(--bottom-content-padding) var(--left-padding);
   overflow: auto;
   box-sizing: border-box;
@@ -145,7 +144,7 @@ body:has(.pureModalBackdrop) {
 }
 
 .pureModalFooter {
-  padding: var(--top-footer-padding) var(--calculated-right-padding)
+  padding: var(--top-footer-padding) var(--right-padding)
     calc(var(--bottom-footer-padding) + env(safe-area-inset-bottom))
     var(--left-padding);
   border-top: var(--dividers-border);
@@ -184,7 +183,7 @@ body:has(.pureModalBackdrop) {
 }
 
 .pureModal:has(.pureCloseButton) .pureModalHeader {
-  --calculated-right-padding: calc(var(--right-padding) + var(--close-button-space));
+  --header-right-padding: var(--close-button-space);
 }
 
 .pureCloseButton {
@@ -196,7 +195,6 @@ body:has(.pureModalBackdrop) {
   justify-self: end;
 
   /* internal clickable space */
-  padding: var(--close-button-container-padding);
   transform: var(--close-button-container-transform, none);
 
   /* styling */
@@ -209,12 +207,12 @@ body:has(.pureModalBackdrop) {
   font-weight: bold;
   border-radius: calc(var(--radius) * 2);
   font-size: calc(var(--close-button-size) / 2);
+  line-height: calc(var(--close-button-size) - 1px);
   height: var(--close-button-size);
   color: var(--dividers-color);
   width: var(--close-button-size);
   cursor: pointer;
   text-align: center;
-  line-height: calc(var(--close-button-size) - 1px);
   aspect-ratio: 1 / 1;
   border: var(--close-button-border);
   background: var(--close-button-background);

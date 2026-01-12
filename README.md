@@ -70,13 +70,29 @@ function CustomCloseContent() {
 
 The context provides: `isOpen`, `onClose`, `closeOnBackdropClick`, and `style`.
 
+## Portal
+
+Render the modal into a dedicated DOM node (for example, a `#modal-root`
+mounted near `body`).
+
+```jsx
+import Modal from "react-pure-modal";
+
+const portalRoot = document.getElementById("modal-root");
+
+<Modal isOpen={isOpen} onClose={onClose} portal={portalRoot}>
+  <Modal.Close />
+  <Modal.Content>Portal content</Modal.Content>
+</Modal>
+```
+
 ## Options
 
 - `isOpen` (boolean) - controls whether the modal is rendered; defaults to `false`.
 - `onClose` (VoidFunction) - called when the user clicks the close button, presses ESC, or (optionally) clicks the backdrop; set `isOpen` to `false` inside it. Any return value is ignored.
 - `closeOnBackdropClick` (boolean) - if `true`, clicking the backdrop calls `onClose` (default is `false`).
 - `style` (CSS custom properties) - inline CSS variables applied to the backdrop element; use this to set the variables listed below. TypeScript users can reference the exported `ModalCssVariable` union for autocomplete.
-- `portal` (Element | DocumentFragment | null) - when provided, render the modal into the target via `createPortal`. If set during SSR (no `document`), the modal returns `null`.
+- `portal` (Element | DocumentFragment | null) - when provided, render the modal into the target via `createPortal`. If set during SSR (no `document`) or the node is missing, the modal returns `null`.
 - `children` - compose the modal from the provided compounds: `Modal.Close`, `Modal.Header`, `Modal.Content`, and `Modal.Footer`.
 
 ## CSS Variables
@@ -96,7 +112,7 @@ All variables can be provided through the `style` prop (e.g. `style={{ "--radius
 - `--close-button-background` - background for the close icon circle.
 - `--close-button-border` - border applied to the close icon circle (defaults to `var(--dividers-border)`).
 - `--close-button-size` - diameter of the close icon circle.
-- `--close-button-container-padding` - extra tap target padding around the close icon.
+- `--close-button-space` - extra space reserved for the close button (defaults to `--close-button-size`).
 - `--close-button-container-transform` - transform applied to the close button container (for positional nudges).
 - `--close-button-hover-transform` - transform applied to the close icon on hover.
 - `--z-index` - base stacking level for the backdrop (panel uses `+1`).

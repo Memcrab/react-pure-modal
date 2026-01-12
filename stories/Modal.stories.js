@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import Modal from "../src/compounds/Modal";
+import { useModalContext } from "../src/compounds/ModalContext";
 
 function App(props) {
   const [isOpen, setIsOpen] = React.useState(true);
@@ -157,6 +158,77 @@ function App(props) {
   );
 }
 
+function CustomCloseContent() {
+  const { onClose } = useModalContext();
+  return (
+    <button type="button" onClick={() => onClose?.()}>
+      Save & Close
+    </button>
+  );
+}
+
+function CustomCloseStory() {
+  const [isOpen, setIsOpen] = React.useState(true);
+
+  return (
+    <div style={{ padding: "24px" }}>
+      <button type="button" onClick={() => setIsOpen(true)}>
+        Open modal with custom close
+      </button>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Close>
+          <CustomCloseContent />
+        </Modal.Close>
+        <Modal.Header>
+          <h2>Custom Close</h2>
+        </Modal.Header>
+        <Modal.Content>
+          <p>Custom close content uses modal context to call onClose.</p>
+        </Modal.Content>
+      </Modal>
+    </div>
+  );
+}
+
+function PortalStory() {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [portalNode, setPortalNode] = React.useState(null);
+
+  React.useEffect(() => {
+    const node = document.createElement("div");
+    node.setAttribute("data-modal-portal", "true");
+    document.body.appendChild(node);
+    setPortalNode(node);
+    setIsOpen(true);
+
+    return () => {
+      document.body.removeChild(node);
+    };
+  }, []);
+
+  return (
+    <div style={{ padding: "24px" }}>
+      <button type="button" onClick={() => setIsOpen(true)}>
+        Open modal rendered in a portal
+      </button>
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        closeOnBackdropClick
+        portal={portalNode}
+      >
+        <Modal.Close />
+        <Modal.Header>
+          <h2>Portal Modal</h2>
+        </Modal.Header>
+        <Modal.Content>
+          <p>This modal is rendered into a dedicated DOM node.</p>
+        </Modal.Content>
+      </Modal>
+    </div>
+  );
+}
+
 function CssVariablesStory() {
   const [isOpen, setIsOpen] = React.useState(true);
 
@@ -272,4 +344,14 @@ export const Default = {
 export const CssVariables = {
   name: "CSS Variables",
   render: () => <CssVariablesStory />,
+};
+
+export const CustomClose = {
+  name: "Custom Close",
+  render: () => <CustomCloseStory />,
+};
+
+export const Portal = {
+  name: "Portal",
+  render: () => <PortalStory />,
 };
