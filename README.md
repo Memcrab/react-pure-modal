@@ -28,6 +28,8 @@ https://memcrab.github.io/react-pure-modal/
 ## Usage
 
 ```jsx
+import Modal from "react-pure-modal";
+
 <Modal
   isOpen={isOpen}
   onClose={onClose}
@@ -44,6 +46,29 @@ https://memcrab.github.io/react-pure-modal/
   <Modal.Footer>footer content</Modal.Footer>
 </Modal>
 ```
+
+## Context
+
+Use the exported context hook when you need modal state inside custom children (for example, a custom close button passed into `Modal.Close`).
+
+```jsx
+import Modal, { useModalContext } from "react-pure-modal";
+
+function CustomCloseContent() {
+  const { onClose } = useModalContext();
+  return (
+    <button type="button" onClick={() => onClose?.()}>
+      Save & Close
+    </button>
+  );
+}
+
+<Modal.Close>
+  <CustomCloseContent />
+</Modal.Close>
+```
+
+The context provides: `isOpen`, `onClose`, `closeOnBackdropClick`, and `style`.
 
 ## Options
 
