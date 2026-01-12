@@ -39,6 +39,8 @@ export type ModalCssVariable =
   | "--close-button-border"
   | "--close-button-size"
   | "--close-button-container-transform"
+  | "--close-button-place-self"
+  | "--close-button-grid-row"
   | "--close-button-hover-transform"
   | "--dividers-color"
   | "--dividers-border"

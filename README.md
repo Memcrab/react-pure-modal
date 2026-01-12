@@ -115,6 +115,8 @@ All variables can be provided through the `style` prop (e.g. `style={{ "--radius
 - `--close-button-border` - border applied to the close icon circle (defaults to `var(--dividers-border)`).
 - `--close-button-size` - diameter of the close icon circle.
 - `--close-button-container-transform` - transform applied to the close button container (for positional nudges).
+- `--close-button-place-self` - `place-self` value for the close button container (defaults to `start end`).
+- `--close-button-grid-row` - grid row for the close button container (defaults to `1`).
 - `--close-button-hover-transform` - transform applied to the close icon on hover.
 - `--z-index` - base stacking level for the backdrop (panel uses `+1`).
 - `--top-content-padding` / `--bottom-content-padding` - vertical padding for the content area.

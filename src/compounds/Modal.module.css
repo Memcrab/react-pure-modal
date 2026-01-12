@@ -42,8 +42,10 @@ body:has(.pureModalBackdrop) {
   --close-button-background: var(--background-panels, white);
   --close-button-size: 30px; /* icon circle diameter */
   --close-button-container-transform: translate(calc(0px - var(--radius)), var(--radius)); /* e.g., translateY(-10px) to nudge up */
+  --close-button-place-self: start end; /* align-self + justify-self for close button container */
   --close-button-border: var(--dividers-border);
   --close-button-hover-transform: scale(1.05);
+  --close-button-grid-row: 1; /* grid row for the close button container */
 
   backdrop-filter: var(--backdrop-filter);
   position: fixed;
@@ -183,12 +185,12 @@ body:has(.pureModalBackdrop) {
 }
 
 .pureCloseButton {
-  grid-row: 1;
+  /* Use the configurable close button row, defaulting to header row (1). */
+  grid-row: var(--close-button-grid-row, 1);
   grid-column: 1 / -1;
 
   /* Always match the header row height */
-  align-self: start;
-  justify-self: end;
+  place-self: var(--close-button-place-self, start end);
 
   /* internal clickable space */
   transform: var(--close-button-container-transform, none);
