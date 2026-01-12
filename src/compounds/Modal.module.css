@@ -131,6 +131,18 @@ body:has(.pureModalBackdrop) {
   grid-column: 1;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.pureModalHeader[data-align="center"] {
+  justify-content: center;
+  text-align: center;
+}
+
+.pureModalHeader[data-align="end"] {
+  justify-content: flex-end;
+  text-align: right;
 }
 
 .pureModalContent {
@@ -153,11 +165,22 @@ body:has(.pureModalBackdrop) {
   border-radius:  0 0 var(--radius) var(--radius);
   background: var(--background-panels);
   display: block;
+  text-align: left;
   width: 100%;
   max-width: max(320px, var(--max-width));
   box-sizing: border-box;
   grid-row: 3;
   grid-column: 1 / -1;
+}
+
+.pureModalFooter[data-align="center"] {
+  justify-content: center;
+  text-align: center;
+}
+
+.pureModalFooter[data-align="end"] {
+  justify-content: flex-end;
+  text-align: right;
 }
 
 @media (max-width: 600px) {

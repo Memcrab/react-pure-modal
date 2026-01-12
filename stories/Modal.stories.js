@@ -86,7 +86,7 @@ function App(props) {
       >
         {props.closeIcon && <Modal.Close />}
         {props.header && (
-          <Modal.Header>
+          <Modal.Header align={props.headerAlign}>
             <h2>header content</h2>
           </Modal.Header>
         )}
@@ -134,7 +134,9 @@ function App(props) {
             </>
           )}
         </Modal.Content>
-        {props.footer && <Modal.Footer>footer content</Modal.Footer>}
+        {props.footer && (
+          <Modal.Footer align={props.footerAlign}>footer content</Modal.Footer>
+        )}
       </Modal>
       <Modal
         isOpen={isSecondOpen}
@@ -144,7 +146,7 @@ function App(props) {
         closeOnBackdropClick={props.closeOnBackdropClick}
       >
         <Modal.Close />
-        <Modal.Header>
+        <Modal.Header align={props.headerAlign}>
           <h2>Second Modal with long title</h2>
         </Modal.Header>
         <Modal.Content>
@@ -152,7 +154,7 @@ function App(props) {
           <p>some content here</p>
           <input type="text" placeholder="Focus me and press ESC" />
         </Modal.Content>
-        <Modal.Footer>footer content</Modal.Footer>
+        <Modal.Footer align={props.footerAlign}>footer content</Modal.Footer>
       </Modal>
     </div>
   );
@@ -327,6 +329,16 @@ function CssVariablesStory() {
 const meta = {
   title: "Modal/Default",
   component: App,
+  argTypes: {
+    headerAlign: {
+      options: ["start", "center", "end"],
+      control: { type: "inline-radio" },
+    },
+    footerAlign: {
+      options: ["start", "center", "end"],
+      control: { type: "inline-radio" },
+    },
+  },
 };
 
 export default meta;
@@ -338,6 +350,8 @@ export const Default = {
     footer: true,
     closeIcon: true,
     closeOnBackdropClick: true,
+    headerAlign: "start",
+    footerAlign: "start",
   },
 };
 

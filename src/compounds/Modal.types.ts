@@ -14,6 +14,8 @@ export type ModalCompoundElement =
 
 export type ModalChildren = ModalCompoundElement | ModalCompoundElement[];
 
+export type ModalSectionAlign = "start" | "center" | "end";
+
 export type ModalCssVariable =
   | "--radius"
   | "--aspect-ratio"

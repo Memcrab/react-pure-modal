@@ -97,6 +97,11 @@ const portalRoot = document.getElementById("modal-root");
 - `portal` (Element | DocumentFragment | null) - when provided, render the modal into the target via `createPortal`. If set during SSR (no `document`) or the node is missing, the modal returns `null`.
 - `children` - compose the modal from the provided compounds: `Modal.Close`, `Modal.Header`, `Modal.Content`, and `Modal.Footer`.
 
+## Compound component props
+
+- `Modal.Header align` (`"start" | "center" | "end"`) - horizontal alignment for header content (default: `start`).
+- `Modal.Footer align` (`"start" | "center" | "end"`) - horizontal alignment for footer content (default: `start`).
+
 ## CSS Variables
 
 All variables can be provided through the `style` prop (e.g. `style={{ "--radius": "16px" }}`). Close button variables apply when `Modal.Close` is rendered.

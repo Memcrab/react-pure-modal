@@ -8,5 +8,6 @@ export type {
   ModalCompoundElement,
   ModalProps,
   ModalCssVariable,
+  ModalSectionAlign,
 } from "./compounds/Modal.types";
 export type { ModalContextType } from "./compounds/ModalContext";
