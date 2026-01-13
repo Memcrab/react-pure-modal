@@ -111,11 +111,13 @@ All variables can be provided through the `style` prop (e.g. `style={{ "--radius
 - `--backdrop-filter` - value for the backdrop `backdrop-filter` property.
 - `--backdrop-color` - background color of the overlay.
 - `--box-shadow` - shadow applied to the modal panel.
-- `--max-width` - maximum width of the modal.
+- `--width` - base width for the modal panel.
+- `--width-mobile` - modal panel width used on mobile breakpoints.
 - `--max-height` - maximum height of the modal.
-- `--min-width` - minimum width of the modal.
 - `--background` - modal surface background.
 - `--background-panels` - background for header and footer panels.
+- `--header-background` - header background (defaults to `--background-panels`).
+- `--footer-background` - footer background (defaults to `--background-panels`).
 - `--close-button-background` - background for the close icon circle.
 - `--close-button-border` - border applied to the close icon circle (defaults to `var(--dividers-border)`).
 - `--close-button-size` - diameter of the close icon circle.
