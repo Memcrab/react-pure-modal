@@ -20,9 +20,10 @@ body:has(.pureModalBackdrop) {
   --bottom-footer-padding: 16px;
   --left-padding: 24px;
   --right-padding: 24px;
+  --header-background: var(--background-panels);
   --header-right-padding: var(--right-padding);
   --header-left-padding: var(--left-padding);
-  
+  --footer-background: var(--background-panels);
   
   /* Backdrop */
   --z-index: 1041;
@@ -82,7 +83,6 @@ body:has(.pureModalBackdrop) {
 
 .pureModal {
   z-index: calc(var(--z-index) + 1);
-  background: var(--background);
   box-shadow: var(--box-shadow);
   border-radius: var(--radius);
   max-height: var(--max-height);
@@ -123,7 +123,7 @@ body:has(.pureModalBackdrop) {
     var(--bottom-header-padding) var(--header-left-padding);
   border-bottom: var(--dividers-border);
   border-radius: var(--radius) var(--radius) 0 0;
-  background: var(--background-panels);
+  background: var(--header-background);
   width: 100%;
   max-width: max(320px, var(--max-width));
   box-sizing: border-box;
@@ -148,6 +148,7 @@ body:has(.pureModalBackdrop) {
 .pureModalContent {
   padding: var(--top-content-padding) var(--right-padding)
     var(--bottom-content-padding) var(--left-padding);
+  background: var(--background);
   overflow: auto;
   box-sizing: border-box;
   overscroll-behavior: contain;
@@ -163,7 +164,7 @@ body:has(.pureModalBackdrop) {
     var(--left-padding);
   border-top: var(--dividers-border);
   border-radius:  0 0 var(--radius) var(--radius);
-  background: var(--background-panels);
+  background: var(--footer-background);
   display: block;
   text-align: left;
   width: 100%;
@@ -185,8 +186,11 @@ body:has(.pureModalBackdrop) {
 
 @media (max-width: 600px) {
   .pureModalBackdrop {
-    --radius: 12px 12px 0 0;
     justify-content: end;
+  }
+  
+  .pureModalFooter {
+    border-radius: 0;
   }
 
   .pureModal {
