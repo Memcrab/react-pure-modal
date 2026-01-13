@@ -159,6 +159,10 @@ Install the dependencies:
 npm install
 ```
 
+## Codex skills
+
+This repo includes local Codex skills under `skills/`. To use one, list it in `AGENTS.md` under "Available skills" and invoke it by name in your request.
+
 
 ## Approach Details
 
