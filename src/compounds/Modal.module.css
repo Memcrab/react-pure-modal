@@ -103,6 +103,19 @@ body:has(.pureModalBackdrop) {
     grid-row: 2;
   }
 
+  &:not(:has(> .pureModalHeader)) > .pureModalContent {
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+
+  &:not(:has(> .pureModalFooter)) > .pureModalContent {
+    border-radius: 0 0 var(--radius) var(--radius);
+  }
+
+  &:not(:has(> .pureModalHeader)):not(:has(> .pureModalFooter))
+    > .pureModalContent {
+    border-radius: var(--radius);
+  }
+
   animation: panelSoftPop 240ms cubic-bezier(0.18, 0.77, 0.42, 1);
   animation-fill-mode: both;
 }
