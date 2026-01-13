@@ -12,7 +12,7 @@ export type ModalCompoundElement =
   | ReactElement<typeof ModalContent>
   | ReactElement<typeof ModalFooter>;
 
-export type ModalChildren = ModalCompoundElement | ModalCompoundElement[];
+export type ModalChildren = ModalCompoundElement | ModalCompoundElement[] | null;
 
 export type ModalSectionAlign = "start" | "center" | "end";
 
