@@ -2,7 +2,11 @@
 
 - After changes ask should we update `./Readme.md` file
 - After changes ask should we update Storubook stories in `./stories`
-- After changes updates tests in `./tests/types`
+
+## Testing instructions
+
+- Add or update tests for the code you change, even if nobody asked.
+- After changes updates tests in `./tests/types` and check with command `npm run typecheck`
 
 ## Working agreements
 
