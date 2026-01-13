@@ -242,8 +242,7 @@ function CssVariablesStory() {
       "--backdrop-color": "rgba(10, 23, 38, 0.72)",
       "--box-shadow":
         "0 18px 60px rgba(0, 0, 0, 0.35), 0 6px 18px rgba(0, 0, 0, 0.22)",
-      "--width": "min(760px, 78vw)",
-      "--width-mobile": "min(92vw, 520px)",
+      "--width": "min(320px, 78vw)",
       "--max-height": "40vh",
       "--close-button-container-transform": "translate(25px, -25px)",
       "--background": "linear-gradient(160deg, #111827 0%, #0b1220 100%)",

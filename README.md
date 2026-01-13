@@ -112,7 +112,6 @@ All variables can be provided through the `style` prop (e.g. `style={{ "--radius
 - `--backdrop-color` - background color of the overlay.
 - `--box-shadow` - shadow applied to the modal panel.
 - `--width` - base width for the modal panel.
-- `--width-mobile` - modal panel width used on mobile breakpoints.
 - `--max-height` - maximum height of the modal.
 - `--background` - modal surface background.
 - `--background-panels` - background for header and footer panels.

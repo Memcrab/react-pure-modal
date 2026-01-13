@@ -22,7 +22,6 @@ export type ModalCssVariable =
   | "--backdrop-color"
   | "--box-shadow"
   | "--width"
-  | "--width-mobile"
   | "--max-height"
   | "--background"
   | "--background-panels"
