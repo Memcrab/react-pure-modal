@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import Modal from "../src/compounds/Modal";
 import { useModalContext } from "../src/compounds/ModalContext";
+import "./Modal.stories.module.css";
 
 function App(props) {
   const [isOpen, setIsOpen] = React.useState(true);
@@ -242,8 +243,8 @@ function CssVariablesStory() {
       "--backdrop-color": "rgba(10, 23, 38, 0.72)",
       "--box-shadow":
         "0 18px 60px rgba(0, 0, 0, 0.35), 0 6px 18px rgba(0, 0, 0, 0.22)",
-      "--width": "min(320px, 78vw)",
-      "--max-height": "40vh",
+      "--width": "var(--custom-css-modal-width)",
+      "--max-height": "50vh",
       "--close-button-container-transform": "translate(25px, -25px)",
       "--background": "linear-gradient(160deg, #111827 0%, #0b1220 100%)",
       "--background-panels": "rgba(17, 24, 39, 0.8)",
@@ -305,17 +306,28 @@ function CssVariablesStory() {
         <Modal.Content>
           <p style={{ marginTop: 0 }}>
             Every visual token here comes from the `style` prop using CSS custom
-            properties. Adjust colors, radii, padding, aspect ratio, or the
+            properties. Adjust colors, padding, aspect ratio, or the
             backdrop blend without touching the stylesheet.
           </p>
           <p>
             Tweak the `styledVariables` object to see how the modal responds to
             new values in real time.
           </p>
-          <p>
-            Tweak the `styledVariables` object to see how the modal responds to
-            new values in real time.
-          </p>
+          <pre>
+            {
+`
+:root {
+  --custom-css-modal-width: min(320px, 78vw);
+}
+
+@media screen and (max-width: 500px) {
+  :root {
+    --custom-css-modal-width: 85dvw;
+  }
+}
+`
+            }
+          </pre>
         </Modal.Content>
         <Modal.Footer>
           <button type="button" onClick={() => setIsOpen(false)}>

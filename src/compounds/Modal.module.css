@@ -9,8 +9,10 @@ body:has(.pureModalBackdrop) {
   --box-shadow:
     0px 1px 2px rgba(0, 0, 0, 0.14), /* tiny sharp shadow */ 0px 8px 20px
     rgba(0, 0, 0, 0.18), /* medium soft */ 0px 20px 48px rgba(0, 0, 0, 0.22); /* wide ambient */
-    --max-height: 90dvh;
-  --width: clamp(320px, 60dvw, 600px);
+  --max-height: 90dvh;
+  --min-width: 280px;
+  --max-width: 95dvw;
+  --width: auto;
   --background: white;
   --background-panels: rgba(255, 255, 255, 0.9);
   --top-content-padding: 16px;
@@ -85,6 +87,8 @@ body:has(.pureModalBackdrop) {
   box-shadow: var(--box-shadow);
   border-radius: var(--radius);
   max-height: var(--max-height);
+  min-width: var(--min-width);
+  max-width: var(--max-width);
   width: var(--width);
   overflow: visible;
   display: grid;
@@ -135,7 +139,7 @@ body:has(.pureModalBackdrop) {
   border-bottom: var(--dividers-border);
   border-radius: var(--radius) var(--radius) 0 0;
   background: var(--header-background);
-  width: var(--width);
+  width: 100%;
   box-sizing: border-box;
   grid-row: 1;
   grid-column: 1;
@@ -162,7 +166,7 @@ body:has(.pureModalBackdrop) {
   overflow: auto;
   box-sizing: border-box;
   overscroll-behavior: contain;
-  width: var(--width);
+  width: 100%;
   grid-row: 1 / 2;
   grid-column: 1 / -1;
   min-block-size: 0; /* critical in Grid to allow inner scrolling */
@@ -177,7 +181,7 @@ body:has(.pureModalBackdrop) {
   background: var(--footer-background);
   display: block;
   text-align: left;
-  width: var(--width);
+  width: 100%;
   box-sizing: border-box;
   grid-row: 3;
   grid-column: 1 / -1;

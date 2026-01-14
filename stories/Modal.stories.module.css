@@ -1,0 +1,9 @@
+:root {
+  --custom-css-modal-width: min(320px, 78vw);
+}
+
+@media screen and (max-width: 500px) {
+  :root {
+    --custom-css-modal-width: 85dvw;
+  }
+}
