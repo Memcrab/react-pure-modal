@@ -91,6 +91,7 @@ const portalRoot = document.getElementById("modal-root");
 
 ## Options
 
+- `id` (string) - optional identifier for the modal container. The modal element id is rendered as `pure-modal-${id}`; when omitted, it uses `useId()` for a unique suffix.
 - `isOpen` (boolean) - controls whether the modal is rendered; defaults to `false`.
 - `onClose` (VoidFunction) - called when the user clicks the close button, presses ESC, or (optionally) clicks the backdrop; set `isOpen` to `false` inside it. Any return value is ignored.
 - `closeOnBackdropClick` (boolean) - if `true`, clicking the backdrop calls `onClose` (default is `false`).

@@ -10,7 +10,8 @@ import { ModalContext } from "./ModalContext";
 import type { ModalProps } from "./Modal.types";
 
 export default function Modal(props: ModalProps) {
-  const hash = useId();
+  const fallbackId = useId();
+  const hash = props.id ?? fallbackId;
   const modalState = useMemo(() => {
     return {
       isOpen: Boolean(props.isOpen),

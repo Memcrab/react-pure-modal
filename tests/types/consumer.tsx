@@ -4,6 +4,7 @@ const handleClose = () => true;
 
 const ValidModal = (
   <Modal
+    id="custom-id"
     isOpen
     onClose={handleClose}
     closeOnBackdropClick
@@ -22,6 +23,10 @@ const InvalidChildren = <Modal isOpen>Just text</Modal>;
 // @ts-expect-error onClose must be a function.
 const InvalidOnClose = <Modal isOpen onClose="nope"><Modal.Close /></Modal>;
 
+// @ts-expect-error id must be a string.
+const InvalidId = <Modal id={123}><Modal.Close /></Modal>;
+
 void ValidModal;
 void InvalidChildren;
 void InvalidOnClose;
+void InvalidId;

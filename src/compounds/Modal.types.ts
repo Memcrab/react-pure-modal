@@ -55,6 +55,7 @@ export type ModalStyle = Partial<Record<ModalCssVariable, string | number>>;
 
 export type ModalProps = {
   children: ModalChildren;
+  id?: string;
   isOpen?: boolean;
   style?: ModalStyle;
   onClose?: VoidFunction;
