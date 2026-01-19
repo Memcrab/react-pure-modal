@@ -3,15 +3,52 @@ import Modal from "../src/compounds/Modal";
 import { useModalContext } from "../src/compounds/ModalContext";
 import "./Modal.stories.module.css";
 
+function useMediaQuery(query) {
+  const [matches, setMatches] = React.useState(false);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia(query);
+    const updateMatch = () => setMatches(mediaQuery.matches);
+
+    updateMatch();
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", updateMatch);
+      return () => mediaQuery.removeEventListener("change", updateMatch);
+    }
+
+    mediaQuery.addListener(updateMatch);
+    return () => mediaQuery.removeListener(updateMatch);
+  }, [query]);
+
+  return matches;
+}
+
 function App(props) {
   const [isOpen, setIsOpen] = React.useState(true);
   const [isSecondOpen, setIsSecondOpen] = React.useState(false);
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   const customStyle = useMemo(
-    () => ({
-      "--aspect-ratio": "4 / 3",
-    }),
-    [],
+    () => {
+      const style = {
+        "--aspect-ratio": "4 / 3",
+      };
+
+      if (isMobile && props.mobileBottom) {
+        style["--aspect-ratio"] = "auto";
+        style["--backdrop-justify-content"] = "flex-end";
+      } else if (isMobile) {
+        style["--backdrop-justify-content"] = "center";
+      }
+
+      return style;
+    },
+    [isMobile, props.mobileBottom],
   );
 
   return (
@@ -232,19 +269,22 @@ function PortalStory() {
   );
 }
 
-function CssVariablesStory() {
+function CssVariablesStory(props) {
   const [isOpen, setIsOpen] = React.useState(true);
 
   const styledVariables = React.useMemo(
     () => ({
       "--radius": "24px",
-      "--aspect-ratio": "16 / 10",
+      "--aspect-ratio": "var(--custom-modal-aspect-ratio)",
       "--backdrop-filter": "blur(8px) saturate(140%)",
       "--backdrop-color": "rgba(10, 23, 38, 0.72)",
+      "--backdrop-justify-content":
+        "var(--custom-modal-backdrop-justify-content)",
       "--box-shadow":
         "0 18px 60px rgba(0, 0, 0, 0.35), 0 6px 18px rgba(0, 0, 0, 0.22)",
+      "--modal-animation": "var(--custom-modal-animation)",
       "--width": "var(--custom-css-modal-width)",
-      "--max-height": "50vh",
+      "--max-height": "var(--custom-modal-max-height)",
       "--close-button-container-transform": "translate(25px, -25px)",
       "--background": "linear-gradient(160deg, #111827 0%, #0b1220 100%)",
       "--background-panels": "rgba(17, 24, 39, 0.8)",
@@ -288,7 +328,7 @@ function CssVariablesStory() {
         style={styledVariables}
       >
         <Modal.Close />
-        <Modal.Header>
+        <Modal.Header align={props.headerAlign}>
           <div>
             <p
               style={{
@@ -306,30 +346,102 @@ function CssVariablesStory() {
         <Modal.Content>
           <p style={{ marginTop: 0 }}>
             Every visual token here comes from the `style` prop using CSS custom
-            properties. Adjust colors, padding, aspect ratio, or the
-            backdrop blend without touching the stylesheet.
+            properties. Adjust colors, padding, aspect ratio, animation, or the
+            backdrop alignment without touching the stylesheet.
           </p>
           <p>
             Tweak the `styledVariables` object to see how the modal responds to
-            new values in real time.
+            new values in real time. In this story the animation is only set on
+            mobile via a CSS variable, so desktop uses the default animation.
           </p>
-          <pre>
-            {
+          <section style={{ marginTop: 16 }}>
+            <h3 style={{ margin: "0 0 8px" }}>How this modal works</h3>
+            <ul style={{ margin: 0, paddingLeft: 18 }}>
+              <li>
+                The backdrop and panel read CSS custom properties from the
+                `style` prop.
+              </li>
+              <li>
+                `--backdrop-justify-content` controls vertical alignment inside
+                the overlay.
+              </li>
+              <li>
+                `--modal-animation` accepts any animation shorthand and can be
+                swapped per breakpoint.
+              </li>
+              <li>
+                Custom keyframes live in your app CSS; the modal does not ship
+                them.
+              </li>
+            </ul>
+          </section>
+          <section style={{ marginTop: 16 }}>
+            <h3 style={{ margin: "0 0 8px" }}>Animation examples</h3>
+            <p style={{ margin: "0 0 12px" }}>
+              Define keyframes in your own CSS and point
+              `--modal-animation` at them. This story uses a mobile sheet
+              animation.
+            </p>
+            <pre>
+              {
 `
 :root {
   --custom-css-modal-width: min(320px, 78vw);
+  --custom-modal-backdrop-justify-content: center;
+  --custom-modal-max-height: 50vh;
+  --custom-modal-aspect-ratio: 16 / 10;
 }
 
 @media screen and (max-width: 500px) {
   :root {
     --custom-css-modal-width: 85dvw;
+    --custom-modal-backdrop-justify-content: flex-end;
+    --custom-modal-aspect-ratio: auto;
+    --custom-modal-animation: panelSheetIn 280ms cubic-bezier(0.25, 0.85, 0.35, 1)
+      both;
+    --custom-modal-max-height: 80dvh;
+  }
+}
+
+@keyframes panelSheetIn {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 `
-            }
-          </pre>
+              }
+            </pre>
+            <p style={{ margin: "12px 0" }}>
+              Another option is a quick fade-in for all breakpoints.
+            </p>
+            <pre>
+              {
+`
+:root {
+  --custom-modal-animation: panelFadeIn 200ms ease-out both;
+}
+
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+`
+              }
+            </pre>
+          </section>
         </Modal.Content>
-        <Modal.Footer>
+        <Modal.Footer align={props.footerAlign}>
           <button type="button" onClick={() => setIsOpen(false)}>
             Close
           </button>
@@ -351,6 +463,10 @@ const meta = {
       options: ["start", "center", "end"],
       control: { type: "inline-radio" },
     },
+    mobileBottom: {
+      control: { type: "boolean" },
+      description: "Stick the modal to the bottom on mobile screens.",
+    },
   },
 };
 
@@ -365,12 +481,13 @@ export const Default = {
     closeOnBackdropClick: true,
     headerAlign: "start",
     footerAlign: "start",
+    mobileBottom: false,
   },
 };
 
 export const CssVariables = {
   name: "CSS Variables",
-  render: () => <CssVariablesStory />,
+  render: (args) => <CssVariablesStory {...args} />,
 };
 
 export const CustomClose = {

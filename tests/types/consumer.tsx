@@ -8,12 +8,16 @@ const ValidModal = (
     isOpen
     onClose={handleClose}
     closeOnBackdropClick
-    style={{ "--z-index": 10 }}
+    style={{
+      "--z-index": 10,
+      "--backdrop-justify-content": "flex-end",
+      "--modal-animation": "panelSoftPop 240ms ease both",
+    }}
   >
     <Modal.Close />
-    <Modal.Header>Header</Modal.Header>
+    <Modal.Header align="center">Header</Modal.Header>
     <Modal.Content>Content</Modal.Content>
-    <Modal.Footer>Footer</Modal.Footer>
+    <Modal.Footer align="end">Footer</Modal.Footer>
   </Modal>
 );
 

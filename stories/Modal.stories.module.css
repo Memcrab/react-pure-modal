@@ -1,9 +1,39 @@
 :root {
   --custom-css-modal-width: min(320px, 78vw);
+  --custom-modal-backdrop-justify-content: center;
+  --custom-modal-max-height: 50vh;
+  --custom-modal-aspect-ratio: 16 / 10;
 }
 
 @media screen and (max-width: 500px) {
   :root {
     --custom-css-modal-width: 85dvw;
+    --custom-modal-backdrop-justify-content: flex-end;
+    --custom-modal-aspect-ratio: auto;
+    --custom-modal-animation:
+      panelSheetIn 280ms cubic-bezier(0.25, 0.85, 0.35, 1) both;
+    --custom-modal-max-height: 80dvh;
+  }
+}
+
+@keyframes panelSheetIn {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }

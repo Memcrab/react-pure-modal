@@ -29,6 +29,8 @@ export type ModalCssVariable =
   | "--background-panels"
   | "--header-background"
   | "--footer-background"
+  | "--backdrop-justify-content"
+  | "--modal-animation"
   | "--z-index"
   | "--top-content-padding"
   | "--bottom-content-padding"

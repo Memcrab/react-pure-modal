@@ -108,11 +108,13 @@ const portalRoot = document.getElementById("modal-root");
 
 All variables can be provided through the `style` prop (e.g. `style={{ "--radius": "16px" }}`). Close button variables apply when `Modal.Close` is rendered.
 
-- `--radius` - border radius of the modal container (mobile uses `12px 12px 0 0`).
+- `--radius` - border radius of the modal container.
 - `--aspect-ratio` - forced aspect ratio for the modal grid.
 - `--backdrop-filter` - value for the backdrop `backdrop-filter` property.
 - `--backdrop-color` - background color of the overlay.
+- `--backdrop-justify-content` - vertical alignment of the modal inside the backdrop (`center`, `flex-end`, etc).
 - `--box-shadow` - shadow applied to the modal panel.
+- `--modal-animation` - animation shorthand for the modal panel (defaults to `panelSoftPop`).
 - `--width` - base width for the modal panel.
 - `--max-width` - min-width for the modal panel.
 - `--min-width` - max-width for the modal panel.
