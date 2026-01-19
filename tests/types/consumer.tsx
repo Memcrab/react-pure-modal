@@ -12,6 +12,10 @@ const ValidModal = (
       "--z-index": 10,
       "--backdrop-justify-content": "flex-end",
       "--modal-animation": "panelSoftPop 240ms ease both",
+      "--radius-top-left": "12px",
+      "--radius-top-right": "12px",
+      "--radius-bottom-right": "0px",
+      "--radius-bottom-left": "0px",
     }}
   >
     <Modal.Close />

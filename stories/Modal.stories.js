@@ -42,6 +42,8 @@ function App(props) {
       if (isMobile && props.mobileBottom) {
         style["--aspect-ratio"] = "auto";
         style["--backdrop-justify-content"] = "flex-end";
+        style["--radius-bottom-left"] = "0px";
+        style["--radius-bottom-right"] = "0px";
       } else if (isMobile) {
         style["--backdrop-justify-content"] = "center";
       }
@@ -274,7 +276,10 @@ function CssVariablesStory(props) {
 
   const styledVariables = React.useMemo(
     () => ({
-      "--radius": "24px",
+      "--radius-top-left": "24px",
+      "--radius-top-right": "24px",
+      "--radius-bottom-left": "24px",
+      "--radius-bottom-right": "24px",
       "--aspect-ratio": "var(--custom-modal-aspect-ratio)",
       "--backdrop-filter": "blur(8px) saturate(140%)",
       "--backdrop-color": "rgba(10, 23, 38, 0.72)",

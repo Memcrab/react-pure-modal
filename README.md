@@ -106,9 +106,13 @@ const portalRoot = document.getElementById("modal-root");
 
 ## CSS Variables
 
-All variables can be provided through the `style` prop (e.g. `style={{ "--radius": "16px" }}`). Close button variables apply when `Modal.Close` is rendered.
+All variables can be provided through the `style` prop (e.g. `style={{ "--radius-top-left": "16px" }}`). Close button variables apply when `Modal.Close` is rendered.
 
-- `--radius` - border radius of the modal container.
+- `--radius-top-left` - border radius for the modal's top-left corner.
+- `--radius-top-right` - border radius for the modal's top-right corner.
+- `--radius-bottom-right` - border radius for the modal's bottom-right corner.
+- `--radius-bottom-left` - border radius for the modal's bottom-left corner.
+- `--radius` - shorthand border radius for all corners (used as the fallback for the four values above).
 - `--aspect-ratio` - forced aspect ratio for the modal grid.
 - `--backdrop-filter` - value for the backdrop `backdrop-filter` property.
 - `--backdrop-color` - background color of the overlay.

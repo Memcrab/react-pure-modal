@@ -18,6 +18,10 @@ export type ModalSectionAlign = "start" | "center" | "end";
 
 export type ModalCssVariable =
   | "--radius"
+  | "--radius-top-left"
+  | "--radius-top-right"
+  | "--radius-bottom-right"
+  | "--radius-bottom-left"
   | "--aspect-ratio"
   | "--backdrop-color"
   | "--box-shadow"
