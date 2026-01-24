@@ -158,16 +158,6 @@ body:has(.pureModalBackdrop) {
   text-align: left;
 }
 
-.pureModalHeader[data-align="center"] {
-  justify-content: center;
-  text-align: center;
-}
-
-.pureModalHeader[data-align="end"] {
-  justify-content: flex-end;
-  text-align: right;
-}
-
 .pureModalContent {
   padding: var(--top-content-padding) var(--right-padding)
     var(--bottom-content-padding) var(--left-padding);
@@ -196,12 +186,13 @@ body:has(.pureModalBackdrop) {
   grid-column: 1 / -1;
 }
 
-.pureModalFooter[data-align="center"] {
+
+.pureModalHeader[data-align="center"], .pureModalFooter[data-align="center"] {
   justify-content: center;
   text-align: center;
 }
 
-.pureModalFooter[data-align="end"] {
+.pureModalHeader[data-align="end"], .pureModalFooter[data-align="end"] {
   justify-content: flex-end;
   text-align: right;
 }
