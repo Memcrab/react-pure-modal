@@ -72,8 +72,7 @@ body:has(.pureModalBackdrop) {
   overflow: auto;
 
   background-color: var(--backdrop-color);
-  animation: backdropFadeSmooth 260ms cubic-bezier(0.16, 0.84, 0.44, 1);
-  animation-fill-mode: both;
+  animation: backdropFadeSmooth 260ms cubic-bezier(0.16, 0.84, 0.44, 1) both;
 }
 
 @keyframes backdropFadeSmooth {
@@ -229,12 +228,11 @@ body:has(.pureModalBackdrop) {
   border-radius: calc(var(--radius-top-right) * 2);
   font-size: calc(var(--close-button-size) / 2);
   line-height: calc(var(--close-button-size) - 1px);
-  height: var(--close-button-size);
   color: var(--dividers-color);
   width: var(--close-button-size);
   cursor: pointer;
   text-align: center;
-  aspect-ratio: 1 / 1;
+  height: var(--close-button-size);
   border: var(--close-button-border);
   background: var(--close-button-background);
   padding: 0;

@@ -19,6 +19,9 @@ export default defineConfig({
     target: 'web',
     minify: true,
     injectStyles: true,
+    cssModules: {
+      localIdentName: '[hash:base64:4]',
+    },
   },
   plugins: [pluginReact()],
 });
