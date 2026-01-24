@@ -17,6 +17,11 @@ React pure modal is a simplest way to create dialog on your site.
 - [x] Smooth animations
 - [x] Mobile-friendly gestures
 - [ ] Passing animation promise to onClose
+- [ ] Passing trigger element to onClose
+
+## TODO
+
+- [ ] Storybook css variables visible example
 
 ## Demo
 

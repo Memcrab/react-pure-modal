@@ -58,6 +58,8 @@ body:has(.pureModalBackdrop) {
   --close-button-hover-transform: scale(1.05);
   --close-button-grid-row: 1; /* grid row for the close button container */
   --swipe-handle-gap: 5px;
+  --swipe-handle-hit-size: 24px;
+  --swipe-handle-length: 60px;
 
   backdrop-filter: var(--backdrop-filter);
   position: fixed;
@@ -115,10 +117,6 @@ body:has(.pureModalBackdrop) {
     minmax(0, 1fr) /* main row: stretches and can scroll */
     minmax(0, max-content); /* footer row: collapses if no footer */
 
-  &:has(> .pureModalHeader) > .pureModalContent {
-    grid-row: 2;
-  }
-
   &:not(:has(> .pureModalHeader)) > .pureModalContent {
     border-radius: var(--radius-top-left) var(--radius-top-right) 0 0;
   }
@@ -136,9 +134,33 @@ body:has(.pureModalBackdrop) {
   animation: var(--modal-animation);
 }
 
+.pureModal:not(:has(> .pureModalHeader)) {
+  grid-template-rows:
+    minmax(0, 1fr)
+    minmax(0, max-content);
+}
+
+.pureModal:not(:has(> .pureModalHeader)) > .pureModalContent {
+  grid-row: 1;
+}
+
+.pureModal:not(:has(> .pureModalHeader)) > .pureModalFooter {
+  grid-row: 2;
+}
+
+.pureModal:not(:has(> .pureModalFooter)) {
+  grid-template-rows:
+    auto
+    minmax(0, 1fr);
+}
+
+.pureModal:not(:has(> .pureModalHeader)):not(:has(> .pureModalFooter)) {
+  grid-template-rows: minmax(0, 1fr);
+}
+
 .pureModalHandle {
-  width: 60px;
-  height: 24px;
+  width: var(--swipe-handle-length);
+  height: var(--swipe-handle-hit-size);
   align-items: center;
   justify-content: center;
   display: none;
@@ -166,28 +188,32 @@ body:has(.pureModalBackdrop) {
   grid-row: 1;
   grid-column: 2;
   align-self: end;
+  transform: translateY(calc(-1 * var(--swipe-handle-gap)));
 }
 
 .pureModalHandle[data-position="bottom"] {
   grid-row: 3;
   grid-column: 2;
   align-self: start;
+  transform: translateY(var(--swipe-handle-gap));
 }
 
 .pureModalHandle[data-position="left"] {
-  width: 24px;
-  height: 60px;
+  width: var(--swipe-handle-hit-size);
+  height: var(--swipe-handle-length);
   grid-row: 2;
   grid-column: 1;
   justify-self: end;
+  transform: translateX(calc(-1 * var(--swipe-handle-gap)));
 }
 
 .pureModalHandle[data-position="right"] {
-  width: 24px;
-  height: 60px;
+  width: var(--swipe-handle-hit-size);
+  height: var(--swipe-handle-length);
   grid-row: 2;
   grid-column: 3;
   justify-self: start;
+  transform: translateX(var(--swipe-handle-gap));
 }
 
 .pureModalHandle[data-position="left"]::before,
@@ -197,6 +223,10 @@ body:has(.pureModalBackdrop) {
 }
 
 .pureModalSwipeWrapper {
+  --swipe-handle-block-start: 0px;
+  --swipe-handle-block-end: 0px;
+  --swipe-handle-inline-start: 0px;
+  --swipe-handle-inline-end: 0px;
   transform: translate(
     var(--modal-swipe-translate-x, 0px),
     var(--modal-swipe-translate-y, 0px)
@@ -204,8 +234,8 @@ body:has(.pureModalBackdrop) {
   transition: transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
   will-change: transform;
   display: inline-grid;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto auto auto;
+  grid-template-columns: 0 auto 0;
+  grid-template-rows: 0 auto 0;
   gap: 0;
   width: fit-content;
   max-width: 100%;
@@ -213,8 +243,39 @@ body:has(.pureModalBackdrop) {
   justify-items: center;
 }
 
-.pureModalSwipeWrapper:has(.pureModalHandle) {
-  gap: var(--swipe-handle-gap);
+.pureModalSwipeWrapper:has(.pureModalHandle[data-position="top"]) {
+  --swipe-handle-block-start: calc(
+    var(--swipe-handle-gap) + var(--swipe-handle-hit-size)
+  );
+}
+
+.pureModalSwipeWrapper:has(.pureModalHandle[data-position="bottom"]) {
+  --swipe-handle-block-end: calc(
+    var(--swipe-handle-gap) + var(--swipe-handle-hit-size)
+  );
+}
+
+.pureModalSwipeWrapper:has(.pureModalHandle[data-position="left"]) {
+  --swipe-handle-inline-start: calc(
+    var(--swipe-handle-gap) + var(--swipe-handle-hit-size)
+  );
+}
+
+.pureModalSwipeWrapper:has(.pureModalHandle[data-position="right"]) {
+  --swipe-handle-inline-end: calc(
+    var(--swipe-handle-gap) + var(--swipe-handle-hit-size)
+  );
+}
+
+.pureModalSwipeWrapper:has(.pureModalHandle) .pureModal {
+  max-height: calc(
+    var(--max-height) - var(--swipe-handle-block-start) -
+      var(--swipe-handle-block-end)
+  );
+  max-width: calc(
+    var(--max-width) - var(--swipe-handle-inline-start) -
+      var(--swipe-handle-inline-end)
+  );
 }
 
 @keyframes panelSoftPop {
@@ -252,7 +313,7 @@ body:has(.pureModalBackdrop) {
   box-sizing: border-box;
   overscroll-behavior: contain;
   width: 100%;
-  grid-row: 1 / 2;
+  grid-row: 2;
   grid-column: 1 / -1;
   min-block-size: 0; /* critical in Grid to allow inner scrolling */
 }
