@@ -17,9 +17,16 @@ export default function Modal(props: ModalProps) {
       isOpen: Boolean(props.isOpen),
       onClose: props.onClose,
       closeOnBackdropClick: Boolean(props.closeOnBackdropClick),
+      swipeToClose: props.swipeToClose,
       style: props.style,
     };
-  }, [props.isOpen, props.onClose, props.closeOnBackdropClick, props.style]);
+  }, [
+    props.isOpen,
+    props.onClose,
+    props.closeOnBackdropClick,
+    props.swipeToClose,
+    props.style,
+  ]);
 
   if (!modalState.isOpen) {
     return null;

@@ -123,6 +123,7 @@ function App(props) {
         }}
         style={customStyle}
         closeOnBackdropClick={props.closeOnBackdropClick}
+        swipeToClose={props.swipeToClose}
       >
         {props.closeIcon && <Modal.Close />}
         {props.header && (
@@ -184,6 +185,7 @@ function App(props) {
           setIsSecondOpen(false);
         }}
         closeOnBackdropClick={props.closeOnBackdropClick}
+        swipeToClose={props.swipeToClose}
       >
         <Modal.Close />
         <Modal.Header align={props.headerAlign}>
@@ -472,6 +474,11 @@ const meta = {
       control: { type: "boolean" },
       description: "Stick the modal to the bottom on mobile screens.",
     },
+    swipeToClose: {
+      options: ["up-down", "down-up", "left-right", "right-left"],
+      control: { type: "check" },
+      description: "Enable swipe-to-close on mobile. Swipe starts on backdrop.",
+    },
   },
 };
 
@@ -487,6 +494,7 @@ export const Default = {
     headerAlign: "start",
     footerAlign: "start",
     mobileBottom: false,
+    swipeToClose: ["up-down"],
   },
 };
 

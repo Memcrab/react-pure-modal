@@ -15,7 +15,7 @@ React pure modal is a simplest way to create dialog on your site.
 - [x] Stop background scrolling when focused in modal
 - [x] Mobile-friendly safe areas
 - [x] Smooth animations
-- [ ] Mobile-friendly gestures
+- [x] Mobile-friendly gestures
 - [ ] Passing animation promise to onClose
 
 ## Demo
@@ -95,9 +95,25 @@ const portalRoot = document.getElementById("modal-root");
 - `isOpen` (boolean) - controls whether the modal is rendered; defaults to `false`.
 - `onClose` (VoidFunction) - called when the user clicks the close button, presses ESC, or (optionally) clicks the backdrop; set `isOpen` to `false` inside it. Any return value is ignored.
 - `closeOnBackdropClick` (boolean) - if `true`, clicking the backdrop calls `onClose` (default is `false`).
+- `swipeToClose` (`Array<"up-down" | "down-up" | "left-right" | "right-left">`) - enable touch-only swipe-to-close on the backdrop. The modal follows the finger, then animates out of view; `onClose` fires after the animation ends and only for the topmost modal.
 - `style` (CSS custom properties) - inline CSS variables applied to the backdrop element; use this to set the variables listed below. TypeScript users can reference the exported `ModalCssVariable` union for autocomplete.
 - `portal` (Element | DocumentFragment | null) - when provided, render the modal into the target via `createPortal`. If set during SSR (no `document`) or the node is missing, the modal returns `null`.
 - `children` - compose the modal from the provided compounds: `Modal.Close`, `Modal.Header`, `Modal.Content`, and `Modal.Footer`.
+
+## Swipe to close
+
+Enable swipe gestures on mobile by passing `swipeToClose` and the allowed directions. Swipes start only when the initial touch is on the backdrop (not the modal content).
+
+```jsx
+<Modal
+  isOpen={isOpen}
+  onClose={onClose}
+  swipeToClose={["up-down", "down-up"]}
+>
+  <Modal.Close />
+  <Modal.Content>Swipe the backdrop to close</Modal.Content>
+</Modal>
+```
 
 ## Compound component props
 

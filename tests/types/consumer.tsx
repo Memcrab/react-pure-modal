@@ -8,6 +8,7 @@ const ValidModal = (
     isOpen
     onClose={handleClose}
     closeOnBackdropClick
+    swipeToClose={["down-up", "up-down"]}
     style={{
       "--z-index": 10,
       "--backdrop-justify-content": "flex-end",
@@ -31,10 +32,18 @@ const InvalidChildren = <Modal isOpen>Just text</Modal>;
 // @ts-expect-error onClose must be a function.
 const InvalidOnClose = <Modal isOpen onClose="nope"><Modal.Close /></Modal>;
 
+// @ts-expect-error swipeToClose must be an array of allowed directions.
+const InvalidSwipeType = <Modal swipeToClose="down-up"><Modal.Close /></Modal>;
+
+// @ts-expect-error swipeToClose must use supported direction strings.
+const InvalidSwipeValue = <Modal swipeToClose={["diagonal-left"]}><Modal.Close /></Modal>;
+
 // @ts-expect-error id must be a string.
 const InvalidId = <Modal id={123}><Modal.Close /></Modal>;
 
 void ValidModal;
 void InvalidChildren;
 void InvalidOnClose;
+void InvalidSwipeType;
+void InvalidSwipeValue;
 void InvalidId;

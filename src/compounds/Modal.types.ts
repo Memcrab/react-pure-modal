@@ -16,6 +16,12 @@ export type ModalChildren = ModalCompoundElement | Array<ModalCompoundElement | 
 
 export type ModalSectionAlign = "start" | "center" | "end";
 
+export type ModalSwipeDirection =
+  | "up-down"
+  | "down-up"
+  | "left-right"
+  | "right-left";
+
 export type ModalCssVariable =
   | "--radius"
   | "--radius-top-left"
@@ -66,5 +72,6 @@ export type ModalProps = {
   style?: ModalStyle;
   onClose?: VoidFunction;
   closeOnBackdropClick?: boolean;
+  swipeToClose?: ModalSwipeDirection[];
   portal?: Element | DocumentFragment | null;
 };

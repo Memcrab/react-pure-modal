@@ -131,6 +131,15 @@ body:has(.pureModalBackdrop) {
   animation: var(--modal-animation);
 }
 
+.pureModalSwipeWrapper {
+  transform: translate(
+    var(--modal-swipe-translate-x, 0px),
+    var(--modal-swipe-translate-y, 0px)
+  );
+  transition: transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+
 @keyframes panelSoftPop {
   from {
     opacity: 0;
