@@ -9,6 +9,7 @@ export type {
   ModalProps,
   ModalCssVariable,
   ModalSectionAlign,
+  ModalHandlePosition,
   ModalSwipeDirection,
 } from "./compounds/Modal.types";
 export type { ModalContextType } from "./compounds/ModalContext";

@@ -123,8 +123,10 @@ function App(props) {
         }}
         style={customStyle}
         closeOnBackdropClick={props.closeOnBackdropClick}
-        swipeToClose={props.swipeToClose}
       >
+        {props.handlePositions?.map((position) => (
+          <Modal.Handle key={position} position={position} />
+        ))}
         {props.closeIcon && <Modal.Close />}
         {props.header && (
           <Modal.Header align={props.headerAlign}>
@@ -185,8 +187,10 @@ function App(props) {
           setIsSecondOpen(false);
         }}
         closeOnBackdropClick={props.closeOnBackdropClick}
-        swipeToClose={props.swipeToClose}
       >
+        {props.handlePositions?.map((position) => (
+          <Modal.Handle key={`secondary-${position}`} position={position} />
+        ))}
         <Modal.Close />
         <Modal.Header align={props.headerAlign}>
           <h2>Second Modal with long title</h2>
@@ -474,10 +478,10 @@ const meta = {
       control: { type: "boolean" },
       description: "Stick the modal to the bottom on mobile screens.",
     },
-    swipeToClose: {
-      options: ["up-down", "down-up", "left-right", "right-left"],
+    handlePositions: {
+      options: ["top", "bottom", "left", "right"],
       control: { type: "check" },
-      description: "Enable swipe-to-close on mobile. Swipe starts on backdrop.",
+      description: "Render swipe handle bars at the chosen modal edges.",
     },
   },
 };
@@ -494,7 +498,7 @@ export const Default = {
     headerAlign: "start",
     footerAlign: "start",
     mobileBottom: false,
-    swipeToClose: ["up-down"],
+    handlePositions: ["top"],
   },
 };
 

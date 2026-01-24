@@ -95,21 +95,20 @@ const portalRoot = document.getElementById("modal-root");
 - `isOpen` (boolean) - controls whether the modal is rendered; defaults to `false`.
 - `onClose` (VoidFunction) - called when the user clicks the close button, presses ESC, or (optionally) clicks the backdrop; set `isOpen` to `false` inside it. Any return value is ignored.
 - `closeOnBackdropClick` (boolean) - if `true`, clicking the backdrop calls `onClose` (default is `false`).
-- `swipeToClose` (`Array<"up-down" | "down-up" | "left-right" | "right-left">`) - enable touch-only swipe-to-close on the backdrop. The modal follows the finger, then animates out of view; `onClose` fires after the animation ends and only for the topmost modal.
 - `style` (CSS custom properties) - inline CSS variables applied to the backdrop element; use this to set the variables listed below. TypeScript users can reference the exported `ModalCssVariable` union for autocomplete.
 - `portal` (Element | DocumentFragment | null) - when provided, render the modal into the target via `createPortal`. If set during SSR (no `document`) or the node is missing, the modal returns `null`.
 - `children` - compose the modal from the provided compounds: `Modal.Close`, `Modal.Header`, `Modal.Content`, and `Modal.Footer`.
 
 ## Swipe to close
 
-Enable swipe gestures on mobile by passing `swipeToClose` and the allowed directions. Swipes start only when the initial touch is on the backdrop (not the modal content).
+Enable swipe gestures on mobile by rendering `Modal.Handle`. Swipes start only when the initial touch is on the handle.
 
 ```jsx
 <Modal
   isOpen={isOpen}
   onClose={onClose}
-  swipeToClose={["up-down", "down-up"]}
 >
+  <Modal.Handle position="top" />
   <Modal.Close />
   <Modal.Content>Swipe the backdrop to close</Modal.Content>
 </Modal>
@@ -119,6 +118,7 @@ Enable swipe gestures on mobile by passing `swipeToClose` and the allowed direct
 
 - `Modal.Header align` (`"start" | "center" | "end"`) - horizontal alignment for header content (default: `start`).
 - `Modal.Footer align` (`"start" | "center" | "end"`) - horizontal alignment for footer content (default: `start`).
+- `Modal.Handle position` (`"left" | "right" | "top" | "bottom"`) - renders a mobile-only swipe handle with an expanded hit area outside the modal; respects `--swipe-handle-gap`.
 
 ## CSS Variables
 
@@ -158,6 +158,7 @@ All variables can be provided through the `style` prop (e.g. `style={{ "--radius
 - `--left-padding` / `--right-padding` - horizontal padding shared across sections.
 - `--dividers-color` - border color for header/footer dividers (also used as the default close icon border).
 - `--dividers-border` - border applied to header/footer dividers (defaults to `1px solid var(--dividers-color)`).
+- `--swipe-handle-gap` - gap between the modal edge and `Modal.Handle` when positioned outside the modal.
 
 
 ## Changelog (latest on top)

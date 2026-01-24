@@ -3,6 +3,7 @@ import type { ModalBackdrop } from "./Backdrop";
 import type { ModalClose } from "./Close";
 import type { ModalContent } from "./Content";
 import type { ModalFooter } from "./Footer";
+import type { ModalHandle } from "./Handle";
 import type { ModalHeader } from "./Header";
 
 export type ModalCompoundElement =
@@ -10,11 +11,14 @@ export type ModalCompoundElement =
   | ReactElement<typeof ModalClose>
   | ReactElement<typeof ModalHeader>
   | ReactElement<typeof ModalContent>
-  | ReactElement<typeof ModalFooter>;
+  | ReactElement<typeof ModalFooter>
+  | ReactElement<typeof ModalHandle>;
 
 export type ModalChildren = ModalCompoundElement | Array<ModalCompoundElement | null> | null;
 
 export type ModalSectionAlign = "start" | "center" | "end";
+
+export type ModalHandlePosition = "left" | "right" | "top" | "bottom";
 
 export type ModalSwipeDirection =
   | "up-down"
@@ -59,6 +63,7 @@ export type ModalCssVariable =
   | "--close-button-place-self"
   | "--close-button-grid-row"
   | "--close-button-hover-transform"
+  | "--swipe-handle-gap"
   | "--dividers-color"
   | "--dividers-border"
   | "--backdrop-filter";
@@ -72,6 +77,5 @@ export type ModalProps = {
   style?: ModalStyle;
   onClose?: VoidFunction;
   closeOnBackdropClick?: boolean;
-  swipeToClose?: ModalSwipeDirection[];
   portal?: Element | DocumentFragment | null;
 };
