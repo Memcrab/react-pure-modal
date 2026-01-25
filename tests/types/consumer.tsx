@@ -1,8 +1,15 @@
 import Modal, { useModalContext } from "react-pure-modal";
-import type { ModalCloseTrigger } from "react-pure-modal";
+import type { ModalCloseHandler, ModalCloseTrigger } from "react-pure-modal";
 
 const handleClose = (trigger?: ModalCloseTrigger) => {
   if (trigger === "escape") {
+    return true;
+  }
+  return true;
+};
+
+const handleCloseAction: ModalCloseHandler = (trigger) => {
+  if (trigger === "backdrop") {
     return true;
   }
   return true;
@@ -34,6 +41,7 @@ const ValidModal = (
       "--z-index": 10,
       "--backdrop-justify-content": "flex-end",
       "--modal-animation": "panelSoftPop 240ms ease both",
+      "--aspect-ratio": "4 / 3",
       "--radius-top-left": "12px",
       "--radius-top-right": "12px",
       "--radius-bottom-right": "0px",
@@ -46,6 +54,18 @@ const ValidModal = (
     <Modal.Header align="center">Header</Modal.Header>
     <Modal.Content>Content</Modal.Content>
     <Modal.Footer align="end">Footer</Modal.Footer>
+  </Modal>
+);
+
+const ValidModalAutoAspectRatio = (
+  <Modal
+    isOpen
+    onClose={handleClose}
+    style={{
+      "--aspect-ratio": "auto",
+    }}
+  >
+    <Modal.Content>Content</Modal.Content>
   </Modal>
 );
 
@@ -102,6 +122,7 @@ const InvalidHandlePosition = <Modal.Handle position="center" />;
 const InvalidId = <Modal id={123}><Modal.Close /></Modal>;
 
 void ValidModal;
+void ValidModalAutoAspectRatio;
 void ValidModalWithoutHeaderFooter;
 void ValidModalWithHandles;
 void ValidModalWithBottomHandle;
@@ -113,3 +134,4 @@ void InvalidChildren;
 void InvalidOnClose;
 void InvalidHandlePosition;
 void InvalidId;
+void handleCloseAction;

@@ -35,9 +35,11 @@ function App(props) {
 
   const customStyle = useMemo(
     () => {
-      const style = {
-        "--aspect-ratio": "4 / 3",
-      };
+      const style = {};
+
+      if (props.aspectRatio) {
+        style["--aspect-ratio"] = props.aspectRatio;
+      }
 
       if (isMobile && props.mobileBottom) {
         style["--aspect-ratio"] = "auto";
@@ -50,7 +52,7 @@ function App(props) {
 
       return style;
     },
-    [isMobile, props.mobileBottom],
+    [isMobile, props.mobileBottom, props.aspectRatio],
   );
 
   return (
@@ -118,7 +120,8 @@ function App(props) {
       </p>
       <Modal
         isOpen={isOpen}
-        onClose={() => {
+        onClose={(trigger) => {
+          props.onClose?.(trigger);
           setIsOpen(false);
         }}
         style={customStyle}
@@ -183,7 +186,8 @@ function App(props) {
       </Modal>
       <Modal
         isOpen={isSecondOpen}
-        onClose={() => {
+        onClose={(trigger) => {
+          props.onSecondClose?.(trigger);
           setIsSecondOpen(false);
         }}
         closeOnBackdropClick={props.closeOnBackdropClick}
@@ -215,7 +219,7 @@ function CustomCloseContent() {
   );
 }
 
-function CustomCloseStory() {
+function CustomCloseStory(props) {
   const [isOpen, setIsOpen] = React.useState(true);
 
   return (
@@ -223,7 +227,13 @@ function CustomCloseStory() {
       <button type="button" onClick={() => setIsOpen(true)}>
         Open modal with custom close
       </button>
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal
+        isOpen={isOpen}
+        onClose={(trigger) => {
+          props.onClose?.(trigger);
+          setIsOpen(false);
+        }}
+      >
         <Modal.Close>
           <CustomCloseContent />
         </Modal.Close>
@@ -238,7 +248,7 @@ function CustomCloseStory() {
   );
 }
 
-function PortalStory() {
+function PortalStory(props) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [portalNode, setPortalNode] = React.useState(null);
 
@@ -261,7 +271,10 @@ function PortalStory() {
       </button>
       <Modal
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={(trigger) => {
+          props.onClose?.(trigger);
+          setIsOpen(false);
+        }}
         closeOnBackdropClick
         portal={portalNode}
       >
@@ -334,7 +347,10 @@ function CssVariablesStory(props) {
 
       <Modal
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={(trigger) => {
+          props.onClose?.(trigger);
+          setIsOpen(false);
+        }}
         closeOnBackdropClick
         style={styledVariables}
       >
@@ -466,6 +482,31 @@ const meta = {
   title: "Modal/Default",
   component: App,
   argTypes: {
+    onClose: {
+      action: "onClose",
+      description: "Called when the primary modal closes.",
+    },
+    onSecondClose: {
+      action: "onSecondClose",
+      description: "Called when the second modal closes.",
+    },
+    aspectRatio: {
+      options: ["auto", "1 / 1", "4 / 3", "9 / 16"],
+      mapping: {
+        auto: undefined,
+        "1 / 1": "1 / 1",
+        "4 / 3": "4 / 3",
+        "9 / 16": "9 / 16",
+      },
+      labels: {
+        auto: "auto",
+        "1 / 1": "1:1",
+        "4 / 3": "4:3",
+        "9 / 16": "9:16",
+      },
+      control: { type: "inline-radio" },
+      description: "Set the modal aspect ratio on desktop.",
+    },
     headerAlign: {
       options: ["start", "center", "end"],
       control: { type: "inline-radio" },
@@ -490,14 +531,15 @@ export default meta;
 
 export const Default = {
   args: {
+    aspectRatio: "auto",
     header: true,
-    largeContent: true,
+    largeContent: false,
     footer: true,
     closeIcon: true,
-    closeOnBackdropClick: true,
-    headerAlign: "start",
-    footerAlign: "start",
-    mobileBottom: false,
+    closeOnBackdropClick: false,
+    headerAlign: "center",
+    footerAlign: "center",
+    mobileBottom: true,
     handlePositions: ["top"],
   },
 };
@@ -509,10 +551,10 @@ export const CssVariables = {
 
 export const CustomClose = {
   name: "Custom Close",
-  render: () => <CustomCloseStory />,
+  render: (args) => <CustomCloseStory {...args} />,
 };
 
 export const Portal = {
   name: "Portal",
-  render: () => <PortalStory />,
+  render: (args) => <PortalStory {...args} />,
 };
