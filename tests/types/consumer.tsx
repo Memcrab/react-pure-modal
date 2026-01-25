@@ -3,23 +3,20 @@ import type { ModalCloseHandler, ModalCloseTrigger } from "react-pure-modal";
 
 const handleClose = (trigger?: ModalCloseTrigger) => {
   if (trigger === "escape") {
-    return true;
+    return;
   }
-  return true;
 };
 
 const handleCloseAction: ModalCloseHandler = (trigger) => {
   if (trigger === "backdrop") {
-    return true;
+    return;
   }
-  return true;
 };
 
 const handleSwipeClose: ModalCloseHandler = (trigger) => {
   if (trigger === "swipe") {
-    return true;
+    return;
   }
-  return true;
 };
 
 function CustomCloseContent() {

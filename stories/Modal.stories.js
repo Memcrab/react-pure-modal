@@ -612,6 +612,37 @@ export const Default = {
     footerAlign: "center",
     mobileBottom: true,
     handlePositions: ["top"],
+  },
+};
+
+export const CssVariables = {
+  name: "CSS Variables",
+  render: (args) => <CssVariablesStory {...args} />,
+};
+
+export const CustomClose = {
+  name: "Custom Close",
+  render: (args) => <CustomCloseStory {...args} />,
+};
+
+export const Portal = {
+  name: "Portal",
+  render: (args) => <PortalStory {...args} />,
+};
+
+export const DefaultInteractions = {
+  name: "Default Interactions",
+  args: {
+    aspectRatio: "auto",
+    header: true,
+    largeContent: false,
+    footer: true,
+    closeIcon: true,
+    closeOnBackdropClick: false,
+    headerAlign: "center",
+    footerAlign: "center",
+    mobileBottom: true,
+    handlePositions: ["top"],
     onClose: createSpy(),
     onSecondClose: createSpy(),
   },
@@ -713,13 +744,8 @@ export const Default = {
   },
 };
 
-export const CssVariables = {
-  name: "CSS Variables",
-  render: (args) => <CssVariablesStory {...args} />,
-};
-
-export const CustomClose = {
-  name: "Custom Close",
+export const CustomCloseInteractions = {
+  name: "Custom Close Interactions",
   args: {
     onClose: createSpy(),
   },
@@ -741,8 +767,8 @@ export const CustomClose = {
   },
 };
 
-export const Portal = {
-  name: "Portal",
+export const PortalInteractions = {
+  name: "Portal Interactions",
   args: {
     onClose: createSpy(),
   },
