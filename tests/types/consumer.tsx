@@ -1,6 +1,28 @@
-import Modal from "react-pure-modal";
+import Modal, { useModalContext } from "react-pure-modal";
+import type { ModalCloseTrigger } from "react-pure-modal";
 
-const handleClose = () => true;
+const handleClose = (trigger?: ModalCloseTrigger) => {
+  if (trigger === "escape") {
+    return true;
+  }
+  return true;
+};
+
+function CustomCloseContent() {
+  const { onClose } = useModalContext();
+  return (
+    <button type="button" onClick={() => onClose?.("close-button")}>
+      Close
+    </button>
+  );
+}
+
+function InvalidCloseContent() {
+  const { onClose } = useModalContext();
+  // @ts-expect-error onClose trigger must be a supported string.
+  onClose?.("nope");
+  return null;
+}
 
 const ValidModal = (
   <Modal
@@ -50,7 +72,9 @@ const ValidModalWithBottomHandle = (
 
 const ValidModalWithCustomClose = (
   <Modal isOpen onClose={handleClose}>
-    <Modal.Close>Close</Modal.Close>
+    <Modal.Close>
+      <CustomCloseContent />
+    </Modal.Close>
     <Modal.Content>Content</Modal.Content>
   </Modal>
 );
@@ -83,6 +107,8 @@ void ValidModalWithHandles;
 void ValidModalWithBottomHandle;
 void ValidModalWithCustomClose;
 void ValidModalArrayChildren;
+void CustomCloseContent;
+void InvalidCloseContent;
 void InvalidChildren;
 void InvalidOnClose;
 void InvalidHandlePosition;

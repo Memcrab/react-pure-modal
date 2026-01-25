@@ -243,7 +243,7 @@ export function ModalHandle({ position }: ModalHandleProps) {
       swipeWrapper.removeEventListener("transitionend", handleTransitionEnd);
       swipeStateRef.current.isClosing = false;
       swipeStateRef.current.swipeWrapper = null;
-      onClose?.();
+      onClose?.("swipe");
     };
 
     swipeWrapper.addEventListener("transitionend", handleTransitionEnd);

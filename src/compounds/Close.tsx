@@ -12,7 +12,7 @@ export function ModalClose({ children }: ModalCloseProps) {
       {children || (
         <button
           type="button"
-          onClick={onClose}
+          onClick={() => onClose?.("close-button")}
           className={styles.pureCloseButtonIcon}
         >
           ✕

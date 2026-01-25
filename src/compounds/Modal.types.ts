@@ -70,12 +70,20 @@ export type ModalCssVariable =
 
 export type ModalStyle = Partial<Record<ModalCssVariable, string | number>>;
 
+export type ModalCloseTrigger =
+  | "backdrop"
+  | "close-button"
+  | "swipe"
+  | "escape";
+
+export type ModalCloseHandler = (trigger?: ModalCloseTrigger) => void;
+
 export type ModalProps = {
   children: ModalChildren;
   id?: string;
   isOpen?: boolean;
   style?: ModalStyle;
-  onClose?: VoidFunction;
+  onClose?: ModalCloseHandler;
   closeOnBackdropClick?: boolean;
   portal?: Element | DocumentFragment | null;
 };

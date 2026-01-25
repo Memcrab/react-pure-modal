@@ -60,7 +60,7 @@ export function ModalBackdrop({ children }: ModalBackdropProps) {
         event.key === "Escape" &&
         currentZindexNode === maximumZindex
       ) {
-        onClose();
+        onClose("escape");
         return true;
       }
 
@@ -81,7 +81,7 @@ export function ModalBackdrop({ children }: ModalBackdropProps) {
       event.stopPropagation();
       event.preventDefault();
     }
-    onClose?.();
+    onClose?.("backdrop");
   };
 
   useEffect(() => {

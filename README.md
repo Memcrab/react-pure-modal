@@ -16,8 +16,8 @@ React pure modal is a simplest way to create dialog on your site.
 - [x] Mobile-friendly safe areas
 - [x] Smooth animations
 - [x] Mobile-friendly gestures
+- [x] Passing trigger to onClose
 - [ ] Passing animation promise to onClose
-- [ ] Passing trigger element to onClose
 
 ## TODO
 
@@ -63,7 +63,7 @@ import Modal, { useModalContext } from "react-pure-modal";
 function CustomCloseContent() {
   const { onClose } = useModalContext();
   return (
-    <button type="button" onClick={() => onClose?.()}>
+    <button type="button" onClick={() => onClose?.("close-button")}>
       Save & Close
     </button>
   );
@@ -98,7 +98,7 @@ const portalRoot = document.getElementById("modal-root");
 
 - `id` (string) - optional identifier for the modal container. The modal element id is rendered as `pure-modal-${id}`; when omitted, it uses `useId()` for a unique suffix.
 - `isOpen` (boolean) - controls whether the modal is rendered; defaults to `false`.
-- `onClose` (VoidFunction) - called when the user clicks the close button, presses ESC, or (optionally) clicks the backdrop; set `isOpen` to `false` inside it. Any return value is ignored.
+- `onClose` ((trigger?: "backdrop" | "close-button" | "swipe" | "escape") => void) - called when the user clicks the close button, swipes via `Modal.Handle`, presses ESC, or (optionally) clicks the backdrop; set `isOpen` to `false` inside it. Any return value is ignored. `trigger` describes what initiated the close.
 - `closeOnBackdropClick` (boolean) - if `true`, clicking the backdrop calls `onClose` (default is `false`).
 - `style` (CSS custom properties) - inline CSS variables applied to the backdrop element; use this to set the variables listed below. TypeScript users can reference the exported `ModalCssVariable` union for autocomplete.
 - `portal` (Element | DocumentFragment | null) - when provided, render the modal into the target via `createPortal`. If set during SSR (no `document`) or the node is missing, the modal returns `null`.

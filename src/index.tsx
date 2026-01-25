@@ -8,6 +8,8 @@ export type {
   ModalCompoundElement,
   ModalProps,
   ModalCssVariable,
+  ModalCloseHandler,
+  ModalCloseTrigger,
   ModalSectionAlign,
   ModalHandlePosition,
   ModalSwipeDirection,
