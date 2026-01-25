@@ -1,4 +1,11 @@
 import React, { useMemo } from "react";
+import { expect } from "@storybook/jest";
+import {
+  fireEvent,
+  userEvent,
+  waitFor,
+  within,
+} from "@storybook/testing-library";
 import Modal from "../src/compounds/Modal";
 import { useModalContext } from "../src/compounds/ModalContext";
 import "./Modal.stories.module.css";
@@ -26,6 +33,70 @@ function useMediaQuery(query) {
   }, [query]);
 
   return matches;
+}
+
+function createSpy() {
+  const spy = (...args) => {
+    spy.calls.push(args);
+  };
+  spy.calls = [];
+  return spy;
+}
+
+function getLastCall(spy) {
+  return spy.calls[spy.calls.length - 1];
+}
+
+function resetSpy(spy) {
+  if (!spy || !Array.isArray(spy.calls)) return;
+  spy.calls.length = 0;
+}
+
+function createTouch(target, position, identifier = 0) {
+  const { clientX, clientY } = position;
+  if (typeof Touch === "function") {
+    return new Touch({
+      identifier,
+      target,
+      clientX,
+      clientY,
+      pageX: clientX,
+      pageY: clientY,
+      screenX: clientX,
+      screenY: clientY,
+      radiusX: 2,
+      radiusY: 2,
+      rotationAngle: 0,
+      force: 0.5,
+    });
+  }
+
+  return {
+    identifier,
+    target,
+    clientX,
+    clientY,
+    pageX: clientX,
+    pageY: clientY,
+    screenX: clientX,
+    screenY: clientY,
+  };
+}
+
+function dispatchTransitionEnd(target) {
+  if (!target) return;
+  if (typeof TransitionEvent === "function") {
+    target.dispatchEvent(
+      new TransitionEvent("transitionend", {
+        propertyName: "transform",
+        bubbles: true,
+      }),
+    );
+    return;
+  }
+  const fallbackEvent = new Event("transitionend", { bubbles: true });
+  Object.defineProperty(fallbackEvent, "propertyName", { value: "transform" });
+  target.dispatchEvent(fallbackEvent);
 }
 
 function App(props) {
@@ -541,6 +612,104 @@ export const Default = {
     footerAlign: "center",
     mobileBottom: true,
     handlePositions: ["top"],
+    onClose: createSpy(),
+    onSecondClose: createSpy(),
+  },
+  play: async ({ canvasElement, args }) => {
+    resetSpy(args.onClose);
+    resetSpy(args.onSecondClose);
+
+    const canvas = within(canvasElement);
+    const openButton = canvas.getByRole("button", {
+      name: /open modal with header and large content/i,
+    });
+    const initialDialog = await canvas.findByRole("dialog");
+    const initialDialogQueries = within(initialDialog);
+
+    await userEvent.click(
+      initialDialogQueries.getByRole("button", { name: "✕" }),
+    );
+    await waitFor(() =>
+      expect(args.onClose.calls).toContainEqual(["close-button"]),
+    );
+    await waitFor(() =>
+      expect(canvas.queryByRole("dialog")).toBeNull(),
+    );
+
+    await userEvent.click(openButton);
+    const reopenedDialog = await canvas.findByRole("dialog");
+    await userEvent.click(
+      within(reopenedDialog).getByRole("button", { name: /open second modal/i }),
+    );
+
+    const dialogs = await canvas.findAllByRole("dialog");
+    expect(dialogs).toHaveLength(2);
+    const topDialog = dialogs[dialogs.length - 1];
+    const topDialogQueries = within(topDialog);
+
+    const input = topDialogQueries.getByPlaceholderText(
+      /focus me and press esc/i,
+    );
+    await userEvent.click(input);
+    await userEvent.keyboard("{Escape}");
+    expect(args.onSecondClose.calls).toHaveLength(0);
+
+    await userEvent.click(
+      topDialogQueries.getByRole("heading", {
+        name: /second modal with long title/i,
+      }),
+    );
+    await userEvent.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(args.onSecondClose.calls).toContainEqual(["escape"]),
+    );
+    await waitFor(() => expect(canvas.getAllByRole("dialog")).toHaveLength(1));
+    expect(args.onClose.calls).toHaveLength(1);
+
+    const remainingDialog = canvas.getByRole("dialog");
+    const swipeHandle = remainingDialog.querySelector(
+      '[data-position="top"]',
+    );
+    if (!swipeHandle) {
+      throw new Error("Expected swipe handle to be rendered.");
+    }
+
+    const startTouch = createTouch(
+      swipeHandle,
+      { clientX: 100, clientY: 120 },
+      1,
+    );
+    const moveTouch = createTouch(
+      swipeHandle,
+      { clientX: 100, clientY: 520 },
+      1,
+    );
+
+    fireEvent.touchStart(swipeHandle, {
+      touches: [startTouch],
+      targetTouches: [startTouch],
+      changedTouches: [startTouch],
+    });
+    fireEvent.touchMove(swipeHandle, {
+      touches: [moveTouch],
+      targetTouches: [moveTouch],
+      changedTouches: [moveTouch],
+    });
+    fireEvent.touchEnd(swipeHandle, {
+      touches: [],
+      targetTouches: [],
+      changedTouches: [moveTouch],
+    });
+
+    const swipeWrapper = swipeHandle.closest('[data-has-handle="true"]');
+    dispatchTransitionEnd(swipeWrapper);
+
+    await waitFor(() =>
+      expect(getLastCall(args.onClose)).toEqual(["swipe"]),
+    );
+    await waitFor(() =>
+      expect(canvas.queryByRole("dialog")).toBeNull(),
+    );
   },
 };
 
@@ -551,10 +720,58 @@ export const CssVariables = {
 
 export const CustomClose = {
   name: "Custom Close",
+  args: {
+    onClose: createSpy(),
+  },
   render: (args) => <CustomCloseStory {...args} />,
+  play: async ({ canvasElement, args }) => {
+    resetSpy(args.onClose);
+
+    const canvas = within(canvasElement);
+    const dialog = await canvas.findByRole("dialog");
+
+    await userEvent.click(
+      within(dialog).getByRole("button", { name: /save & close/i }),
+    );
+    await waitFor(() => expect(args.onClose.calls).toHaveLength(1));
+    expect(args.onClose.calls[0]).toEqual([]);
+    await waitFor(() =>
+      expect(canvas.queryByRole("dialog")).toBeNull(),
+    );
+  },
 };
 
 export const Portal = {
   name: "Portal",
+  args: {
+    onClose: createSpy(),
+  },
   render: (args) => <PortalStory {...args} />,
+  play: async ({ args }) => {
+    resetSpy(args.onClose);
+
+    await waitFor(() =>
+      expect(
+        document.querySelector('[data-modal-portal="true"]'),
+      ).not.toBeNull(),
+    );
+
+    const portalNode = document.querySelector('[data-modal-portal="true"]');
+    if (!portalNode) {
+      throw new Error("Expected portal node to be mounted.");
+    }
+
+    const portalQueries = within(portalNode);
+    const dialog = await portalQueries.findByRole("dialog");
+
+    await userEvent.click(
+      portalQueries.getByText(/this modal is rendered into a dedicated dom node/i),
+    );
+    expect(args.onClose.calls).toHaveLength(0);
+
+    await userEvent.click(dialog);
+    await waitFor(() =>
+      expect(getLastCall(args.onClose)).toEqual(["backdrop"]),
+    );
+  },
 };

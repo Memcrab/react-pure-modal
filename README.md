@@ -22,6 +22,8 @@ React pure modal is a simplest way to create dialog on your site.
 ## TODO
 
 - [ ] Storybook css variables example
+- [ ] Pretify storybook demo styles
+- [ ] Instructions for LLMs
 
 ## Demo
 

@@ -40,7 +40,8 @@
     "typecheck": "tsc -p tsconfig.types.json",
     "storybook": "npx storybook dev",
     "storybook:build": "storybook build -o storybook-static",
-    "storybook:deploy": "npm run storybook:build"
+    "storybook:deploy": "npm run storybook:build",
+    "storybook:test": "test-storybook --url http://127.0.0.1:6006"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.5",
@@ -49,7 +50,10 @@
     "@rslib/core": "^0.15.0",
     "@storybook/addon-docs": "^10.1.0",
     "@storybook/addon-onboarding": "^10.1.0",
+    "@storybook/jest": "0.2.3",
     "@storybook/react": "^10.1.0",
+    "@storybook/test-runner": "0.24.2",
+    "@storybook/testing-library": "0.2.2",
     "@types/react": "^19.1.15",
     "@types/react-dom": "19.2.0",
     "react": "^19.1.1",

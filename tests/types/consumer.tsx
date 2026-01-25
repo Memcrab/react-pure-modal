@@ -15,6 +15,13 @@ const handleCloseAction: ModalCloseHandler = (trigger) => {
   return true;
 };
 
+const handleSwipeClose: ModalCloseHandler = (trigger) => {
+  if (trigger === "swipe") {
+    return true;
+  }
+  return true;
+};
+
 function CustomCloseContent() {
   const { onClose } = useModalContext();
   return (
@@ -135,3 +142,4 @@ void InvalidOnClose;
 void InvalidHandlePosition;
 void InvalidId;
 void handleCloseAction;
+void handleSwipeClose;
