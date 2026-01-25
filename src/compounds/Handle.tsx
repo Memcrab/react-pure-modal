@@ -125,7 +125,6 @@ export function ModalHandle({ position }: ModalHandleProps) {
   const handleTouchStart = useCallback(
     (event: React.TouchEvent<HTMLDivElement>) => {
       if (!onClose) return;
-      const direction = POSITION_DIRECTION_MAP[position];
       if (event.touches.length !== 1) return;
 
       const handleNode = handleRef.current;
@@ -147,7 +146,7 @@ export function ModalHandle({ position }: ModalHandleProps) {
       swipeStateRef.current.swipeWrapper = swipeWrapper;
       setSwipeTransitionEnabled(swipeWrapper, false);
     },
-    [isTopmostBackdrop, onClose, position, setSwipeTransitionEnabled],
+    [isTopmostBackdrop, onClose, setSwipeTransitionEnabled],
   );
 
   const handleTouchMove = useCallback(
@@ -155,6 +154,7 @@ export function ModalHandle({ position }: ModalHandleProps) {
       if (!swipeStateRef.current.isTracking) return;
       if (event.touches.length !== 1) return;
       const direction = POSITION_DIRECTION_MAP[position];
+      const axis = getSwipeAxis(direction);
 
       const swipeWrapper = swipeStateRef.current.swipeWrapper;
       if (!swipeWrapper) return;
@@ -162,14 +162,13 @@ export function ModalHandle({ position }: ModalHandleProps) {
       const touch = event.touches[0];
       const deltaX = touch.clientX - swipeStateRef.current.startX;
       const deltaY = touch.clientY - swipeStateRef.current.startY;
-      const axisDelta =
-        getSwipeAxis(direction) === "x" ? deltaX : deltaY;
+      const axisDelta = axis === "x" ? deltaX : deltaY;
       if (Math.abs(axisDelta) < SWIPE_DIRECTION_LOCK_PX) {
         return;
       }
 
       const directionalDelta = getDirectionalDelta(direction, deltaX, deltaY);
-      if (getSwipeAxis(direction) === "x") {
+      if (axis === "x") {
         setSwipeTranslate(swipeWrapper, directionalDelta, 0);
       } else {
         setSwipeTranslate(swipeWrapper, 0, directionalDelta);
@@ -191,12 +190,12 @@ export function ModalHandle({ position }: ModalHandleProps) {
     }
 
     const direction = POSITION_DIRECTION_MAP[position];
+    const axis = getSwipeAxis(direction);
     const rect = swipeWrapper.getBoundingClientRect();
-    const axisSize =
-      getSwipeAxis(direction) === "x" ? rect.width : rect.height;
+    const axisSize = axis === "x" ? rect.width : rect.height;
     const threshold = getSwipeCloseThreshold(axisSize);
     const travelled =
-      getSwipeAxis(direction) === "x"
+      axis === "x"
         ? Math.abs(swipeStateRef.current.lastTranslateX)
         : Math.abs(swipeStateRef.current.lastTranslateY);
 

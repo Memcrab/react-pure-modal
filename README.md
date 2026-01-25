@@ -6,7 +6,7 @@ React pure modal is a simplest way to create dialog on your site.
 
 ## Features
 
-- [x] Lightweight, no external dependencies, 4.1Kb GZip including CSS
+- [x] Lightweight, no external dependencies, 6.2Kb GZip including CSS
 - [x] Easy-to-swap modal components; independent but designed to work together
 - [x] Close only the current modal on ESC or backdrop
 - [x] Easy change modal proportions
@@ -21,7 +21,7 @@ React pure modal is a simplest way to create dialog on your site.
 
 ## TODO
 
-- [ ] Storybook css variables visible example
+- [ ] Storybook css variables example
 
 ## Demo
 

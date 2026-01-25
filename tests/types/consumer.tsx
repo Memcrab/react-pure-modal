@@ -27,6 +27,44 @@ const ValidModal = (
   </Modal>
 );
 
+const ValidModalWithoutHeaderFooter = (
+  <Modal isOpen onClose={handleClose}>
+    <Modal.Content>Content only</Modal.Content>
+  </Modal>
+);
+
+const ValidModalWithHandles = (
+  <Modal isOpen onClose={handleClose}>
+    <Modal.Handle position="left" />
+    <Modal.Handle position="right" />
+    <Modal.Content>Content</Modal.Content>
+  </Modal>
+);
+
+const ValidModalWithBottomHandle = (
+  <Modal isOpen onClose={handleClose}>
+    <Modal.Handle position="bottom" />
+    <Modal.Content>Content</Modal.Content>
+  </Modal>
+);
+
+const ValidModalWithCustomClose = (
+  <Modal isOpen onClose={handleClose}>
+    <Modal.Close>Close</Modal.Close>
+    <Modal.Content>Content</Modal.Content>
+  </Modal>
+);
+
+const ValidModalArrayChildren = (
+  <Modal isOpen onClose={handleClose}>
+    {[
+      <Modal.Header key="header">Header</Modal.Header>,
+      <Modal.Content key="content">Content</Modal.Content>,
+      null,
+    ]}
+  </Modal>
+);
+
 // @ts-expect-error Modal children must be compound components.
 const InvalidChildren = <Modal isOpen>Just text</Modal>;
 
@@ -40,6 +78,11 @@ const InvalidHandlePosition = <Modal.Handle position="center" />;
 const InvalidId = <Modal id={123}><Modal.Close /></Modal>;
 
 void ValidModal;
+void ValidModalWithoutHeaderFooter;
+void ValidModalWithHandles;
+void ValidModalWithBottomHandle;
+void ValidModalWithCustomClose;
+void ValidModalArrayChildren;
 void InvalidChildren;
 void InvalidOnClose;
 void InvalidHandlePosition;

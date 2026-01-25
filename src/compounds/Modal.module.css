@@ -117,45 +117,42 @@ body:has(.pureModalBackdrop) {
     minmax(0, 1fr) /* main row: stretches and can scroll */
     minmax(0, max-content); /* footer row: collapses if no footer */
 
-  &:not(:has(> .pureModalHeader)) > .pureModalContent {
-    border-radius: var(--radius-top-left) var(--radius-top-right) 0 0;
-  }
-
-  &:not(:has(> .pureModalFooter)) > .pureModalContent {
-    border-radius: 0 0 var(--radius-bottom-right) var(--radius-bottom-left);
-  }
-
-  &:not(:has(> .pureModalHeader)):not(:has(> .pureModalFooter))
-    > .pureModalContent {
-    border-radius: var(--radius-top-left) var(--radius-top-right)
-      var(--radius-bottom-right) var(--radius-bottom-left);
-  }
-
   animation: var(--modal-animation);
 }
 
-.pureModal:not(:has(> .pureModalHeader)) {
+.pureModal[data-has-header="false"] {
   grid-template-rows:
     minmax(0, 1fr)
     minmax(0, max-content);
 }
 
-.pureModal:not(:has(> .pureModalHeader)) > .pureModalContent {
+.pureModal[data-has-header="false"] > .pureModalContent {
   grid-row: 1;
+  border-radius: var(--radius-top-left) var(--radius-top-right) 0 0;
 }
 
-.pureModal:not(:has(> .pureModalHeader)) > .pureModalFooter {
+.pureModal[data-has-header="false"] > .pureModalFooter {
   grid-row: 2;
 }
 
-.pureModal:not(:has(> .pureModalFooter)) {
+.pureModal[data-has-footer="false"] {
   grid-template-rows:
     auto
     minmax(0, 1fr);
 }
 
-.pureModal:not(:has(> .pureModalHeader)):not(:has(> .pureModalFooter)) {
+.pureModal[data-has-header="false"][data-has-footer="false"] {
   grid-template-rows: minmax(0, 1fr);
+}
+
+.pureModal[data-has-footer="false"] > .pureModalContent {
+  border-radius: 0 0 var(--radius-bottom-right) var(--radius-bottom-left);
+}
+
+.pureModal[data-has-header="false"][data-has-footer="false"]
+  > .pureModalContent {
+  border-radius: var(--radius-top-left) var(--radius-top-right)
+    var(--radius-bottom-right) var(--radius-bottom-left);
 }
 
 .pureModalHandle {
@@ -243,31 +240,31 @@ body:has(.pureModalBackdrop) {
   justify-items: center;
 }
 
-.pureModalSwipeWrapper:has(.pureModalHandle[data-position="top"]) {
+.pureModalSwipeWrapper[data-handle-top="true"] {
   --swipe-handle-block-start: calc(
     var(--swipe-handle-gap) + var(--swipe-handle-hit-size)
   );
 }
 
-.pureModalSwipeWrapper:has(.pureModalHandle[data-position="bottom"]) {
+.pureModalSwipeWrapper[data-handle-bottom="true"] {
   --swipe-handle-block-end: calc(
     var(--swipe-handle-gap) + var(--swipe-handle-hit-size)
   );
 }
 
-.pureModalSwipeWrapper:has(.pureModalHandle[data-position="left"]) {
+.pureModalSwipeWrapper[data-handle-left="true"] {
   --swipe-handle-inline-start: calc(
     var(--swipe-handle-gap) + var(--swipe-handle-hit-size)
   );
 }
 
-.pureModalSwipeWrapper:has(.pureModalHandle[data-position="right"]) {
+.pureModalSwipeWrapper[data-handle-right="true"] {
   --swipe-handle-inline-end: calc(
     var(--swipe-handle-gap) + var(--swipe-handle-hit-size)
   );
 }
 
-.pureModalSwipeWrapper:has(.pureModalHandle) .pureModal {
+.pureModalSwipeWrapper[data-has-handle="true"] .pureModal {
   max-height: calc(
     var(--max-height) - var(--swipe-handle-block-start) -
       var(--swipe-handle-block-end)

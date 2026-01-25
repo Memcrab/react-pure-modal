@@ -36,7 +36,11 @@ function isTypingElement(el: Element | null): boolean {
   return false;
 }
 
-export function ModalBackdrop({ children }: { children?: React.ReactNode }) {
+type ModalBackdropProps = {
+  children?: React.ReactNode;
+};
+
+export function ModalBackdrop({ children }: ModalBackdropProps) {
   const { isOpen, onClose, style, closeOnBackdropClick } = useModalContext();
   const backdropRef = useRef<HTMLDivElement | null>(null);
 
@@ -117,9 +121,7 @@ export function ModalBackdrop({ children }: { children?: React.ReactNode }) {
       role="dialog"
       style={style as CSSProperties}
     >
-      <div className={styles.pureModalSwipeWrapper}>
-        {children}
-      </div>
+      {children}
     </div>
   );
 }

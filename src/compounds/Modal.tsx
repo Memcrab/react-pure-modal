@@ -8,25 +8,57 @@ import { ModalHeader } from "./Header";
 import { ModalClose } from "./Close";
 import { ModalHandle } from "./Handle";
 import { ModalContext } from "./ModalContext";
-import type { ModalProps } from "./Modal.types";
+import type { ModalHandlePosition, ModalProps } from "./Modal.types";
 
 export default function Modal(props: ModalProps) {
   const fallbackId = useId();
   const hash = props.id ?? fallbackId;
-  const { handleNodes, modalNodes } = (() => {
-    const handles: React.ReactNode[] = [];
-    const content: React.ReactNode[] = [];
+  const { handleNodes, modalNodes, hasHeader, hasFooter, handlePositions } =
+    (() => {
+      const handles: React.ReactElement<{ position: ModalHandlePosition }>[] =
+        [];
+      const content: React.ReactNode[] = [];
+      let header = false;
+      let footer = false;
+      const positions: Record<ModalHandlePosition, boolean> = {
+        top: false,
+        bottom: false,
+        left: false,
+        right: false,
+      };
 
-    for (const child of Children.toArray(props.children)) {
-      if (isValidElement(child) && child.type === ModalHandle) {
-        handles.push(child);
-        continue;
+      for (const child of Children.toArray(props.children)) {
+        if (!isValidElement(child)) {
+          content.push(child);
+          continue;
+        }
+
+        const childType = child.type;
+        if (childType === ModalHandle) {
+          const handleElement =
+            child as React.ReactElement<{ position: ModalHandlePosition }>;
+          handles.push(handleElement);
+          positions[handleElement.props.position] = true;
+          continue;
+        }
+        if (childType === ModalHeader) {
+          header = true;
+        }
+        if (childType === ModalFooter) {
+          footer = true;
+        }
+        content.push(child);
       }
-      content.push(child);
-    }
 
-    return { handleNodes: handles, modalNodes: content };
-  })();
+      return {
+        handleNodes: handles,
+        modalNodes: content,
+        hasHeader: header,
+        hasFooter: footer,
+        handlePositions: positions,
+      };
+    })();
+  const hasHandle = Object.values(handlePositions).some(Boolean);
   const modalState = useMemo(() => {
     return {
       isOpen: Boolean(props.isOpen),
@@ -48,12 +80,23 @@ export default function Modal(props: ModalProps) {
   const modalNode = (
     <ModalContext.Provider value={modalState}>
       <ModalBackdrop>
-        {handleNodes}
         <div
-          id={`pure-modal-${hash}`}
-          className={styles.pureModal}
+          className={styles.pureModalSwipeWrapper}
+          data-has-handle={hasHandle ? "true" : "false"}
+          data-handle-top={handlePositions.top ? "true" : "false"}
+          data-handle-bottom={handlePositions.bottom ? "true" : "false"}
+          data-handle-left={handlePositions.left ? "true" : "false"}
+          data-handle-right={handlePositions.right ? "true" : "false"}
         >
-          {modalNodes}
+          {handleNodes}
+          <div
+            id={`pure-modal-${hash}`}
+            className={styles.pureModal}
+            data-has-header={hasHeader ? "true" : "false"}
+            data-has-footer={hasFooter ? "true" : "false"}
+          >
+            {modalNodes}
+          </div>
         </div>
       </ModalBackdrop>
     </ModalContext.Provider>
