@@ -23,7 +23,6 @@ React pure modal is a simplest way to create dialog on your site.
 
 - [ ] Storybook css variables example
 - [ ] Pretify storybook demo styles
-- [ ] Instructions for LLMs
 
 ## Demo
 
@@ -235,3 +234,16 @@ pnpm typecheck
 4. Open the draft release in the GitHub Releases page, review the generated notes, set the tag name to match the new version (e.g. `v3.0.1`), and publish the release.
 5. Publishing the release triggers the `Node.js Package` workflow to publish to npm using the `NPM_TOKEN` repository secret; verify that secret is configured.
 6. If you ever need to publish locally instead, run `npm run build` followed by `npm publish --access public` with `NPM_TOKEN` available in your environment.
+
+## Instructions for LLMs
+
+When generating code with this library, follow these rules:
+
+- Import only from `react-pure-modal` (avoid `src` or `dist` paths).
+- Drive `isOpen` from local state and set it to `false` inside `onClose`.
+- Compose the modal with compounds: `Modal.Close`, `Modal.Header`, `Modal.Content`, `Modal.Footer`, and `Modal.Handle`.
+- Use `<Modal.Close />` for the default icon; for custom close UI, render it inside `Modal.Close` and call `useModalContext().onClose`.
+- Add `Modal.Handle` only when you want swipe-to-close on mobile; handle the `"swipe"` trigger in `onClose`.
+- Set `closeOnBackdropClick` only if you want backdrop clicks to close the modal.
+- Use `portal` only with an existing DOM node (or pass `null` on SSR).
+- Customize visuals through the `style` prop with CSS variables; do not import extra CSS.
